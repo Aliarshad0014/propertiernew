@@ -59,77 +59,72 @@ const Properties = () => {
     <div className="min-h-screen  overflow-hidden bg-gray-100 relative">
       <div className="min-h-screen relative bg-white">
         {/* Background slider image */}
-        <div className="absolute inset-0 z-0 h-[50vh] w-full overflow-hidden">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`Background Image ${index + 1}`}
-                fill
-                quality={100}
-                priority
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          ))}
-          <button
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
-            onClick={handlePrev}
+        <div className="absolute inset-0 z-0 h-[80vh] w-full overflow-hidden">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
           >
-            <GrPrevious size={30} color="#eaab0c" />
-          </button>
-          <button
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 hover:scale-100 bg-opacity-50 text-white p-2 rounded-full z-50"
-            onClick={handleNext}
-          >
-            <GrNext size={30} color="#eaab0c" />
-          </button>
-        </div>
+            <Image
+              src={image}
+              alt={`Background Image ${index + 1}`}
+              fill
+              style={{ objectFit: "cover" }}
+              quality={100}
+              priority
+            />
+          </div>
+        ))}
+        <button
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
+          onClick={handlePrev}
+        >
+          <GrPrevious size={30} color="#eaab0c" />
+        </button>
+        <button
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
+          onClick={handleNext}
+        >
+          <GrNext size={30} color="#eaab0c" />
+        </button>
+      </div>
 
         {/* Content overlay */}
-        <div className="relative z-40 flex flex-col items-center justify-center min-h-screen inset-y-32">
-          {/* Search Box */}
-          <div className="absolute lg:bottom-64 bottom-48 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-100 backdrop-blur-sm p-8 rounded-xl shadow-lg w-auto flex flex-col justify-center items-center h-1/12">
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
-              <div className="flex flex-col items-start">
-                <h1 className="text-yellow-500 font-semibold mb-2">
-                  Property Type
-                </h1>
-                <select className="w-60 bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
-                  <option value="allProperties">All Properties</option>
-                  <option value="rental">Rental</option>
-                  <option value="sale">Sale</option>
-                </select>
-              </div>
-              <div className="flex flex-col items-start">
-                <h1 className="text-yellow-500 font-semibold mb-2">Country</h1>
-                <select className="w-60 bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
-                  <option value="pakistan">Pakistan</option>
-                  <option value="china">China</option>
-                  <option value="europe">Europe</option>
-                  {/* Add options for countries here */}
-                </select>
-              </div>
-              <div className="flex flex-col items-start">
-                <h1 className="text-yellow-500 font-semibold mb-2">City</h1>
-                <select className="w-60 bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
-                  <option value="islamabad">Islamabad</option>
-                  <option value="karachi">Karachi</option>
-                  <option value="peshawar">Peshawar</option>
-                  {/* Add options for cities here */}
-                </select>
-              </div>
-              <button className="flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <FaSearch size={20} />
-              </button>
+        <div className="relative z-40 flex flex-col items-center justify-center min-h-screen inset-y-48">
+        <div className="absolute lg:bottom-64 bottom-48 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-100 backdrop-blur-sm p-8 rounded-xl shadow-lg w-auto flex flex-col justify-center items-center h-1/12">
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
+            <div className="flex flex-col items-start">
+              <h1 className="text-yellow-500 font-semibold mb-2">Property Type</h1>
+              <select className="w-60 bg-white poppins px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
+                <option value="allProperties">All Properties</option>
+                <option value="rental">Rental</option>
+                <option value="sale">Sale</option>
+              </select>
             </div>
+            <div className="flex flex-col items-start">
+              <h1 className="text-yellow-500 font-semibold mb-2">Country</h1>
+              <select className="w-60 poppins bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
+                <option value="country">Pakistan</option>
+                <option value="country">China</option>
+                <option value="country">Europe</option>
+              </select>
+            </div>
+            <div className="flex flex-col items-start">
+              <h1 className="text-yellow-500 font-semibold mb-2">City</h1>
+              <select className="w-60 poppins bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
+                <option value="city">Islamabad</option>
+                <option value="city">Karachi</option>
+                <option value="city">Peshawar</option>
+              </select>
+            </div>
+            <button className="flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <FaSearch size={20} />
+            </button>
           </div>
         </div>
+      </div>
 
         {/* Properties grid */}
         <h1 className="text-3xl font-bold text-center text-yellow-500 mb-10">
