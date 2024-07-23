@@ -10,7 +10,7 @@ const AllShortsPage = () => {
   const [data, setData] = useState([]);
   const [playingIndex, setPlayingIndex] = useState(0);
   const [likedVideos, setLikedVideos] = useState([]);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
