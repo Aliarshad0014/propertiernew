@@ -49,7 +49,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Ensure the background is behind other content */
+  /* z-index: -1; Ensure the background is behind other content */
   background-image: url("https://your-background-image-url.jpg");
   background-size: cover;
   background-position: center;
@@ -59,7 +59,7 @@ body {
 /* Image Carousel */
 .container {
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   padding-top: 100px;
 }
 .carousel-container {
@@ -120,48 +120,6 @@ body {
 }
 
 /* Shorts */
-.video-shorts-wrapper {
-  width: 100%;
-  height: 100vh; /* Set full viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.video-shorts-container {
-  display: flex;
-  align-items: center;
-  width: 80%;
-}
-
-.video-box {
-  flex: 0 0 30%;
-  max-width: 30%;
-  margin: 0 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.video-element {
-  width: 100%;
-  height: 100%; /* Adjusted to 100% of parent container */
-  cursor: pointer;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.video-box.focused {
-  transform: scale(0.8);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.video-box:not(.focused) {
-  transform: scale(0.9);
-}
-.video-box {
-  position: relative;
-}
-
 .heart-button,
 .share-button {
   background: none;
@@ -191,15 +149,6 @@ body {
 }
 .bg-custom-color {
   background-color: #eaab0c;
-}
-
-/* short play */
-.video-element {
-  transition: transform 0.2s ease; /* Add a smooth transition */
-}
-
-.playing {
-  transform: scale(1.1); /* Scale up the video when it's playing */
 }
 
 /* Services */
@@ -276,7 +225,7 @@ body {
   border: none;
   font-size: 2em;
   cursor: pointer;
-  z-index: 2;
+  /* z-index: 2; */
   color: black;
 }
 

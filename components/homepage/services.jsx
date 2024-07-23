@@ -59,6 +59,11 @@ const ServicesCarousel = () => {
             </div>
           ))}
         </Carousel>
+        <div className="mt- text-center">
+        <a href="/" className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-black transition-all">
+          View All Services
+        </a>
+      </div>
       </div>
     </div>
   );

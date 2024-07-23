@@ -11,7 +11,6 @@ import UserReviews from "@/components/homepage/review";
 import SearchForm from "@/components/searching";
 import ServicesCarousel from "@/components/homepage/services";
 import BlogComponent from "@/components/homepage/blog";
-// import FooterSection from "@/components/footer";
 
 const images = [
   "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -39,8 +38,8 @@ export default function Home() {
       try {
         const response = await fetch('https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage');
         const result = await response.json();
-        console.log('Fetched data:', result); // Log the fetched data
-        setData(result.Data); // Assuming 'properties' and 'materialRates' are returned together
+        console.log('Fetched data:', result);
+        setData(result.Data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -52,7 +51,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,7 +72,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden bg-white">
-      {/* Background slider image */}
       <div className="absolute inset-0 z-0 h-[80vh] w-full overflow-hidden">
         {images.map((image, index) => (
           <div
@@ -88,7 +86,7 @@ export default function Home() {
               fill
               style={{ objectFit: "cover" }}
               quality={100}
-              priority // Prioritize the first image
+              priority
             />
           </div>
         ))}
@@ -99,16 +97,14 @@ export default function Home() {
           <GrPrevious size={30} color="#eaab0c" />
         </button>
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 hover:scale-100 bg-opacity-50 text-white p-2 rounded-full z-50"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
           onClick={handleNext}
         >
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
 
-      {/* Content overlay */}
       <div className="relative z-40 flex flex-col items-center justify-center min-h-screen inset-y-48">
-        {/* Search Box */}
         <div className="absolute lg:bottom-64 bottom-48 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-100 backdrop-blur-sm p-8 rounded-xl shadow-lg w-auto flex flex-col justify-center items-center h-1/12">
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
             <div className="flex flex-col items-start">
@@ -125,7 +121,6 @@ export default function Home() {
                 <option value="country">Pakistan</option>
                 <option value="country">China</option>
                 <option value="country">Europe</option>
-                {/* Add options for countries here */}
               </select>
             </div>
             <div className="flex flex-col items-start">
@@ -134,7 +129,6 @@ export default function Home() {
                 <option value="city">Islamabad</option>
                 <option value="city">Karachi</option>
                 <option value="city">Peshawar</option>
-                {/* Add options for cities here */}
               </select>
             </div>
             <button className="flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -145,7 +139,7 @@ export default function Home() {
       </div>
 
       <div className="absolute">
-        <HotSale data={data.properties} />
+        <HotSale data={data.properties} className='relative'/>
         <CustomCarousel data={data.materialRates} />
         <VideoShorts data={data.shortVideos} />
         <ServicesCarousel />
@@ -153,8 +147,8 @@ export default function Home() {
         <UserReviews data={data.appFeedbacks} />
         <BlogComponent />
         <SearchForm />
-        {/* <FooterSection /> */}
       </div>
     </div>
   );
 }
+

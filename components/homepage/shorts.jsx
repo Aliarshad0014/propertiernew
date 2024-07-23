@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
-import '../../app/globals.css';
 
 /**
  * @typedef {Object} VideoData
@@ -97,17 +96,20 @@ const VideoShorts = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col min-h-[50vh] items-center justify-center lg:min-h-[100vh]">
-      <h1 className="text-4xl font-bold mt-20 text-yellow-500">Short Videos</h1>
-      <div className="video-shorts-wrapper flex justify-center items-center w-full">
-        <button className="prev-button rounded-full" onClick={handlePrev}>
-          <GrPrevious size={30} color="#eaab0c" />
+    <div className="relative flex flex-col w-full min-h-screen items-center justify-center p-4 md:p-8">
+      <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-4 text-yellow-500">Short Videos</h1>
+      <div className="relative flex items-center w-full md:w-4/5">
+        <button
+          className="absolute left-4 md:-left-8 top-1/2 transform -translate-y-1/2 rounded-full border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          onClick={handlePrev}
+        >
+          <GrPrevious size={24} />
         </button>
-        <div className="video-shorts-container flex justify-center items-center space-x-4">
+        <div className="flex items-center w-full overflow-x-scroll md:overflow-hidden space-x-2 md:space-x-4">
           {data.map((item, index) => (
             <div
               key={index}
-              className={`video-box relative ${index === playingIndex ? "focused" : ""}`}
+              className={`relative flex-none w-[40%] max-w-[40%] md:w-[30%] md:max-w-[30%] mx-1 md:mx-2 transition-transform duration-300 ${index === playingIndex ? "scale-90 md:scale-80 shadow-lg" : "scale-85 md:scale-90"}`}
               style={{ display: showAll || (index >= playingIndex - 1 && index <= playingIndex + 1) ? 'block' : 'none' }}
               onClick={() => handleVideoClick(index)}
             >
@@ -118,29 +120,28 @@ const VideoShorts = ({ data }) => {
                   }
                 }}
                 src={item.short_video}
-                className={`video-element ${index === playingIndex ? "playing" : ""}`}
-                style={{
-                  transform: index === playingIndex ? 'scale(1.1)' : 'scale(0.9)',
-                  boxShadow: index === playingIndex ? '0 10px 15px rgba(0, 0, 0, 0.5)' : 'none'
-                }}
+                className={`w-full h-auto cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${index === playingIndex ? "opacity-100" : "opacity-70"}`}
               />
-              <div className="absolute bottom-10 right-6 flex flex-col space-y-4">
-                <button className="heart-button" onClick={() => handleLikeClick(index)}>
+              <div className="absolute bottom-4 right-4 flex flex-col space-y-2 md:space-y-4">
+                <button className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110" onClick={() => handleLikeClick(index)}>
                   {likedVideos.includes(index) ? (
-                    <AiFillHeart size={30} color="red" />
+                    <AiFillHeart size={24} className="text-red-500" />
                   ) : (
-                    <AiOutlineHeart size={30} color="white" />
+                    <AiOutlineHeart size={24} className="text-white" />
                   )}
                 </button>
-                <button className="share-button">
-                  <AiOutlineShareAlt size={30} color="white" />
+                <button className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110">
+                  <AiOutlineShareAlt size={24} className="text-white" />
                 </button>
               </div>
             </div>
           ))}
         </div>
-        <button className="next-button rounded-full" onClick={handleNext}>
-          <GrNext size={30} color="#eaab0c" />
+        <button
+          className="absolute right-4 md:right-4 top-1/2 transform -translate-y-1/2 rounded-full border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          onClick={handleNext}
+        >
+          <GrNext size={24} />
         </button>
       </div>
       <a

@@ -58,6 +58,7 @@ const BlogPage = () => {
               {staffPicks.map((pick, index) => (
                 <li key={index} className="hover:bg-gray-100 p-6 rounded-md">
                   <h4 className="text-sm font-bold">{pick.title}</h4>
+                  <p className="line-clamp-2">{pick.content}</p>
                 </li>
               ))}
             </ul>

@@ -44,6 +44,25 @@ const Page = ({ params }) => {
     ));
   };
 
+  const renderVideo = (url) => {
+    const isYouTube = url.includes("youtube.com") || url.includes("youtu.be");
+    return isYouTube ? (
+      <iframe
+        width="100%"
+        height="400"
+        src={url.replace("watch?v=", "embed/")}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    ) : (
+      <video width="100%" height="400" controls className="w-full h-auto rounded">
+        <source src={url} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    );
+  };
+
   return (
     <div className="container mx-auto p-6 bg-white text-black min-h-screen">
       <h1 className="text-3xl font-bold mb-6 lg:ml-44">{data.Property?.title || 'Property Title'}</h1>
@@ -57,8 +76,7 @@ const Page = ({ params }) => {
               width={600}
               height={400}
               alt="Property"
-              style={{ objectFit: "cover" }}
-              className="w-full h-auto rounded"
+              className="w-full h-72 object-cover rounded"
             />
             <div className="flex gap-2 mt-4">
               {data.Gallery_images?.map((image, index) => (
@@ -107,10 +125,7 @@ const Page = ({ params }) => {
           <div className="mb-6">
             <h3 className="mt-4 text-lg font-semibold text-black">Video Tour</h3>
             <hr className="my-4" />
-            <video width="1080" height="720" controls className="w-full h-auto rounded">
-              <source src={data.Property?.video || "https://via.placeholder.com/1080x720.mp4"} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {data.Property?.video ? renderVideo(data.Property.video) : <p>No video available</p>}
             <div className="mt-6">
               <button className="w-1/4 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-yellow-500">
                 Talk to Seller
@@ -122,10 +137,7 @@ const Page = ({ params }) => {
         <div className="lg:w-1/4">
           {/* Short Video Section */}
           <div className="mb-6">
-            <video width="1080" height="1920" controls className="w-full h-auto rounded">
-              <source src={data.Property?.short_video || "https://via.placeholder.com/1080x1080.mp4"} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {data.Property?.short_video ? renderVideo(data.Property.short_video) : <p>No short video available</p>}
           </div>
           {/* Recommended Section */}
           <div>

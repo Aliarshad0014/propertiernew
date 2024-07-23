@@ -52,19 +52,11 @@ const UserReviews = ({ data }) => {
           </div>
         ))}
       </div>
-      <div className="absolute top-0 bottom-0 w-full flex justify-between items-center lg:hidden z-50">
-        <button
-          className="left-arrow flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
-          onClick={() => handleSwipe("left")}
-        >
-          {/* Left Arrow SVG */}
-        </button>
-        <button
-          className="right-arrow flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
-          onClick={() => handleSwipe("right")}
-        >
-          {/* Right Arrow SVG */}
-        </button>
+
+      <div className="mt-8 text-center">
+        <a href="/" className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-black transition-all">
+          View All Reviews
+        </a>
       </div>
     </div>
   );
