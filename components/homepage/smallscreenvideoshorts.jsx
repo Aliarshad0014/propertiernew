@@ -91,6 +91,8 @@ const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
             src={data[playingIndex]?.short_video}
             className="w-full h-auto cursor-pointer object-cover rounded-lg"
             onClick={handleVideoClick}
+            webkit-playsinline
+            playsinline
           />
           <div className="absolute bottom-4 right-4 flex flex-col space-y-2">
             <button
@@ -115,7 +117,7 @@ const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
           <GrPrevious size={24} />
         </button>
         <button
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full border-none p-2 cursor-pointer text-lg transition-transform duration-300 z-10  text-yellow-500 bg-gray-100"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full border-none p-2 cursor-pointer text-lg transition-transform duration-300 z-10 text-yellow-500 bg-gray-100"
           onClick={handleNext}
         >
           <GrNext size={24} />
