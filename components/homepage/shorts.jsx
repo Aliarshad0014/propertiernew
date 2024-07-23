@@ -5,12 +5,15 @@ import SmallScreenVideoShorts from "./smallscreenvideoshorts"; // Import the new
 const VideoShorts = ({ data }) => {
   const [playingIndex, setPlayingIndex] = useState(0);
   const [likedVideos, setLikedVideos] = useState([]);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
     };
+
+    // Set initial screen size
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
