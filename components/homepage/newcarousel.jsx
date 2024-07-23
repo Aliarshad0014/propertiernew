@@ -97,12 +97,11 @@ const CustomCarousel = () => {
             </div>
           </div>
         </Carousel>
-        <div className="mt-4 text-center">
-        <a href="/blogpages" className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-black transition-all">
+        <div className="mt-8 text-center">
+        <a href="/" className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-black transition-all">
           All Corporate Services
         </a>
       </div>
-        {/* <ul className="custom-dots"></ul> */}
         
       </div>
       
