@@ -32,7 +32,7 @@ const UserReviews = ({ data }) => {
     <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 p-6 mb-10">
       <h1 className="text-3xl font-bold mb-2 text-gray-800">Client Review</h1>
       <h2 className="text-lg font-regular mb-20 text-gray-500">What our clients say about us?</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:w-2/3 bg-none rounded-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6 gap-16 lg:w-2/3 bg-none rounded-lg">
         {data.slice(0, 3).map((review) => (
           <div key={review.id} className="relative bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
             <div className="absolute top-0 left-16 transform -translate-x-1/2 -translate-y-1/2">

@@ -125,7 +125,7 @@ const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
       </div>
       <a
         href="/shorts"
-        className="mt-4 mb-10 px-4 py-2 bg-yellow-500 hover:bg-black transition-all text-white rounded-md block text-center"
+        className="mt-4 px-4 py-2 bg-yellow-500 hover:bg-black transition-all text-white rounded-md block text-center"
       >
         Show More
       </a>

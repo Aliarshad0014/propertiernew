@@ -50,7 +50,7 @@ const ServicesCarousel = () => {
             { name: 'Plumber', title: '', img: 'https://t3.ftcdn.net/jpg/00/54/34/54/360_F_54345414_dETkGQ7zMBUgbB8Le9b9oYf9DJ4cYZH2.jpg' },
             { name: 'Document Verification', title: '', img: 'https://media.istockphoto.com/id/1349390515/photo/paperless-workplace-idea-e-signing-electronic-signature-document-management-businessman-signs.jpg?s=612x612&w=0&k=20&c=EyQl13diegNV5DVLnb0krcAcRDhL7NiSA7IEVImZs6Q=' }
           ].map((member, index) => (
-            <div key={index} className="service-card text-black mb-20">
+            <div key={index} className="service-card text-black mb-12">
               <img src={member.img} alt={member.name} />
               <div className="service-info">
                 <h3 className='text-white'>{member.name}</h3>

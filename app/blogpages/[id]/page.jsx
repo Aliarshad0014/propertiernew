@@ -52,7 +52,7 @@ const Page = ({ params }) => {
     <div className="bg-white min-h-screen p-4 md:p-8">
       <div className="blog-read-page max-w-6xl mx-auto p-4 md:p-6 bg-white flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-12 text-black">
         <div className="left-content flex-1">
-          <h1 className="text-2xl md:text-4xl font-bold mb-2">{title}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-2 mt-2">{title}</h1>
           <p className="text-gray-600 mb-4">by {author.name}</p>
           <Image
           width={100}

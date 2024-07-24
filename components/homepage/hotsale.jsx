@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const HotSale = ({ data }) => {
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center mb-40 relative z-10">
+    <div className="min-h-screen w-screen flex items-center justify-center relative z-10">
       <div className="flex flex-col items-center">
         <div className="p-8 text-start">
           <h2 className="text-3xl font-bold mb-10 text-start text-black">Blazing Deals!</h2>

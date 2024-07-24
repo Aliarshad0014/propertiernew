@@ -28,9 +28,9 @@ const BlogComponent = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mb-20">
+    <div className="max-w-7xl mx-auto mb-20 lg:p-0 p-4">
       <h1 className="text-3xl font-semibold text-center mb-8 text-black">Blogs</h1>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 lg:gap-6 gap-10 sm:grid-cols-3">
         {blogPosts.map((post) => (
           <div key={post.id} className="border rounded-lg flex flex-col h-full">
             <div className="w-full h-64 mb-4 overflow-hidden" style={{ width: '414px', height: '254px' }}>

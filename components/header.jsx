@@ -11,6 +11,7 @@ const Header = () => {
   const [animate, setAnimate] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [activeLink, setActiveLink] = useState("/");
 
   // Toggle navbar visibility and animate state
   const onNavClick = () => {
@@ -37,6 +38,11 @@ const Header = () => {
     };
   }, [lastScrollY]); // Update effect when lastScrollY changes
 
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+    setNavBar(false);
+  };
+
   return (
     <nav
       style={{
@@ -57,43 +63,31 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="hidden lg:flex justify-center space-x-6  font-light text-md">
+      <div className="hidden lg:flex justify-center space-x-6 font-light text-md">
         {/* Centered navigation buttons */}
-        <Link
-          href="/"
-          className="hover:text-white text-yellow-500 font-semibold h-9 rounded-md ease-in-out duration-500 transition-all flex items-center"
-        >
-          HOME
-        </Link>
-        <Link
-          href="/properties"
-          className="hover:text-yellow-500 text-white font-regular h-9 rounded-md ease-in-out duration-500 transition-all flex items-center"
-        >
-          PROPERTIES
-        </Link>
-        <Link
-          href="/services"
-          className="hover:text-yellow-500 text-white h-9 font-regular rounded-md ease-in-out duration-500 transition-all flex items-center"
-        >
-          SERVICES
-        </Link>
-        <Link
-          href="/corporate"
-          className="hover:text-yellow-500 text-white h-9 font-regular rounded-md ease-in-out duration-500 transition-all flex items-center"
-        >
-          CORPORATE
-        </Link>
-        <Link
-          href="/material"
-          className="hover:text-yellow-500 text-white h-9 font-regular rounded-md ease-in-out duration-500 transition-all flex items-center"
-        >
-          MATERIAL
-        </Link>
-        <div className="relative  text-left flex items-center">
+        {[
+          { href: "/", text: "HOME" },
+          { href: "/properties", text: "PROPERTIES" },
+          { href: "/services", text: "SERVICES" },
+          { href: "/corporate", text: "CORPORATE" },
+          { href: "/material", text: "MATERIAL" },
+        ].map(({ href, text }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`hover:text-yellow-500 ${
+              activeLink === href ? "text-yellow-500 font-bold" : "text-white font-regular"
+            } h-9 rounded-md ease-in-out duration-500 transition-all flex items-center`}
+            onClick={() => handleLinkClick(href)}
+          >
+            {text}
+          </Link>
+        ))}
+        <div className="relative text-left flex items-center">
           <div className="group">
             <button
               type="button"
-              className=" justify-center w-full rounded-md h-9 ease-in-out duration-500 font-regular text-white hover:text-white flex items-center"
+              className="justify-center w-full rounded-md h-9 ease-in-out duration-500 font-regular text-white hover:text-white flex items-center"
             >
               OTHERS
               <svg
@@ -118,34 +112,24 @@ const Header = () => {
               tabIndex={-1}
             >
               <div className="py-1" role="none">
-                <Link
-                  href="/option1"
-                  className="text-white block px-4 py-2 text-sm hover:text-yellow-500"
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="menu-item-0"
-                >
-                  Short Videos
-                </Link>
-                <Link
-                  href="/option2"
-                  className="text-white block px-4 py-2 text-sm hover:text-yellow-500"
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="menu-item-1"
-                >
-                  Corporate Services
-                </Link>
-                <Link
-                  href="/option3"
-                  className="text-white block px-4 py-2 text-sm hover:text-yellow-500"
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="menu-item-2"
-                >
-                  Profile
-                </Link>
-                {/* <Link href="/option4" className="text-black block px-4 py-2 text-sm hover:text-yellow-500" role="menuitem" tabIndex={-1} id="menu-item-3">Option 4</Link> */}
+                {[
+                  { href: "/option1", text: "Short Videos" },
+                  { href: "/option2", text: "Corporate Services" },
+                  { href: "/option3", text: "Profile" },
+                ].map(({ href, text }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`text-white block px-4 py-2 text-sm hover:text-yellow-500 ${
+                      activeLink === href ? "text-yellow-500 font-bold" : ""
+                    }`}
+                    role="menuitem"
+                    tabIndex={-1}
+                    onClick={() => handleLinkClick(href)}
+                  >
+                    {text}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -173,51 +157,24 @@ const Header = () => {
             animate ? "slideIn" : ""
           }`}
         >
-          <Link
-            className={`px-4 capitalize py-6 text-2xl ${
-              animate ? "slideIn" : ""
-            }`}
-            href="/home"
-            onClick={onNavClick}
-          >
-            HOME
-          </Link>
-          <Link
-            className={`px-4 capitalize py-6 text-2xl ${
-              animate ? "slideIn" : ""
-            }`}
-            href="/properties"
-            onClick={onNavClick}
-          >
-            PROPERTIES
-          </Link>
-          <Link
-            className={`px-4 capitalize py-6 text-2xl ${
-              animate ? "slideIn" : ""
-            }`}
-            href="/services"
-            onClick={onNavClick}
-          >
-            SERVICES
-          </Link>
-          <Link
-            className={`px-4 capitalize py-6 text-2xl ${
-              animate ? "slideIn" : ""
-            }`}
-            href="/corporate"
-            onClick={onNavClick}
-          >
-            CORPORATE
-          </Link>
-          <Link
-            className={`px-4 capitalize py-6 text-2xl ${
-              animate ? "slideIn" : ""
-            }`}
-            href="/material"
-            onClick={onNavClick}
-          >
-            MATERIAL
-          </Link>
+          {[
+            { href: "/home", text: "HOME" },
+            { href: "/properties", text: "PROPERTIES" },
+            { href: "/services", text: "SERVICES" },
+            { href: "/corporate", text: "CORPORATE" },
+            { href: "/material", text: "MATERIAL" },
+          ].map(({ href, text }) => (
+            <Link
+              key={href}
+              className={`px-4 capitalize py-6 text-2xl ${
+                animate ? "slideIn" : ""
+              } ${activeLink === href ? "text-yellow-500 font-bold" : ""}`}
+              href={href}
+              onClick={() => handleLinkClick(href)}
+            >
+              {text}
+            </Link>
+          ))}
         </ul>
       )}
     </nav>

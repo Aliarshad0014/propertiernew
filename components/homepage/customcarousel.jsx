@@ -52,7 +52,7 @@ const CustomCarousel = ({ data }) => {
     }
 
     return ratesToRender.map((item) => (
-      <div key={item.id} className="p-2">
+      <div key={item.id} className="p-4 lg:p-2">
         <div className="relative h-28 flex flex-col justify-center items-center bg-white shadow-md rounded-md">
           <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white p-4 rounded-md">
             <h3 className="font-bold lg:text-md text-sm">{item.name}</h3>
@@ -130,7 +130,7 @@ const CustomCarousel = ({ data }) => {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="lg:w-1/4 w-full p-2 cursor-pointer rounded-lg shadow-sm mr-4 focus:outline-none focus:ring text-black focus:ring-yellow-500"
+            className="lg:w-1/4 w-1/2 lg:p-2 p-2  cursor-pointer rounded-lg shadow-sm mr-4 focus:outline-none focus:ring text-black focus:ring-yellow-500"
           />
         </div>
       </div>
