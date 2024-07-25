@@ -124,7 +124,7 @@ export default function Home() {
               <div className="flex flex-col items-start">
                 <h1 className="text-yellow-500 font-semibold mb-2">Country</h1>
                 <select className="w-60 poppins bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
-                  <option value="country">Pakistan</option>
+                  <option value="country" >Pakistan</option>
                   <option value="country">China</option>
                   <option value="country">Europe</option>
                 </select>
@@ -137,7 +137,7 @@ export default function Home() {
                   <option value="city">Peshawar</option>
                 </select>
               </div>
-              <button className="flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button className="lg:flex hidden items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <FaSearch size={20} />
               </button>
             </div>
@@ -170,40 +170,43 @@ export default function Home() {
             >
               {showMore ? "Show Less" : "Show More"}
             </button>
+            <button className="lg:hidden flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <FaSearch size={20} />
+            </button>
 
           </div>
         </div>
       </div>
 
 
-        <div className="py-10">
-          <HotSale data={data.properties} className='relative' />
-        </div>
-        <div className="py-10">
+      <div className="py-10">
+        <HotSale data={data.properties} className='relative' />
+      </div>
+      <div className="py-10">
         <CustomCarousel data={data.materialRates} />
-        </div>
-        <div className="py-10">
-        <VideoShorts data={data.shortVideos} />
-          </div>
-          <div className="py-10">
-        <ServicesCarousel />
-          </div>
-          <div className="py-10">
-        <CustommCarousel />
-          </div>
-          <div className="py-10">
-        <UserReviews data={data.appFeedbacks} />
-          </div>
-          <div className="py-10">
-        <BlogComponent />
-          </div>
-          <div className="py-10">
-        <SearchForm />
-          </div>
-          <div className="py-10">
-        <FooterSection/>
-          </div>
       </div>
+      <div className="py-10">
+        <VideoShorts data={data.shortVideos} />
+      </div>
+      <div className="py-10">
+        <ServicesCarousel />
+      </div>
+      <div className="py-10">
+        <CustommCarousel />
+      </div>
+      <div className="py-10">
+        <UserReviews data={data.appFeedbacks} />
+      </div>
+      <div className="py-10">
+        <BlogComponent />
+      </div>
+      <div className="">
+        <SearchForm />
+      </div>
+      <div className="">
+        <FooterSection />
+      </div>
+    </div>
 
   );
 }

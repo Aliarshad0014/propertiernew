@@ -87,7 +87,7 @@ const Page = ({ params }) => {
                   src={image.image_url}
                   alt={`Thumbnail ${index + 1}`}
                   style={{ objectFit: "cover" }}
-                  className="w-24 h-24 rounded"
+                  className="w-24 h-24 rounded "
                 />
               ))}
             </div>
@@ -127,7 +127,7 @@ const Page = ({ params }) => {
             <hr className="my-4" />
             {data.Property?.video ? renderVideo(data.Property.video) : <p>No video available</p>}
             <div className="mt-6">
-              <button className="w-1/4 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-yellow-500">
+              <button className="lg:flex hidden justify-center lg:w-1/4 w-1/2 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-yellow-500">
                 Talk to Seller
               </button>
             </div>
@@ -160,6 +160,9 @@ const Page = ({ params }) => {
                 </div>
               ))}
             </div>
+            <button className="lg:hidden flex justify-center lg:w-1/4 w-1/2 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-yellow-500">
+                Talk to Seller
+              </button>
           </div>
         </div>
       </div>

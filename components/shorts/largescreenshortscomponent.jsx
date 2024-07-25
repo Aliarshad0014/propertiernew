@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
-import { GrPrevious, GrNext } from "react-icons/gr";
+import React, { useRef, useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import axios from "axios";
 
 /**
@@ -16,7 +16,7 @@ import axios from "axios";
  * @param {number[]} props.likedVideos - Array of indices of liked videos.
  * @param {function(number): void} props.setLikedVideos - Function to set liked videos.
  */
-const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos, setLikedVideos }) => {
+const VerticalVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos, setLikedVideos }) => {
   const videoRefs = useRef(Array(data.length).fill(null));
 
   useEffect(() => {
@@ -36,53 +36,32 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
     handleVideoChange();
   }, [playingIndex]);
 
-  const handlePrev = (e) => {
-    e.stopPropagation();
-    setPlayingIndex((prev) => (prev > 0 ? prev - 1 : data.length - 1));
-  };
-
-  const handleNext = (e) => {
-    e.stopPropagation();
+  const handleNext = () => {
     setPlayingIndex((prev) => (prev < data.length - 1 ? prev + 1 : 0));
   };
 
-  const handleVideoClick = (index) => {
-    if (index !== playingIndex) {
-      setPlayingIndex(index);
-    } else {
-      const video = videoRefs.current[index];
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-        video.currentTime = 0;
-      }
-    }
+  const handlePrev = () => {
+    setPlayingIndex((prev) => (prev > 0 ? prev - 1 : data.length - 1));
   };
 
   const handleLikeClick = async (e, index) => {
     e.stopPropagation();
     try {
       const { id, agent } = data[index];
-
       const isLiked = likedVideos.includes(index);
 
       if (isLiked) {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
+        await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
           agent_id: agent.id,
           property_id: id,
         });
-        console.log("Unlike action response:", response.data);
-
         setLikedVideos((prevLikedVideos) => prevLikedVideos.filter((item) => item !== index));
       } else {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
+        await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
           agent_id: agent.id,
           property_id: id,
           action: "like",
         });
-        console.log("Like action response:", response.data);
-
         setLikedVideos((prevLikedVideos) => [...prevLikedVideos, index]);
       }
     } catch (error) {
@@ -91,66 +70,64 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
   };
 
   return (
-    <div className="relative flex flex-col w-full min-h-screen items-center justify-center p-4 md:p-8 bg-white">
-      <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-10 text-yellow-500">Short Videos</h1>
-      <div className="relative flex items-center w-full md:w-4/5">
+    <div className="relative flex flex-col items-center w-full min-h-screen p-10 bg-white text-white">
+      <h1 className="text-3xl font-bold mt-10 text-black">Short Videos</h1>
+      <div className="flex flex-col items-center w-full max-w-md mx-auto space-y-4">
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className={`relative w-full mx-auto cursor-pointer ${
+              index === playingIndex ? "block" : "hidden"
+            }`}
+            style={{
+              height: "100vh",
+            }}
+          >
+            <video
+              ref={(el) => {
+                if (el) {
+                  videoRefs.current[index] = el;
+                }
+              }}
+              src={item.short_video}
+              className="w-full h-full object-cover rounded-lg"
+              loop
+              playsInline
+            />
+            <div className="absolute bottom-8 right-4 flex flex-col space-y-2">
+              <button
+                className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110"
+                onClick={(e) => handleLikeClick(e, index)}
+              >
+                {likedVideos.includes(index) ? (
+                  <AiFillHeart size={24} className="text-red-500" />
+                ) : (
+                  <AiOutlineHeart size={24} />
+                )}
+              </button>
+              <button className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110">
+                <AiOutlineShareAlt size={24} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 space-y-4">
         <button
-          className="absolute left-4 md:-left-8 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          className="bg-white text-black rounded-full p-2"
           onClick={handlePrev}
         >
-          <GrPrevious size={24} />
+          <FaArrowUp size={24} />
         </button>
-        <div className="flex items-center w-full overflow-x-hidden md:overflow-hidden space-x-2 md:space-x-4">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className={`relative flex-none w-full md:w-[30%] mx-1 md:mx-2 transition-transform duration-300 ${
-                index === playingIndex ? "scale-110 md:scale-100" : "scale-85 md:scale-90"
-              }`}
-              style={{
-                display: index >= playingIndex - 1 && index <= playingIndex + 1 ? "block" : "none",
-                height: "100vh",
-              }}
-              onClick={() => handleVideoClick(index)}
-            >
-              <video
-                ref={(el) => {
-                  if (el) {
-                    videoRefs.current[index] = el;
-                  }
-                }}
-                src={item.short_video}
-                className={`w-full h-auto cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${
-                  index === playingIndex ? "opacity-100" : "opacity-70"
-                }`}
-              />
-              <div className="absolute bottom-24 right-4 flex flex-col space-y-2 md:space-y-4">
-                <button
-                  className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110"
-                  onClick={(e) => handleLikeClick(e, index)}
-                >
-                  {likedVideos.includes(index) ? (
-                    <AiFillHeart size={24} className="text-red-500" />
-                  ) : (
-                    <AiOutlineHeart size={24} className="text-white" />
-                  )}
-                </button>
-                <button className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110">
-                  <AiOutlineShareAlt size={24} className="text-white" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
         <button
-          className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          className="bg-white text-black rounded-full p-2"
           onClick={handleNext}
         >
-          <GrNext size={24} />
+          <FaArrowDown size={24} />
         </button>
       </div>
     </div>
   );
 };
 
-export default LargeScreenVideoShorts;
+export default VerticalVideoShorts;

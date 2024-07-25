@@ -1,12 +1,19 @@
 import React from "react";
+import Image from "next/image";
 
 const FooterSection = () => {
   return (
-    <footer className="bg-gray-900 text-white absolute">
+    <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap justify-around items-start">
           <div className="w-full md:w-1/3 mb-4">
-            <img src="/path-to-your-logo.png" alt="Logo" className="h-8 mb-4" />
+            <Image
+              width={100}
+              height={100}
+              src="https://propertier.com.pk/assets/img/footer-logo-n.png"
+              alt="Logo"
+              className="w-1/3 cursor-pointer mb-5"
+            />
             <div className="mb-2">
               <p className="font-bold text-xl">Information:</p>
               <p className="mt-2">
@@ -28,10 +35,14 @@ const FooterSection = () => {
               provide the information you need.
             </p>
             <div className="mt-4">
-              <button className="bg-white text-black px-4 py-2 rounded mr-2">
+              <button className="bg-white text-black px-4 py-2 rounded mr-2 hover:bg-gray-200 transition-all">
                 Featured Your Ad
               </button>
-              <button className="bg-white text-black px-4 py-2 rounded">
+              <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition-all">
+                Add Review
+              </button>
+              <br />
+              <button className="bg-white text-black mt-2 px-4 py-2 rounded hover:bg-gray-200 transition-all">
                 Support
               </button>
             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const BlogComponent = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -49,9 +50,9 @@ const BlogComponent = () => {
               <div className="flex justify-between items-center mt-auto">
                 <p className="text-gray-700 font-semibold">By {post.author.name}</p>
                 {/* Replace with your preferred routing mechanism */}
-                <a href={`/blogposts/${post.id}`} className="mt-2 bg-yellow-500 hover:bg-black transition-all text-white font-semibold py-2 px-4 rounded">
+                <Link href={`/blogpages/${post.id}`} className="mt-2 bg-yellow-500 hover:bg-black transition-all text-white font-semibold py-2 px-4 rounded">
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
           </div>

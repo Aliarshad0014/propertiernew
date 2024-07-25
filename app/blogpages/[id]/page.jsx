@@ -37,7 +37,15 @@ const Page = ({ params }) => {
     return <div>No blog data available</div>;
   }
 
-  const { title, content, image_url, author,cover_photo_url } = blogData;
+  const { title, content, image_url, author, cover_photo_url } = blogData;
+
+  // Format the created_at date
+  const formattedDate = new Date(author.created_at).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+
   const latestPosts = [
     { title: "Post 1" },
     { title: "Post 2" },
@@ -52,18 +60,27 @@ const Page = ({ params }) => {
     <div className="bg-white min-h-screen p-4 md:p-8">
       <div className="blog-read-page max-w-6xl mx-auto p-4 md:p-6 bg-white flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-12 text-black">
         <div className="left-content flex-1">
-          <h1 className="text-2xl md:text-4xl font-bold mb-2 mt-2">{title}</h1>
-          <p className="text-gray-600 mb-4">by {author.name}</p>
           <Image
-          width={100}
-          height={100}
-            src={cover_photo_url}
+            width={100}
+            height={100}
+            src="https://dummyimage.com/200x200"
             alt={title}
-            className="w-full h-auto lg:h-1/6 object-cover rounded-lg mb-6"
+            className="w-full h-auto lg:h-1/3 object-cover rounded-lg mb-6"
           />
-          <div className="blog-content text-base md:text-lg leading-relaxed">
+          <h1 className="text-lg md:text-lg font-bold mb-2 mt-2">{title}</h1>
+          <div className="flex items-center text-sm text-gray-500 mb-2">
+            <span className="flex items-center mr-2">
+              <i className=" mr-1 text-yellow-500"></i>
+              {formattedDate} 
+            </span> |
+            <span className="flex items-center">
+              <i className=" text-yellow-500 ml-2"></i>
+              {author.name}
+            </span>
+          </div>
+          <div className="blog-content text-base md:text-sm leading-relaxed">
             {content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4">
+              <p key={index} className="mb-4 a">
                 {paragraph}
               </p>
             ))}

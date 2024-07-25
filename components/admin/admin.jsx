@@ -1,7 +1,7 @@
 "use client";
 import Dashboard from '@/components/admin/dashboard';
 import React, { useState } from 'react';
-// import './index.css';
+
 
 function App() {
     const [selectedNavItem, setSelectedNavItem] = useState('dashboard');

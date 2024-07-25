@@ -11,7 +11,7 @@ const Header = () => {
   const [animate, setAnimate] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [activeLink, setActiveLink] = useState("/");
+  const [activeLink, setActiveLink] = useState("");
 
   // Toggle navbar visibility and animate state
   const onNavClick = () => {

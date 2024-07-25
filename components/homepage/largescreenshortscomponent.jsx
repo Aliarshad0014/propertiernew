@@ -95,7 +95,7 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
       <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-10 text-yellow-500">Short Videos</h1>
       <div className="relative flex items-center w-full md:w-4/5">
         <button
-          className="absolute left-4 md:-left-8 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          className="absolute left-4 md:-left-24 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
           onClick={handlePrev}
         >
           <GrPrevious size={24} />
@@ -143,7 +143,7 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
           ))}
         </div>
         <button
-          className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
+          className="absolute right-4 md:-right-10 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
           onClick={handleNext}
         >
           <GrNext size={24} />
