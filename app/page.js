@@ -159,7 +159,7 @@ export default function Home() {
                     <option value="priceRange">Below $50,000</option>
                     <option value="priceRange">$50,000 - $100,000</option>
                     <option value="priceRange">$100,000 - $200,000</option>
-                    <option value="priceRange">Above $200,000</option>
+                    <option value="priceRange">Above pkr200,000</option>
                   </select>
                 </div>
               </div>
