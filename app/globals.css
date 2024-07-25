@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import "material-symbols";
-=======
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 /* @import "material-symbols"; */
->>>>>>> 535e97bce25625d2b447b0e50ec86b8923eb6eaa
+
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
