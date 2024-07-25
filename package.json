@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
@@ -16,7 +17,14 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^1.0.6",
+=======
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+>>>>>>> 535e97bce25625d2b447b0e50ec86b8923eb6eaa
     "@material-tailwind/react": "^2.1.9",
+    "@mui/icons-material": "^5.16.4",
+    "@mui/material": "^5.16.4",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@tailwindcss/line-clamp": "^0.4.4",
     "axios": "^1.7.2",
     "material": "^0.9.15",
@@ -29,7 +37,8 @@
     "react-multi-carousel": "^2.8.5",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "slider": "^1.0.4"
+    "slider": "^1.0.4",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
