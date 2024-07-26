@@ -17,7 +17,7 @@ export default function Services() {
   return (
     <div>
       <TopBanner />
-      <div className="w-full flex justify-center  -mt-10 absolute">
+      <div className="w-full flex justify-center -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
           <div className="flex items-center bg-gray-900 px-4 gap-3 w-full rounded-lg">
             <Box sx={{ minWidth: 120, width: "100%" }}>

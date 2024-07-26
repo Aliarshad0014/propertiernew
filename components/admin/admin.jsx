@@ -1,6 +1,8 @@
 "use client";
 import Dashboard from '@/components/admin/dashboard';
 import React, { useState } from 'react';
+import Sliders from './sliders';
+import Features from './features';
 
 
 function App() {
@@ -17,11 +19,11 @@ function App() {
             case 'dashboard':
                 return <Dashboard />;
             case 'sliders':
-                return <div className='text-black'>Sliders Content</div>;
+                return <Sliders/>
             case 'property':
                 return <div>Property Content</div>;
             case 'features':
-                return <div>Features Content</div>;
+                return <Features/>
             case 'material-rates':
                 return <div>Material Rates Content</div>;
             case 'memberships':
