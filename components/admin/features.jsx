@@ -1,7 +1,7 @@
 // components/Slider.js
 import React from 'react';
 
-const Sliders = () => {
+const Features = () => {
   // Sample data
   const sliderData = [
     {
@@ -30,7 +30,7 @@ const Sliders = () => {
   return (
     <div className="p-6 bg-gray-100 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-gray-700 text-left">Slider List</h2>
+        <h2 className="text-xl font-semibold text-gray-700 text-left">Features List</h2>
         <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">+ Create</button>
       </div>
       <div className="flex space-x-2 mb-4">
@@ -44,11 +44,9 @@ const Sliders = () => {
         <table className="min-w-full bg-white text-left text-gray-700">
           <thead className="bg-gray-200 font-normal">
             <tr>
-              <th className="py-2 px-4 border-b font-medium">SL.</th>
-              <th className="py-2 px-4 border-b font-medium">Image</th>
-              <th className="py-2 px-4 border-b font-medium">Title</th>
-              <th className="py-2 px-4 border-b font-medium">Link</th>
-              <th className="py-2 px-4 border-b font-medium">Description</th>
+              <th className="py-2 px-4 border-b font-medium">Sl</th>
+              <th className="py-2 px-4 border-b font-medium">Name</th>
+              <th className="py-2 px-4 border-b font-medium">Slug</th>
               <th className="py-2 px-4 border-b font-medium">Action</th>
             </tr>
           </thead>
@@ -56,16 +54,12 @@ const Sliders = () => {
             {sliderData.map((slider) => (
               <tr key={slider.id} className='text-gray-700 hover:bg-gray-50 cursor-pointer'>
                 <td className="py-2 px-4 border-b">{slider.id}</td>
-                <td className="py-2 px-4 border-b">
-                  <img src={slider.image} alt={slider.title} className="w-24 h-auto" />
-                </td>
                 <td className="py-2 px-4 border-b">{slider.title}</td>
                 <td className="py-2 px-4 border-b">
                   <a href={slider.link} className="text-blue-500 hover:underline">
                     {slider.link}
                   </a>
                 </td>
-                <td className="py-2 px-4 border-b">{slider.description}</td>
                 <td className="py-2 px-4 border-b">
                   <button className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">Edit</button>
                   <button className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 ml-2">Delete</button>
@@ -79,4 +73,4 @@ const Sliders = () => {
   );
 };
 
-export default Sliders;
+export default Features;

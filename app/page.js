@@ -12,6 +12,7 @@ import SearchForm from "@/components/searching";
 import ServicesCarousel from "@/components/homepage/services";
 import BlogComponent from "@/components/homepage/blog";
 import FooterSection from "@/components/footer";
+import SearchBox from "@/components/searchbox/searchbox";
 
 const images = [
   "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -20,7 +21,6 @@ const images = [
 ];
 
 export default function Home() {
-  const [activeButton, setActiveButton] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [data, setData] = useState({
     properties: [],
@@ -33,7 +33,6 @@ export default function Home() {
     shortVideos: [],
     appFeedbacks: [],
   });
-  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,29 +59,17 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleButtonClick = (buttonType) => {
-    setActiveButton(buttonType === activeButton ? null : buttonType);
-  };
-
   const handleNext = () => {
-    console.log("Next clicked");
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const handlePrev = () => {
-    console.log("Prev clicked");
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
-  };
-
-  const handleShowMoreClick = () => {
-    setShowMore(!showMore);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
     <div className="min-h-screen relative w-full bg-white">
-      <div className="absolute inset-0 z-0 h-[80vh] w-full overflow-hidden">
+      <div className="relative z-0 h-[80vh] w-full overflow-hidden">
         {images.map((image, index) => (
           <div
             key={index}
@@ -113,7 +100,6 @@ export default function Home() {
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
-
       <div className="relative z-40 flex flex-col items-center justify-center min-h-screen inset-y-48">
         <div className="absolute lg:bottom-64 bottom-48 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-100 backdrop-blur-sm p-8 rounded-xl shadow-lg w-auto flex flex-col justify-center items-center h-1/12">
           <div className="flex flex-col items-center space-y-4 w-full">
@@ -184,6 +170,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+
       </div>
 
       <div className="py-10">

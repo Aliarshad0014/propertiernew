@@ -69,7 +69,7 @@ const Header = () => {
           { href: "/", text: "HOME" },
           { href: "/properties", text: "PROPERTIES" },
           { href: "/services", text: "SERVICES" },
-          { href: "/corporate", text: "CORPORATE" },
+          { href: "/corporateservices", text: "CORPORATE" },
           { href: "/material", text: "MATERIAL" },
         ].map(({ href, text }) => (
           <Link

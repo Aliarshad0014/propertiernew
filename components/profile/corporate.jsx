@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FooterSection from "../footer";
 
 const CorporateServices = () => {
   const [formValues, setFormValues] = useState({
@@ -183,6 +184,7 @@ const CorporateServices = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
