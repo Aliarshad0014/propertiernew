@@ -137,9 +137,6 @@ const BlogPage = () => {
           </div>
         </div>
       </div>
-      <div className="py-10">
-        <FooterSection />
-      </div>
     </div>
   );
 };

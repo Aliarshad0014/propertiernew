@@ -21,7 +21,7 @@ const SearchBox = () => {
           <div className="flex flex-col items-center space-y-4 w-full">
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
               <div className="flex flex-col items-start">
-                <FormControl  className="w-60" variant="outlined">
+                <FormControl  className="w-60" variant="outlined" size="small">
                   <InputLabel>Property Type</InputLabel>
                   <Select
                     value={propertyType}
@@ -36,7 +36,7 @@ const SearchBox = () => {
                 </FormControl>
               </div>
               <div className="flex flex-col items-start">
-                <FormControl fullWidth className="w-60" variant="outlined">
+                <FormControl fullWidth className="w-60" variant="outlined" size="small">
                   <InputLabel>Country</InputLabel>
                   <Select
                     value={country}
@@ -51,7 +51,7 @@ const SearchBox = () => {
                 </FormControl>
               </div>
               <div className="flex flex-col items-start">
-                <FormControl fullWidth className="w-60" variant="outlined">
+                <FormControl fullWidth className="w-60" variant="outlined" size="small">
                   <InputLabel>City</InputLabel>
                   <Select
                     value={city}
@@ -65,7 +65,7 @@ const SearchBox = () => {
                   </Select>
                 </FormControl>
               </div>
-              <button className="lg:flex hidden items-center justify-center h-14 w-14 bg-custom-color text-white shadow rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button className="lg:flex hidden items-center justify-center h-12 w-12 bg-custom-color text-white shadow rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <FaSearch size={20} />
               </button>
             </div>
@@ -73,7 +73,7 @@ const SearchBox = () => {
             {showMore && (
               <div className="flex flex-col sm:flex-row items-center justify-start space-y-4 sm:space-y-0 sm:space-x-4 w-full">
                 <div className="flex flex-col items-start">
-                  <FormControl fullWidth className="w-60" variant="outlined">
+                  <FormControl fullWidth className="w-60" variant="outlined" size="small">
                     <InputLabel>Region</InputLabel>
                     <Select
                       value={region}
@@ -89,7 +89,7 @@ const SearchBox = () => {
                   </FormControl>
                 </div>
                 <div className="flex flex-col items-start">
-                  <FormControl fullWidth className="w-60" variant="outlined">
+                  <FormControl fullWidth className="w-60" variant="outlined" size="small">
                     <InputLabel>Price Range</InputLabel>
                     <Select
                       value={priceRange}
