@@ -92,8 +92,7 @@ const FooterSection = () => {
           </a>
         </div>
         <p className="text-xs text-center mt-4">
-          © Copyrights 2024. Propertier.pk. All Rights Reserved. Powered by
-          Exagic.
+          © Copyrights 2024. Propertier.pk. All Rights Reserved. 
         </p>
       </div>
     </footer>
