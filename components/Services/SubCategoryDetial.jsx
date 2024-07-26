@@ -10,30 +10,31 @@ import ServicesCard from "./ServicesCard";
 import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
 
-export default function Services() {
+export default function SubCategoryDetial({ paramsID }) {
   const [allService, setAllService] = useState("Electricity");
-  const [allFixedServices, setAllFixedServices] = useState([]);
+  const [allSubServices, setAllSubServices] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
 
   useEffect(() => {
-    getFixedServices();
+    getSubServices();
   }, []);
 
-  const getFixedServices = async () => {
+  const getSubServices = async () => {
     setBtnLoad(true);
     url
-      .get(`/services/filtered-services/`)
+      .get(`/services/sub-services/${paramsID}`)
       .then(async (res) => {
-        setAllFixedServices(res.data);
+        setAllSubServices(res.data);
         setBtnLoad(false);
       })
       .catch((e) => {
-        console.log(e);
         setBtnLoad(false);
+
+        console.log(e);
       });
   };
 
-  console.log(allFixedServices);
+  console.log(allSubServices);
   const handleChange = (event) => {
     setAllService(event.target.value);
   };
@@ -43,6 +44,7 @@ export default function Services() {
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
+        secondCrumb={allSubServices?.parent_service_name}
       />
       <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
@@ -91,16 +93,6 @@ export default function Services() {
             aliquam. Elementum tellus ultricies massa nulla ac. Gravida
             elementum, purus felis egestas. Sollicitudin nec tortor etiam
             dignissim varius.
-          </div>
-
-          <div className="my-4 flex flex-wrap gap-7 justify-center">
-            {btnLoad ? (
-              <BounceLoader color="#eab308" />
-            ) : (
-              allFixedServices?.map((e, i) => {
-                return <ServicesCard allService={e} />;
-              })
-            )}
           </div>
         </div>
       </div>

@@ -9,40 +9,45 @@ import TopBanner from "../TopBanner/TopBanner";
 import ServicesCard from "./ServicesCard";
 import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
+import OtherServices from "./OtherServices";
+import OurPartners from "./OurPartners";
 
-export default function Services() {
+export default function SubCategory({ paramsID }) {
   const [allService, setAllService] = useState("Electricity");
-  const [allFixedServices, setAllFixedServices] = useState([]);
+  const [allSubServices, setAllSubServices] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
 
   useEffect(() => {
-    getFixedServices();
+    getSubServices();
   }, []);
 
-  const getFixedServices = async () => {
+  const getSubServices = async () => {
     setBtnLoad(true);
     url
-      .get(`/services/filtered-services/`)
+      .get(`/services/service/${paramsID}/sub-services/`)
       .then(async (res) => {
-        setAllFixedServices(res.data);
+        setAllSubServices(res.data);
         setBtnLoad(false);
       })
       .catch((e) => {
-        console.log(e);
         setBtnLoad(false);
+
+        console.log(e);
       });
   };
 
-  console.log(allFixedServices);
   const handleChange = (event) => {
     setAllService(event.target.value);
   };
+
+  //   console.log(allSubServices[0]?.parent_service_name);
   return (
     <div>
       <TopBanner
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
+        secondCrumb={allSubServices[0]?.parent_service_name}
       />
       <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
@@ -93,17 +98,22 @@ export default function Services() {
             dignissim varius.
           </div>
 
-          <div className="my-4 flex flex-wrap gap-7 justify-center">
+          <div className="my-4 mb-10 flex flex-wrap gap-7 justify-center">
             {btnLoad ? (
               <BounceLoader color="#eab308" />
             ) : (
-              allFixedServices?.map((e, i) => {
-                return <ServicesCard allService={e} />;
+              allSubServices?.map((e, i) => {
+                return <ServicesCard allService={e} subCategory={true} />;
               })
             )}
           </div>
         </div>
       </div>
+
+      <main>
+        <OtherServices />
+        <OurPartners />
+      </main>
     </div>
   );
 }

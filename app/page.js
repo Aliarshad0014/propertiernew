@@ -38,12 +38,14 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage');
+        const response = await fetch(
+          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage"
+        );
         const result = await response.json();
-        console.log('Fetched data:', result);
+        console.log("Fetched data:", result);
         setData(result.Data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -69,7 +71,9 @@ export default function Home() {
 
   const handlePrev = () => {
     console.log("Prev clicked");
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
   const handleShowMoreClick = () => {
@@ -82,8 +86,9 @@ export default function Home() {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
           >
             <Image
               src={image}
@@ -114,7 +119,9 @@ export default function Home() {
           <div className="flex flex-col items-center space-y-4 w-full">
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
               <div className="flex flex-col items-start">
-                <h1 className="text-yellow-500 font-semibold mb-2">Property Type</h1>
+                <h1 className="text-yellow-500 font-semibold mb-2">
+                  Property Type
+                </h1>
                 <select className="w-60 bg-white poppins px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
                   <option value="allProperties">All Properties</option>
                   <option value="rental">Rental</option>
@@ -124,7 +131,7 @@ export default function Home() {
               <div className="flex flex-col items-start">
                 <h1 className="text-yellow-500 font-semibold mb-2">Country</h1>
                 <select className="w-60 poppins bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
-                  <option value="country" >Pakistan</option>
+                  <option value="country">Pakistan</option>
                   <option value="country">China</option>
                   <option value="country">Europe</option>
                 </select>
@@ -154,7 +161,9 @@ export default function Home() {
                   </select>
                 </div>
                 <div className="flex flex-col items-start">
-                  <h1 className="text-yellow-500 font-semibold mb-2">Price Range</h1>
+                  <h1 className="text-yellow-500 font-semibold mb-2">
+                    Price Range
+                  </h1>
                   <select className="w-60 poppins bg-white px-4 py-2 border border-t-0 border-x-0 border-gray-500 shadow-sm text-black text-sm sm:text-base">
                     <option value="priceRange">Below $50,000</option>
                     <option value="priceRange">$50,000 - $100,000</option>
@@ -173,14 +182,12 @@ export default function Home() {
             <button className="lg:hidden flex items-center justify-center h-14 w-14 bg-custom-color text-white shadow-md rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
               <FaSearch size={20} />
             </button>
-
           </div>
         </div>
       </div>
 
-
       <div className="py-10">
-        <HotSale data={data.properties} className='relative' />
+        <HotSale data={data.properties} className="relative" />
       </div>
       <div className="py-10">
         <CustomCarousel data={data.materialRates} />
@@ -207,6 +214,5 @@ export default function Home() {
         <FooterSection />
       </div>
     </div>
-
   );
 }
