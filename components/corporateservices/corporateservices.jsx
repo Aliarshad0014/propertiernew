@@ -55,7 +55,6 @@ const CorporateServices = () => {
           </button>
         </Link>
       </div>
-      <FooterSection/>
     </div>
   );
 };

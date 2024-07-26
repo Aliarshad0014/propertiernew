@@ -212,8 +212,6 @@ const Page = ({ params }) => {
         </div>
       </div>
       
-      <FooterSection />
-      
     </div>
   );
 };

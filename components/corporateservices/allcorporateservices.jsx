@@ -42,9 +42,6 @@ const VerticalCarouselPage = () => {
                 </div>
             </div>
             
-            <div className="">
-                    <FooterSection/>
-                </div>
         </div>
     );
 };

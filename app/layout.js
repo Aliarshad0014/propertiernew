@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={poppins.className}>
         <Header />
-        <div className="h-screen">{children}</div>
-        {/* <FooterSection /> */}
+        <div className="">{children}</div>
+        <FooterSection />
       </body>
     </html>
   );
