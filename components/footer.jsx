@@ -74,11 +74,6 @@ const FooterSection = () => {
           </nav>
         </div>
         <div className="border-t border-gray-700 mt-4 pt-4 flex flex-col md:flex-row justify-center items-center"></div>
-
-        <p className="text-xs text-center mt-4">
-          This site uses Google AdSense ad intent links. AdSense automatically
-          generates these links and they may help creators earn money.
-        </p>
         <div className="flex justify-center space-x-4 mt-4">
           <a href="#">
             <i className="fab fa-facebook-f"></i>
