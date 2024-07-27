@@ -61,7 +61,7 @@ const Header = () => {
     >
       <div className="flex items-center space-x-4">
         {/* Logo */}
-        <Link href="/">
+        <Link href="/" onClick={() => handleLinkClick("/")}>
           <Image
             width={100}
             height={100}
