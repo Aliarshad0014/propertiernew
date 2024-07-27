@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-
 import React, { useState, useEffect } from "react";
 import { RiCloseLine, RiMenu3Line, RiAccountCircleFill } from "react-icons/ri";
-import logo from "../components/logo.png";
 import Link from "next/link";
 
 const Header = () => {
@@ -36,12 +34,22 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]); // Update effect when lastScrollY changes
+  }, [lastScrollY]);
 
+  // Set active link on click and store in local storage
   const handleLinkClick = (link) => {
     setActiveLink(link);
     setNavBar(false);
+    localStorage.setItem("activeLink", link);
   };
+
+  // Retrieve active link from local storage on component mount
+  useEffect(() => {
+    const storedLink = localStorage.getItem("activeLink");
+    if (storedLink) {
+      setActiveLink(storedLink);
+    }
+  }, []);
 
   return (
     <nav
@@ -49,7 +57,7 @@ const Header = () => {
         transform: showHeader ? "translateY(0)" : "translateY(-100%)",
         transition: "transform 0.3s ease-in-out",
       }}
-      className="absolute top-0 left-0 h-10 right-0 flex items-center justify-between text-black px-4 py-5 shadow-teal-500 z-50 bg-black bg-opacity-70 backdrop-blur-sm"
+      className="fixed top-0 left-0 h-10 right-0 flex items-center justify-between text-black px-4 py-5 shadow-teal-500 z-50 bg-black bg-opacity-70 backdrop-blur-sm"
     >
       <div className="flex items-center space-x-4">
         {/* Logo */}
@@ -57,7 +65,7 @@ const Header = () => {
           <Image
             width={100}
             height={100}
-            src="https://propertier.com.pk/assets/img/footer-logo-n.png"
+            src="http://localhost:3000/_next/image?url=https%3A%2F%2Fpropertier.com.pk%2Fassets%2Fimg%2Ffooter-logo-n.png&w=256&q=75"
             alt="Logo"
             className="h-6 w-full cursor-pointer"
           />
