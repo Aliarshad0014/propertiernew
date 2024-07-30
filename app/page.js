@@ -111,7 +111,7 @@ export default function Home() {
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
-      <div className="relative z-40 flex flex-col items-center justify-center">
+      <div className="relative z-10 flex flex-col items-center justify-center">
         <SearchBox />
       </div>
 

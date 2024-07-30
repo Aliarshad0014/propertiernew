@@ -1,11 +1,11 @@
-// components/CustomerRequests.js
-import React from 'react';
-import GenericTable from './GenericTable';
+import React, { useState } from 'react';
+import GenericTable from './generictable';
 import ExportButtons from './buttons';
+import SearchBox from './searchbox';
 
 const CustomerRequests = () => {
   // Sample data
-  const requestsData = [
+  const initialRequestsData = [
     {
       id: 1,
       fullName: 'John Doe',
@@ -44,30 +44,54 @@ const CustomerRequests = () => {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [requestsData, setRequestsData] = useState(initialRequestsData);
+
   const headers = ['SL.', 'Full Name', 'Email', 'Phone Number', 'City', 'Size', 'Type', 'Price', 'Note', 'Date'];
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (value === '') {
+      setRequestsData(initialRequestsData);
+    } else {
+      setRequestsData(
+        initialRequestsData.filter((request) =>
+          request.fullName.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+    }
+  };
+
   const renderRow = (request) => (
-    <tr key={request.id} className='text-gray-700 text-sm'>
-      <td className="py-2 px-4 border-b">{request.id}</td>
-      <td className="py-2 px-4 border-b">{request.fullName}</td>
-      <td className="py-2 px-4 border-b">{request.email}</td>
-      <td className="py-2 px-4 border-b">{request.phoneNumber}</td>
-      <td className="py-2 px-4 border-b">{request.city}</td>
-      <td className="py-2 px-4 border-b">{request.size}</td>
-      <td className="py-2 px-4 border-b">{request.type}</td>
-      <td className="py-2 px-4 border-b">{request.price}</td>
-      <td className="py-2 px-4 border-b">{request.note}</td>
-      <td className="py-2 px-4 border-b">{request.date}</td>
+    <tr key={request.id} className="text-gray-700 hover:bg-gray-50 cursor-pointer text-sm">
+      <td className="py-2 px-4 border border-gray-300">{request.id}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.fullName}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.email}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.phoneNumber}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.city}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.size}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.type}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.price}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.note}</td>
+      <td className="py-2 px-4 border border-gray-300">{request.date}</td>
     </tr>
   );
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-medium text-gray-700">Customer Requests</h2>
+    <div className="p-2 py-10">
+      <div className="flex justify-between items-center bg-blue-100 p-4 rounded-none">
+        <h2 className="text-xl font-semibold text-gray-700">Customer Requests</h2>
+              </div>
+      <div className="bg-white p-4">
+        <div className="flex justify-between items-center">
+          <ExportButtons />
+          <div className="ml-4 w-64">
+            <SearchBox value={searchTerm} onChange={handleSearchChange} />
+          </div>
+        </div>
+        <GenericTable headers={headers} data={requestsData} renderRow={renderRow} />
       </div>
-      <ExportButtons />
-      <GenericTable headers={headers} data={requestsData} renderRow={renderRow} />
     </div>
   );
 };

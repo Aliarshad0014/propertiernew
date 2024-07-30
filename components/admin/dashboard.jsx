@@ -1,6 +1,6 @@
 // components/Dashboard.js
 import React from 'react';
-import GenericTable from './genericTable';
+import GenericTable from './generictable';
 
 
 const Dashboard = () => {
@@ -40,7 +40,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="text-black p-4 min-h-screen">
+    <div className="text-black p-4 min-h-screen py-10">
       <h2 className="text-base text-gray-600 font-normal mb-4">DASHBOARD</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6">
         {statistics.map((stat, index) => (

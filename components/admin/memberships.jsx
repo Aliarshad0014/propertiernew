@@ -1,11 +1,11 @@
-// components/Membership.js
-import React from 'react';
-import GenericTable from './GenericTable';
+import React, { useState } from 'react';
+import GenericTable from './generictable';
 import ExportButtons from './buttons';
+import SearchBox from './searchbox';
 
 const Membership = () => {
   // Sample data
-  const membershipData = [
+  const initialMembershipData = [
     {
       id: 1,
       fullName: 'John Doe',
@@ -41,32 +41,56 @@ const Membership = () => {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [membershipData, setMembershipData] = useState(initialMembershipData);
+
   const headers = [
     'SL.', 'Full Name', 'Email', 'Phone Number', 
     'Project/Company', 'Package', 'Payment Method', 'Date', 'Status'
   ];
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (value === '') {
+      setMembershipData(initialMembershipData);
+    } else {
+      setMembershipData(
+        initialMembershipData.filter((member) =>
+          member.fullName.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+    }
+  };
+
   const renderRow = (member) => (
-    <tr key={member.id} className='text-gray-700 text-sm'>
-      <td className="py-2 px-4 border-b">{member.id}</td>
-      <td className="py-2 px-4 border-b">{member.fullName}</td>
-      <td className="py-2 px-4 border-b">{member.email}</td>
-      <td className="py-2 px-4 border-b">{member.phoneNumber}</td>
-      <td className="py-2 px-4 border-b">{member.projectOrCompany}</td>
-      <td className="py-2 px-4 border-b">{member.package}</td>
-      <td className="py-2 px-4 border-b">{member.paymentMethod}</td>
-      <td className="py-2 px-4 border-b">{member.date}</td>
-      <td className="py-2 px-4 border-b">{member.status}</td>
+    <tr key={member.id} className="text-gray-700 hover:bg-gray-50 cursor-pointer text-sm">
+      <td className="py-2 px-4 border border-gray-300">{member.id}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.fullName}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.email}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.phoneNumber}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.projectOrCompany}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.package}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.paymentMethod}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.date}</td>
+      <td className="py-2 px-4 border border-gray-300">{member.status}</td>
     </tr>
   );
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-2 py-10">
+      <div className="flex justify-between items-center bg-blue-100 p-4 rounded-none">
         <h2 className="text-xl font-semibold text-gray-700">All Memberships</h2>
       </div>
-      <ExportButtons />
-      <GenericTable headers={headers} data={membershipData} renderRow={renderRow} />
+      <div className="bg-white p-4">
+        <div className="flex justify-between items-center">
+          <ExportButtons />
+          <div className="ml-4 w-64">
+            <SearchBox value={searchTerm} onChange={handleSearchChange} />
+          </div>
+        </div>
+        <GenericTable headers={headers} data={membershipData} renderRow={renderRow} />
+      </div>
     </div>
   );
 };

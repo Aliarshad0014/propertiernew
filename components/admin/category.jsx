@@ -3,57 +3,61 @@ import GenericTable from './generictable';
 import ExportButtons from './buttons';
 import SearchBox from './searchbox';
 
-const Testimonials = () => {
+const Categories = () => {
   // Sample data
-  const initialTestimonialsData = [
+  const initialCategoriesData = [
     {
       id: 1,
       image: 'https://via.placeholder.com/150',
-      name: 'John Doe',
-      testimonial: 'This service was excellent and exceeded my expectations.',
+      name: 'Technology',
+      postNum: 45,
+      slug: 'technology',
     },
     {
       id: 2,
       image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      testimonial: 'The team was professional and delivered great results.',
+      name: 'Health',
+      postNum: 30,
+      slug: 'health',
     },
     {
       id: 3,
       image: 'https://via.placeholder.com/150',
-      name: 'Alice Johnson',
-      testimonial: 'Highly recommend this company for their outstanding service.',
+      name: 'Lifestyle',
+      postNum: 50,
+      slug: 'lifestyle',
     },
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [testimonialsData, setTestimonialsData] = useState(initialTestimonialsData);
+  const [categoriesData, setCategoriesData] = useState(initialCategoriesData);
 
-  const headers = ['SL.', 'Image', 'Name', 'Testimonial', 'Action'];
+  const headers = ['SL.', 'Image', 'Name', 'Post Num', 'Slug', 'Action'];
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
     if (value === '') {
-      setTestimonialsData(initialTestimonialsData);
+      setCategoriesData(initialCategoriesData);
     } else {
-      setTestimonialsData(
-        initialTestimonialsData.filter((testimonial) =>
-          testimonial.name.toLowerCase().includes(value.toLowerCase()) ||
-          testimonial.testimonial.toLowerCase().includes(value.toLowerCase())
+      setCategoriesData(
+        initialCategoriesData.filter((category) =>
+          category.name.toLowerCase().includes(value.toLowerCase()) ||
+          category.slug.toLowerCase().includes(value.toLowerCase())
         )
       );
     }
   };
 
-  const renderRow = (testimonial) => (
-    <tr key={testimonial.id} className="text-gray-700 hover:bg-gray-50 cursor-pointer text-sm">
-      <td className="py-2 px-4 border border-gray-300">{testimonial.id}</td>
+  const renderRow = (category) => (
+    <tr key={category.id} className="text-gray-700 hover:bg-gray-50 cursor-pointer text-sm">
+      <td className="py-2 px-4 border border-gray-300">{category.id}</td>
       <td className="py-2 px-4 border border-gray-300">
-        <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-full" />
+        <img src={category.image} alt={category.name} className="w-16 h-16 rounded" />
       </td>
-      <td className="py-2 px-4 border border-gray-300">{testimonial.name}</td>
-      <td className="py-2 px-4 border border-gray-300">{testimonial.testimonial}</td>
+      <td className="py-2 px-4 border border-gray-300">{category.name}</td>
+      <td className="py-2 px-4 border border-gray-300">{category.postNum}</td>
+      <td className="py-2 px-4 border border-gray-300">{category.slug}</td>
       <td className="py-2 px-4 border border-gray-300">
         <button className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">Edit</button>
         <button className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 ml-2">Delete</button>
@@ -64,7 +68,7 @@ const Testimonials = () => {
   return (
     <div className="p-2 py-10">
       <div className="flex justify-between items-center bg-blue-100 p-4 rounded-none">
-        <h2 className="text-xl font-semibold text-gray-700">Testimonials</h2>
+        <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
         <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">+ Create</button>
       </div>
       <div className="bg-white p-4">
@@ -74,10 +78,10 @@ const Testimonials = () => {
             <SearchBox value={searchTerm} onChange={handleSearchChange} />
           </div>
         </div>
-        <GenericTable headers={headers} data={testimonialsData} renderRow={renderRow} />
+        <GenericTable headers={headers} data={categoriesData} renderRow={renderRow} />
       </div>
     </div>
   );
 };
 
-export default Testimonials;
+export default Categories;
