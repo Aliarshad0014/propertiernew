@@ -78,7 +78,7 @@ const SearchBox = () => {
             {showMore && (
               <div className="flex flex-col sm:flex-row items-center justify-start space-y-4 sm:space-y-0 sm:space-x-4 w-full">
                 <div className="flex flex-col items-start">
-                  <FormControl fullWidth className="w-60" variant="outlined">
+                  <FormControl fullWidth className="w-60" variant="outlined" size="small">
                     <InputLabel>Region</InputLabel>
                     <Select
                       value={region}
@@ -94,7 +94,7 @@ const SearchBox = () => {
                   </FormControl>
                 </div>
                 <div className="flex flex-col items-start">
-                  <FormControl fullWidth className="w-60" variant="outlined">
+                  <FormControl fullWidth className="w-60" variant="outlined" size="small">
                     <InputLabel>Price Range</InputLabel>
                     <Select
                       value={priceRange}

@@ -3,6 +3,16 @@ import Dashboard from '@/components/admin/dashboard';
 import React, { useState } from 'react';
 import Sliders from './sliders';
 import Features from './features';
+import MaterialRates from './materialrates';
+import Membership from './memberships';
+import CustomerRequests from './customerrequests';
+import ProjectOffers from './projectoffers';
+import ProjectQueries from './projectqueries';
+import Customers from './customers';
+import Services from '../Services/Services';
+import ServicesCard from '../Services/ServicesCard';
+import AllServices from './services';
+import Testimonials from './testimonials';
 
 
 function App() {
@@ -25,23 +35,23 @@ function App() {
             case 'features':
                 return <Features/>
             case 'material-rates':
-                return <div>Material Rates Content</div>;
+                return <MaterialRates/>
             case 'memberships':
-                return <div>Memberships Content</div>;
+                return <Membership/>
             case 'customer-requests':
-                return <div>Customer Requests Content</div>;
+                return <CustomerRequests/>
             case 'project-offers':
-                return <div>Project Offers Content</div>;
+                return <ProjectOffers/>
             case 'project-queries':
-                return <div>Project Queries Content</div>;
+                return <ProjectQueries/>
             case 'customers':
-                return <div>Customers Content</div>;
+                return <Customers/>
             case 'services':
-                return <div>Services Content</div>;
+                return  <AllServices/>
             case 'packages':
                 return <div>Packages Content</div>;
             case 'testimonials':
-                return <div>Testimonials Content</div>;
+                return <Testimonials/>
             default:
                 return <div>Select an item from the sidebar</div>;
         }

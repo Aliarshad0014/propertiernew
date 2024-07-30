@@ -4,11 +4,13 @@ import { FaSearch } from "react-icons/fa";
 import FooterSection from "@/components/footer";
 import TopBanner from "../TopBanner/TopBannerProperties";
 import SearchBox from "../searchbox/searchboxpages";
+import BounceLoader from "react-spinners/BounceLoader";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [showMore, setShowMore] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -20,6 +22,8 @@ const Properties = () => {
         setProperties(result.Data.properties);
       } catch (error) {
         console.error("Error fetching properties:", error);
+      } finally {
+        setLoading(false); // Set loading to false once data is fetched
       }
     };
 
@@ -38,10 +42,18 @@ const Properties = () => {
     setShowMore(!showMore);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <BounceLoader color="#eaab0c" loading={loading} size={60} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 relative">
       <TopBanner />
-      <SearchBox/>
+      <SearchBox />
 
       <h1 className="text-3xl font-bold text-center text-yellow-500 mt-10 mb-10">
         Properties

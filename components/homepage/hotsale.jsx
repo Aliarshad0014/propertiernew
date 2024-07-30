@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import BounceLoader from "react-spinners/BounceLoader";
+
 
 const HotSale = ({ data }) => {
   return (
