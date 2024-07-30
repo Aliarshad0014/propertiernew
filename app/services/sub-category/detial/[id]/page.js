@@ -1,4 +1,4 @@
-import SubCategoryDetial from "@/components/Services/SubCategoryDetial";
+import SubCategoryDetial from "@/components/Services/Detials/SubCategoryDetial";
 import React from "react";
 
 export default function page({ params }) {
