@@ -12,6 +12,7 @@ import ServicesCarousel from "@/components/homepage/services";
 import BlogComponent from "@/components/homepage/blog";
 import FooterSection from "@/components/footer";
 import SearchBox from "@/components/searchbox/searchbox";
+import BounceLoader from "react-spinners/BounceLoader";
 
 const images = [
   "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -32,6 +33,7 @@ export default function Home() {
     shortVideos: [],
     appFeedbacks: [],
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +46,8 @@ export default function Home() {
         setData(result.Data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -65,6 +69,14 @@ export default function Home() {
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <BounceLoader color="#eaab0c" loading={loading} size={60} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen relative w-full bg-white">
@@ -99,10 +111,8 @@ export default function Home() {
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
-      <div className="relative z-40 flex flex-col items-center justify-center">
-        
-          <SearchBox />
-        
+      <div className="relative z-10 flex flex-col items-center justify-center">
+        <SearchBox />
       </div>
 
       <div className="py-10">
