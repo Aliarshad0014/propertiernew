@@ -1,4 +1,4 @@
-import SubCategory from "@/components/Services/SubCategory";
+import SubCategory from "@/components/Services/Sub-Services/SubCategory";
 import React from "react";
 
 export default function page({ params }) {

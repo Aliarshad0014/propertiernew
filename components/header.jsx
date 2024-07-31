@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { RiCloseLine, RiMenu3Line, RiAccountCircleFill } from "react-icons/ri";
 import Link from "next/link";
-
+import logo from "@/image/logo.png";
 const Header = () => {
   const [navBar, setNavBar] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -65,7 +65,7 @@ const Header = () => {
           <Image
             width={100}
             height={100}
-            src="http://localhost:3000/_next/image?url=https%3A%2F%2Fpropertier.com.pk%2Fassets%2Fimg%2Ffooter-logo-n.png&w=256&q=75"
+            src={logo}
             alt="Logo"
             className="h-6 w-full cursor-pointer"
           />
@@ -84,7 +84,9 @@ const Header = () => {
             key={href}
             href={href}
             className={`hover:text-yellow-500 ${
-              activeLink === href ? "text-yellow-500 font-bold" : "text-white font-regular"
+              activeLink === href
+                ? "text-yellow-500 font-bold"
+                : "text-white font-regular"
             } h-9 rounded-md ease-in-out duration-500 transition-all flex items-center`}
             onClick={() => handleLinkClick(href)}
           >

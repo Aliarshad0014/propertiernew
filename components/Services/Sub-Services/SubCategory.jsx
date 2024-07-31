@@ -5,12 +5,14 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import TopBanner from "../TopBanner/TopBanner";
+import TopBanner from "../../TopBanner/TopBanner";
 import ServicesCard from "./ServicesCard";
 import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
+import OtherServices from "./OtherServices";
+import OurPartners from "./OurPartners";
 
-export default function SubCategoryDetial({ paramsID }) {
+export default function SubCategory({ paramsID }) {
   const [allService, setAllService] = useState("Electricity");
   const [allSubServices, setAllSubServices] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
@@ -22,7 +24,7 @@ export default function SubCategoryDetial({ paramsID }) {
   const getSubServices = async () => {
     setBtnLoad(true);
     url
-      .get(`/services/sub-services/${paramsID}`)
+      .get(`/services/service/${paramsID}/sub-services/`)
       .then(async (res) => {
         setAllSubServices(res.data);
         setBtnLoad(false);
@@ -34,17 +36,18 @@ export default function SubCategoryDetial({ paramsID }) {
       });
   };
 
-  console.log(allSubServices);
   const handleChange = (event) => {
     setAllService(event.target.value);
   };
+
+  //   console.log(allSubServices[0]?.parent_service_name);
   return (
     <div>
       <TopBanner
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
-        secondCrumb={allSubServices?.parent_service_name}
+        secondCrumb={allSubServices[0]?.parent_service_name}
       />
       <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
@@ -94,8 +97,23 @@ export default function SubCategoryDetial({ paramsID }) {
             elementum, purus felis egestas. Sollicitudin nec tortor etiam
             dignissim varius.
           </div>
+
+          <div className="my-4 mb-10 flex flex-wrap gap-7 justify-center">
+            {btnLoad ? (
+              <BounceLoader color="#eab308" />
+            ) : (
+              allSubServices?.map((e, i) => {
+                return <ServicesCard allService={e} subCategory={true} />;
+              })
+            )}
+          </div>
         </div>
       </div>
+
+      <main>
+        <OtherServices />
+        <OurPartners />
+      </main>
     </div>
   );
 }

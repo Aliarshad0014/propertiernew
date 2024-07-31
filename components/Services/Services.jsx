@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TopBanner from "../TopBanner/TopBanner";
-import ServicesCard from "./ServicesCard";
+import ServicesCard from "./Sub-Services/ServicesCard";
 import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
 
@@ -39,14 +39,12 @@ export default function Services() {
   };
   return (
     <div>
-
       <TopBanner
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
       />
       <div className="w-full flex justify-center  -mt-10 absolute">
-
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
           <div className="flex items-center bg-gray-900 px-4 gap-3 w-full rounded-lg">
             <Box sx={{ minWidth: 120, width: "100%" }}>
