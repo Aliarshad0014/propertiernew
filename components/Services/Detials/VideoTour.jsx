@@ -4,7 +4,7 @@ import ShareIcon from "@/icons/ShareIcon";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function VideoTour({ videoSrc }) {
+export default function VideoTour({ video_url }) {
   const [comment, setComment] = useState("");
 
   const handleCommentChange = (e) => {
@@ -25,7 +25,7 @@ export default function VideoTour({ videoSrc }) {
         <div className="flex w-[70%]">
           <div className="relative w-full">
             <video className="w-full h-[350px]" controls>
-              <source src={videoSrc} type="video/mp4" />
+              <source src={video_url} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div className="absolute inset-0 flex justify-center items-center">

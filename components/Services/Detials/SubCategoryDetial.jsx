@@ -21,6 +21,7 @@ export default function SubCategoryDetial({ paramsID }) {
   const [allSubServices, setAllSubServices] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allFixedServices, setAllFixedServices] = useState([]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -45,6 +46,24 @@ export default function SubCategoryDetial({ paramsID }) {
       });
   };
 
+  useEffect(() => {
+    getFixedServices();
+  }, []);
+
+  const getFixedServices = async () => {
+    setBtnLoad(true);
+    url
+      .get(`/services/filtered-services/`)
+      .then(async (res) => {
+        setAllFixedServices(res.data);
+        setBtnLoad(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setBtnLoad(false);
+      });
+  };
+
   console.log(allSubServices);
   const handleChange = (event) => {
     setAllService(event.target.value);
@@ -64,7 +83,7 @@ export default function SubCategoryDetial({ paramsID }) {
             {allSubServices?.parent_service_name}
           </div>
           <div
-            className="my-5 text-sm text-center w-[200px] bg-[#FECE55] px-4 py-2"
+            className="my-5 text-sm text-center w-[200px] bg-[#FECE55] px-4 py-2 cursor-pointer"
             onClick={toggleModal}
           >
             GET SERVICE
@@ -97,15 +116,15 @@ export default function SubCategoryDetial({ paramsID }) {
                   <div className="text-justify">
                     {allSubServices?.description}
                   </div>
-                  <Tags />
+                  <Tags Tags={allSubServices?.tags} />
                 </div>
                 <div className="w-[30%]">
-                  <Recommender />
+                  <Recommender allFixedServices={allFixedServices} />
                 </div>
               </div>
 
               <div>
-                <VideoTour />
+                <VideoTour video_url={allSubServices?.video_url} />
               </div>
             </div>
           )}
@@ -119,11 +138,11 @@ export default function SubCategoryDetial({ paramsID }) {
                 Please Install Our Vendor App
               </h2>
               <p className="mb-6">
-                Lorem ipsum dolor sit amet consectetur. Venenatis suspendisse
-                rhoncus at nulla ultricies in eu. Quam at elementum nibh
-                phasellus. Tincidunt id magna ultricies iaculis at varius eget
-                etiam. Et hac erat mus et bibendum pellentesque nulla praesent.
-                Nam sed purus leo sollicitudin.
+                To enhance your experience and access our full range of
+                services, we recommend installing our vendor app. The app offers
+                easy access to our services, timely updates, and seamless
+                communication with our support team. Stay connected and get the
+                most out of our offerings by downloading the app today.
               </p>
               <div className="flex justify-end">
                 <button

@@ -1,62 +1,38 @@
 // pages/Recommender.js
 import Image from "next/image";
 import noimg from "@/image/noimg.svg";
-
-const recommendations = [
-  {
-    id: 1,
-    title: "Fane Repairing",
-    date: "10 August",
-    imageSrc: "noimg",
-  },
-  {
-    id: 2,
-    title: "Machine Repairing",
-    date: "2 August",
-    imageSrc: "noimg",
-  },
-  {
-    id: 3,
-    title: "Electric scooter Repairing",
-    date: "3 July",
-    imageSrc: "noimg",
-  },
-  {
-    id: 4,
-    title: "Home Wiring Repairing",
-    date: "19 June",
-    imageSrc: "noimg",
-  },
-  //   { id: 5, title: "Ac Repairing", date: "1 June", imageSrc: "noimg" },
-  //   {
-  //     id: 6,
-  //     title: "Meter Repairing",
-  //     date: "16 April",
-  //     imageSrc: "noimg",
-  //   },
-];
-
-export default function Recommender() {
+import moment from "moment/moment";
+import Link from "next/link";
+export default function Recommender({ allFixedServices }) {
+  //   console.log(allFixedServices);
   return (
-    <div>
+    <div className="w-full">
       <h1 className="text-xl font-bold mb-4">Recommender for you</h1>
       <ul>
-        {recommendations.map((item) => (
+        {allFixedServices?.slice(0, 4)?.map((item) => (
           <li key={item.id} className="flex items-center mb-4">
             <div className="w-20 h-20 relative mr-4">
               <Image
-                src={noimg}
+                src={item?.image_url ? item?.image_url : noimg}
                 alt={item.title}
                 layout="fill"
                 objectFit="cover"
                 className="rounded"
               />
             </div>
-            <div>
-              <a href="#" className="text-blue-600 text-md font-semibold">
+            <div className="flex-1 min-w-0">
+              <Link
+                href="/services"
+                className="text-blue-600 text-md font-semibold block truncate"
+              >
                 {item.title}
-              </a>
-              <p className="text-gray-600 text-sm">{item.date}</p>
+              </Link>
+              <div className="text-gray-600 text-sm w-full block">
+                <div className="truncate">{item?.description}</div>
+              </div>
+              <p className="text-gray-600 text-sm">
+                {moment(item?.created_at).format("DD MMM")}
+              </p>
             </div>
           </li>
         ))}

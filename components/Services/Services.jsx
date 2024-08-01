@@ -33,7 +33,7 @@ export default function Services() {
       });
   };
 
-  console.log(allFixedServices);
+  // console.log(allFixedServices);
   const handleChange = (event) => {
     setAllService(event.target.value);
   };
