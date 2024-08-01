@@ -59,9 +59,9 @@ const ProjectOffers = () => {
         <h2 className="text-xl font-semibold text-gray-700">Project Offers</h2>
       </div>
       <div className="bg-white p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex lg:flex-row flex-col justify-between lg:items-center">
           <ExportButtons />
-          <div className="ml-4 w-64">
+          <div className="lg:ml-4 w-64">
             <SearchBox value={searchTerm} onChange={handleSearchChange} />
           </div>
         </div>

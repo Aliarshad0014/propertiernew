@@ -65,15 +65,15 @@ const Sliders = () => {
   );
 
   return (
-    <div className="p-2 py-10">
+    <div className="p-2 py-10 w-full">
       <div className="flex justify-between items-center bg-blue-100 p-4 rounded-none">
         <h2 className="text-xl font-semibold text-gray-700">Slider List</h2>
         <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">+ Create</button>
       </div>
       <div className="bg-white p-4 ">
-        <div className="flex justify-between items-center">
+        <div className="flex lg:justify-between lg:items-center items-start flex-col lg:flex-row">
           <ExportButtons />
-          <div className="ml-4 w-64">
+          <div className="lg:ml-4 w-64">
             <SearchBox value={searchTerm} onChange={handleSearchChange} />
           </div>
         </div>

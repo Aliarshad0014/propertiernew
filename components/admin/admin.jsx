@@ -73,8 +73,8 @@ function App() {
     };
 
     return (
-        <div className="flex bg-gray-100 max-h-screen">
-            <div className="w-80 h-screen bg-white shadow-lg overflow-y-auto pt-10">
+        <div className="flex flex-col lg:flex-row bg-gray-100 max-h-screen">
+            <div className={`w-full lg:w-80 h-screen bg-white shadow-lg overflow-y-auto pt-10 ${isNavOpen ? 'block' : 'hidden'} lg:block`}>
                 <div className="p-4 text-lg font-medium text-gray-800 bg-gray-100">MAIN NAVIGATION</div>
                 <ul className="mt-2">
                     <li className={getNavItemClasses('dashboard')} onClick={() => handleNavItemClick('dashboard')}>
@@ -149,7 +149,10 @@ function App() {
                     </li>
                 </ul>
             </div>
-            <div className="flex-1 p-4 overflow-y-auto">
+            <div className="flex-1 mt-10 lg:mt-0 p-4 overflow-y-auto">
+                <button className="lg:hidden p-4 text-gray-800" onClick={() => setIsNavOpen(!isNavOpen)}>
+                    <span className="material-symbols-outlined">{isNavOpen ? 'close' : 'menu'}</span>
+                </button>
                 {renderContent()}
             </div>
         </div>
