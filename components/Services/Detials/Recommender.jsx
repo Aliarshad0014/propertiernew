@@ -1,6 +1,6 @@
 // pages/Recommender.js
 import Image from "next/image";
-import noimg from "@/image/noimg.svg";
+import noimg from "@/image/noImg.svg";
 import moment from "moment/moment";
 import Link from "next/link";
 export default function Recommender({ allFixedServices }) {
