@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import noimg from "@/image/noimg.svg";
+import noimg from "@/image/noImg.svg";
 
 const ImageGallery = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(images?.[0]);
