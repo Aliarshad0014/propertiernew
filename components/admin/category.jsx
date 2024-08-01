@@ -72,9 +72,9 @@ const Categories = () => {
         <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">+ Create</button>
       </div>
       <div className="bg-white p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex lg:flex-row flex-col justify-between lg:items-center">
           <ExportButtons />
-          <div className="ml-4 w-64">
+          <div className="lg:ml-4 w-64">
             <SearchBox value={searchTerm} onChange={handleSearchChange} />
           </div>
         </div>
