@@ -11,20 +11,26 @@ import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
 import OtherServices from "./OtherServices";
 import OurPartners from "./OurPartners";
+import FeaturedCard from "../Serviceslist/FeaturedCard";
 
 export default function SubCategory({ paramsID }) {
-  const [allService, setAllService] = useState("Electricity");
+  const [allService, setAllService] = useState([]);
   const [allSubServices, setAllSubServices] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
 
   useEffect(() => {
     getSubServices();
+    getFixedServices();
   }, []);
 
   const getSubServices = async () => {
     setBtnLoad(true);
     url
-      .get(`/services/service/${paramsID}/sub-services/`)
+      // .get(`/services/service/${paramsID}/sub-services/`)
+
+      .get(
+        `/services/vendor-services-with-pagination/?page=1&limit=20&service_id=${paramsID}`
+      )
       .then(async (res) => {
         setAllSubServices(res.data);
         setBtnLoad(false);
@@ -36,25 +42,34 @@ export default function SubCategory({ paramsID }) {
       });
   };
 
-  const handleChange = (event) => {
-    setAllService(event.target.value);
+  const getFixedServices = async () => {
+    setBtnLoad(true);
+    url
+      .get(`/services/fixed-services/`)
+      .then(async (res) => {
+        setAllService(res.data);
+        setBtnLoad(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setBtnLoad(false);
+      });
   };
 
-  //   console.log(allSubServices[0]?.parent_service_name);
+  // console.log(allSubServices?.results[0]?.service?.title);
   return (
     <div>
       <TopBanner
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
-        secondCrumb={allSubServices[0]?.parent_service_name}
+        secondCrumb={allSubServices?.results?.[0]?.service?.title}
       />
-      <div className="w-full flex justify-center  -mt-10 absolute">
+      {/* <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
           <div className="flex items-center bg-gray-900 px-4 gap-3 w-full rounded-lg">
             <Box sx={{ minWidth: 120, width: "100%" }}>
               <FormControl fullWidth>
-                {/* <InputLabel id="demo-simple-select-label">AllService</InputLabel> */}
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -81,29 +96,20 @@ export default function SubCategory({ paramsID }) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="bg-[#DDDDDD] mt-20 flex flex-col items-center text-black">
+      <div className="bg-[#ffffff] mt-20 flex flex-col items-center text-black">
         <div className="flex flex-col items-center w-[70%]">
           <div className="text-3xl font-bold text-black mb-5 mt-10">
-            Services
-          </div>
-          <div className="my-5 text-sm text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. At diam
-            urna id metus mus. Nunc, mi ut volutpat, natoque. Enim, amet, sem id
-            a ultrices elementum, quis auctor. Sed turpis ultricies nulla
-            consequat facilisis. Proin nunc elementum, enim, facilisis mauris in
-            aliquam. Elementum tellus ultricies massa nulla ac. Gravida
-            elementum, purus felis egestas. Sollicitudin nec tortor etiam
-            dignissim varius.
+            {allSubServices?.results?.[0]?.service?.title}
           </div>
 
           <div className="my-4 mb-10 flex flex-wrap gap-7 justify-center">
             {btnLoad ? (
               <BounceLoader color="#eab308" />
             ) : (
-              allSubServices?.map((e, i) => {
-                return <ServicesCard allService={e} subCategory={true} />;
+              allSubServices?.results?.map((e, i) => {
+                return <FeaturedCard allService={e} subCategory={true} />;
               })
             )}
           </div>
@@ -111,8 +117,8 @@ export default function SubCategory({ paramsID }) {
       </div>
 
       <main>
-        <OtherServices />
-        <OurPartners />
+        <OtherServices allService={allService} />
+        {/* <OurPartners /> */}
       </main>
     </div>
   );

@@ -29,7 +29,8 @@ export default function SubCategoryDetial({ paramsID }) {
   const getSubServices = async () => {
     setBtnLoad(true);
     url
-      .get(`/services/sub-services/${paramsID}`)
+      // .get(`/services/sub-services/${paramsID}`)
+      .get(`/services/vendor-services/${paramsID}`)
       .then(async (res) => {
         setAllSubServices(res.data);
         setBtnLoad(false);
@@ -109,7 +110,7 @@ export default function SubCategoryDetial({ paramsID }) {
                     Description
                   </div>
                   <div className="text-justify">
-                    {allSubServices?.description}
+                    {allSubServices?.service?.description}
                   </div>
                   <Tags Tags={allSubServices?.tags} />
                 </div>

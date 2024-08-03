@@ -76,7 +76,7 @@ const Header = () => {
         {[
           { href: "/", text: "HOME" },
           { href: "/properties", text: "PROPERTIES" },
-          { href: "/services", text: "SERVICES" },
+          { href: "/services-list", text: "SERVICES" },
           { href: "/corporateservices", text: "CORPORATE" },
           { href: "/material", text: "MATERIAL" },
         ].map(({ href, text }) => (
