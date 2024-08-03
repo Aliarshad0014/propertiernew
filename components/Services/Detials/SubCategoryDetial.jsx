@@ -64,19 +64,37 @@ export default function SubCategoryDetial({ paramsID }) {
   const handleChange = (event) => {
     setAllService(event.target.value);
   };
+
+  console.log(allSubServices);
   return (
     <div>
       <TopBanner
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
-        secondCrumb={allSubServices?.parent_service_name}
+        secondCrumb={allSubServices?.service?.title}
       />
 
       <div className="bg-[#ffffff] mt-5 flex flex-col items-center text-black">
         <div className="flex flex-col items-center w-[80%]">
-          <div className="text-3xl font-bold text-black mb-5 mt-10">
-            {allSubServices?.parent_service_name}
+          <div className="flex justify-between items-center w-full">
+            <div>
+              {allSubServices?.is_featured && (
+                <div className=" bg-[#FFCE58] text-black px-2 py-1 text-sm font-semibold">
+                  Featured
+                </div>
+              )}
+            </div>
+            <div className="text-3xl font-bold text-black mb-5 mt-10">
+              {allSubServices?.service?.title}
+            </div>
+            {allSubServices?.fixed_price ? (
+              <div className=" bg-[#FFCE58] text-black px-2 py-1 text-sm font-semibold">
+                {allSubServices?.fixed_price} Rs
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
           <div
             className="my-5 text-sm text-center w-[200px] bg-[#FECE55] px-4 py-2 cursor-pointer"
@@ -112,7 +130,7 @@ export default function SubCategoryDetial({ paramsID }) {
                   <div className="text-justify">
                     {allSubServices?.service?.description}
                   </div>
-                  <Tags Tags={allSubServices?.tags} />
+                  <Tags Tags={allSubServices?.selected_sub_services} />
                 </div>
                 <div className="w-[30%]">
                   <Recommender allFixedServices={allFixedServices} />

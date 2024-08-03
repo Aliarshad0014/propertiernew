@@ -14,13 +14,14 @@ export default function ServicesCard({ allService, subCategory }) {
   return (
     <div className="mb-8 ">
       {" "}
-      <div className="max-w-sm mx-auto  relative ">
+      <div className="w-[300px] mx-auto  relative ">
         <div>
           <Image
             src={imgSrc}
             alt="Electricity"
-            width={310}
-            height={310}
+            className=" h-[200px] w-full"
+            width={200}
+            height={200}
             onError={handleError}
           />
         </div>
@@ -35,7 +36,7 @@ export default function ServicesCard({ allService, subCategory }) {
               className="w-full flex justify-between items-center "
             >
               <div className="w-full flex justify-between items-center ">
-                <span className="ml-2 text-gray-700 font-medium ">
+                <span className="ml-2 text-gray-700 font-medium line-clamp-1">
                   {allService?.title}
                 </span>
 
