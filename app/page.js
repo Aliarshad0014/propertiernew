@@ -63,7 +63,9 @@ export default function Home() {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
   return (
@@ -100,30 +102,28 @@ export default function Home() {
         </button>
       </div>
       <div className="relative z-40 flex flex-col items-center justify-center">
-        
-          <SearchBox />
-        
+        <SearchBox />
       </div>
 
-      <div className="py-10">
+      <div className="pb-5 -mt-5">
         <HotSale data={data.properties} className="relative" />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <CustomCarousel data={data.materialRates} />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <VideoShorts data={data.shortVideos} />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <ServicesCarousel />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <CustommCarousel />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <UserReviews data={data.appFeedbacks} />
       </div>
-      <div className="py-10">
+      <div className="py-5">
         <BlogComponent />
       </div>
       <div className="">

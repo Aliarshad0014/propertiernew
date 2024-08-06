@@ -14,7 +14,7 @@ const Franchise = () => {
       price: "$100,000",
       area: "1000 sqft",
       propertyType: "Apartment",
-      note: "Lorem ipsum dolor sit amet"
+      note: "Lorem ipsum dolor sit amet",
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ const Franchise = () => {
       price: "$150,000",
       area: "1200 sqft",
       propertyType: "House",
-      note: "Consectetur adipiscing elit"
+      note: "Consectetur adipiscing elit",
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ const Franchise = () => {
       price: "$120,000",
       area: "800 sqft",
       propertyType: "Villa",
-      note: "Sed do eiusmod tempor"
+      note: "Sed do eiusmod tempor",
     },
     // Add more properties as needed
   ]);
@@ -74,31 +74,71 @@ const Franchise = () => {
   return (
     <div className="mt-6">
       <div className="flex flex-col md:flex-row md:justify-start md:space-x-4 mb-4 text-gray-600">
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "requests" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("requests")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "requests" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("requests")}
+        >
           Requests
         </button>
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "ads" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("ads")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "ads" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("ads")}
+        >
           Ads
         </button>
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "propertyManagement" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("propertyManagement")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "propertyManagement" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("propertyManagement")}
+        >
           Property Management
         </button>
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "societiesUpdate" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("societiesUpdate")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "societiesUpdate" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("societiesUpdate")}
+        >
           Societies Update
         </button>
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "biddingControl" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("biddingControl")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "biddingControl" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("biddingControl")}
+        >
           Bidding Control
         </button>
-        <button className={`px-4 py-2 w-full md:w-auto ${activeTab === "sellForMe" ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded mb-2 md:mb-0`} onClick={() => handleTabClick("sellForMe")}>
+        <button
+          className={`px-4 py-2 w-full md:w-auto ${
+            activeTab === "sellForMe" ? "bg-[#FFCE58]" : "bg-gray-200"
+          } hover:bg-[#FFCE58] rounded mb-2 md:mb-0`}
+          onClick={() => handleTabClick("sellForMe")}
+        >
           Sell for Me
         </button>
       </div>
       {activeTab === "requests" && (
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 mb-4">
-          <button className={`px-4 py-2 w-full md:w-1/2 ${showRequestOfProperties ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded md:mr-2`} onClick={requestOfProperties}>
+          <button
+            className={`px-4 py-2 w-full md:w-1/2 ${
+              showRequestOfProperties ? "bg-[#FFCE58]" : "bg-gray-200"
+            } hover:bg-[#FFCE58] rounded md:mr-2`}
+            onClick={requestOfProperties}
+          >
             Request of Properties
           </button>
-          <button className={`px-4 py-2 w-full md:w-1/2 ${showRequestedProperties ? "bg-yellow-500" : "bg-gray-200"} hover:bg-yellow-500 rounded`} onClick={showRequestedPropertiesTable}>
+          <button
+            className={`px-4 py-2 w-full md:w-1/2 ${
+              showRequestedProperties ? "bg-[#FFCE58]" : "bg-gray-200"
+            } hover:bg-[#FFCE58] rounded`}
+            onClick={showRequestedPropertiesTable}
+          >
             Requested Properties
           </button>
         </div>
@@ -126,12 +166,16 @@ const Franchise = () => {
                   <td className="text-left py-2 px-4">{property.id}</td>
                   <td className="text-left py-2 px-4">{property.name}</td>
                   <td className="text-left py-2 px-4">{property.email}</td>
-                  <td className="text-left py-2 px-4">{property.phoneNumber}</td>
+                  <td className="text-left py-2 px-4">
+                    {property.phoneNumber}
+                  </td>
                   <td className="text-left py-2 px-4">{property.city}</td>
                   <td className="text-left py-2 px-4">{property.location}</td>
                   <td className="text-left py-2 px-4">{property.price}</td>
                   <td className="text-left py-2 px-4">{property.area}</td>
-                  <td className="text-left py-2 px-4">{property.propertyType}</td>
+                  <td className="text-left py-2 px-4">
+                    {property.propertyType}
+                  </td>
                   <td className="text-left py-2 px-4">{property.note}</td>
                 </tr>
               ))}
@@ -163,9 +207,13 @@ const Franchise = () => {
                   <td className="text-left py-2 px-4">{property.location}</td>
                   <td className="text-left py-2 px-4">{property.price}</td>
                   <td className="text-left py-2 px-4">{property.area}</td>
-                  <td className="text-left py-2 px-4">{property.propertyType}</td>
                   <td className="text-left py-2 px-4">
-                    <button className="px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">Action</button>
+                    {property.propertyType}
+                  </td>
+                  <td className="text-left py-2 px-4">
+                    <button className="px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                      Action
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -181,19 +229,25 @@ const Franchise = () => {
       {activeTab === "propertyManagement" && (
         <div className="mt-4">
           <h2 className="text-2xl mb-2">Property Management Section</h2>
-          <p className="text-gray-600">Add your property management content here.</p>
+          <p className="text-gray-600">
+            Add your property management content here.
+          </p>
         </div>
       )}
       {activeTab === "societiesUpdate" && (
         <div className="mt-4">
           <h2 className="text-2xl mb-2">Societies Update Section</h2>
-          <p className="text-gray-600">Add your societies update content here.</p>
+          <p className="text-gray-600">
+            Add your societies update content here.
+          </p>
         </div>
       )}
       {activeTab === "biddingControl" && (
         <div className="mt-4">
           <h2 className="text-2xl mb-2">Bidding Control Section</h2>
-          <p className="text-gray-600">Add your bidding control content here.</p>
+          <p className="text-gray-600">
+            Add your bidding control content here.
+          </p>
         </div>
       )}
       {activeTab === "sellForMe" && (
@@ -202,7 +256,7 @@ const Franchise = () => {
           <p className="text-gray-600">Add your sell for me content here.</p>
         </div>
       )}
-      <FloatingButton/>
+      <FloatingButton />
     </div>
   );
 };

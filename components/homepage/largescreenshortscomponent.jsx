@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import axios from "axios";
+import Link from "next/link";
 
 /**
  * @typedef {Object} VideoData
@@ -16,7 +17,13 @@ import axios from "axios";
  * @param {number[]} props.likedVideos - Array of indices of liked videos.
  * @param {function(number): void} props.setLikedVideos - Function to set liked videos.
  */
-const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos, setLikedVideos }) => {
+const LargeScreenVideoShorts = ({
+  data,
+  playingIndex,
+  setPlayingIndex,
+  likedVideos,
+  setLikedVideos,
+}) => {
   const videoRefs = useRef(Array(data.length).fill(null));
 
   useEffect(() => {
@@ -68,19 +75,27 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
       const isLiked = likedVideos.includes(index);
 
       if (isLiked) {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-        });
+        const response = await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+          }
+        );
         console.log("Unlike action response:", response.data);
 
-        setLikedVideos((prevLikedVideos) => prevLikedVideos.filter((item) => item !== index));
+        setLikedVideos((prevLikedVideos) =>
+          prevLikedVideos.filter((item) => item !== index)
+        );
       } else {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-          action: "like",
-        });
+        const response = await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+            action: "like",
+          }
+        );
         console.log("Like action response:", response.data);
 
         setLikedVideos((prevLikedVideos) => [...prevLikedVideos, index]);
@@ -91,8 +106,10 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
   };
 
   return (
-    <div className="relative flex flex-col w-full min-h-screen items-center justify-center p-4 md:p-8 bg-white">
-      <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-10 text-yellow-500">Short Videos</h1>
+    <div className="relative flex flex-col w-full items-center justify-center p-4  bg-white">
+      <h1 className="text-3xl md:text-4xl font-bold mt-5 mb-10 text-yellow-500">
+        Short Videos
+      </h1>
       <div className="relative flex items-center w-full md:w-4/5">
         <button
           className="absolute left-4 md:-left-24 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
@@ -105,11 +122,15 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
             <div
               key={index}
               className={`relative flex-none w-full md:w-[30%] mx-1 md:mx-2 transition-transform duration-300 ${
-                index === playingIndex ? "scale-110 md:scale-100" : "scale-85 md:scale-90"
+                index === playingIndex
+                  ? "scale-110 md:scale-100"
+                  : "scale-85 md:scale-90"
               }`}
               style={{
-                display: index >= playingIndex - 1 && index <= playingIndex + 1 ? "block" : "none",
-                height: "100vh",
+                display:
+                  index >= playingIndex - 1 && index <= playingIndex + 1
+                    ? "block"
+                    : "none",
               }}
               onClick={() => handleVideoClick(index)}
             >
@@ -120,7 +141,7 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
                   }
                 }}
                 src={item.short_video}
-                className={`w-full h-auto cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${
+                className={`w-full  cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${
                   index === playingIndex ? "opacity-100" : "opacity-70"
                 }`}
               />
@@ -149,12 +170,12 @@ const LargeScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
           <GrNext size={24} />
         </button>
       </div>
-      <a
+      <Link
         href="/shorts"
-        className=" px-4 py-2 bg-yellow-500 hover:bg-black transition-all text-white rounded-md block text-center"
+        className=" px-4 mt-10 py-2 bg-[#FFCE58] hover:bg-black transition-all text-white rounded-md block text-center"
       >
         Show More
-      </a>
+      </Link>
     </div>
   );
 };

@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddBlogsComponent = () => {
   const [blogData, setBlogData] = useState({
-    title: '',
-    image: '',
-    description: '',
-    tags: '',
-    category: ''
+    title: "",
+    image: "",
+    description: "",
+    tags: "",
+    category: "",
   });
 
-  const [view, setView] = useState('addBlog');
+  const [view, setView] = useState("addBlog");
 
   const demoBlogs = [
     {
-      title: 'Sample Blog 1',
-      image: 'https://via.placeholder.com/300',
-      description: 'This is a description for sample blog 1.',
+      title: "Sample Blog 1",
+      image: "https://via.placeholder.com/300",
+      description: "This is a description for sample blog 1.",
       views: 1234,
-      earnings: '$500',
+      earnings: "$500",
       comments: 56,
       likes: 78,
     },
     {
-      title: 'Sample Blog 2',
-      image: 'https://via.placeholder.com/300',
-      description: 'This is a description for sample blog 2.',
+      title: "Sample Blog 2",
+      image: "https://via.placeholder.com/300",
+      description: "This is a description for sample blog 2.",
       views: 2345,
-      earnings: '$600',
+      earnings: "$600",
       comments: 67,
       likes: 89,
-    }
+    },
   ];
 
   const payoutData = {
-    balance: '$2000',
-    withdrawalDate: '2024-07-15',
-    withdrawalAmount: '$1000',
+    balance: "$2000",
+    withdrawalDate: "2024-07-15",
+    withdrawalAmount: "$1000",
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBlogData({
       ...blogData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -50,13 +50,13 @@ const AddBlogsComponent = () => {
     const file = e.target.files[0];
     setBlogData({
       ...blogData,
-      image: file ? URL.createObjectURL(file) : ''
+      image: file ? URL.createObjectURL(file) : "",
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Blog Data Submitted: ', blogData);
+    console.log("Blog Data Submitted: ", blogData);
   };
 
   return (
@@ -64,28 +64,44 @@ const AddBlogsComponent = () => {
       <div className="container mx-auto px-4 py-8 bg-white text-black max-w-4xl">
         <div className="flex space-x-4 mb-8">
           <button
-            onClick={() => setView('addBlog')}
-            className={`px-4 py-2 rounded-md shadow-sm transition-all ${view === 'addBlog' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-black'}`}
+            onClick={() => setView("addBlog")}
+            className={`px-4 py-2 rounded-md shadow-sm transition-all ${
+              view === "addBlog"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-gray-200 text-black"
+            }`}
           >
             Add Blog
           </button>
           <button
-            onClick={() => setView('currentBlogDetails')}
-            className={`px-4 py-2 rounded-md shadow-sm transition-all ${view === 'currentBlogDetails' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-black'}`}
+            onClick={() => setView("currentBlogDetails")}
+            className={`px-4 py-2 rounded-md shadow-sm transition-all ${
+              view === "currentBlogDetails"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-gray-200 text-black"
+            }`}
           >
             Current Blog Details
           </button>
           <button
-            onClick={() => setView('payoutDetails')}
-            className={`px-4 py-2 rounded-md shadow-sm transition-all ${view === 'payoutDetails' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-black'}`}
+            onClick={() => setView("payoutDetails")}
+            className={`px-4 py-2 rounded-md shadow-sm transition-all ${
+              view === "payoutDetails"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-gray-200 text-black"
+            }`}
           >
             Payout
           </button>
         </div>
         <h2 className="text-2xl font-bold mb-8">
-          {view === 'addBlog' ? 'Add Blog' : view === 'currentBlogDetails' ? 'Current Blog Details' : 'Payout'}
+          {view === "addBlog"
+            ? "Add Blog"
+            : view === "currentBlogDetails"
+            ? "Current Blog Details"
+            : "Payout"}
         </h2>
-        {view === 'addBlog' ? (
+        {view === "addBlog" ? (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-gray-700">Blog Title</label>
@@ -105,7 +121,13 @@ const AddBlogsComponent = () => {
                 onChange={handleFileChange}
                 className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
               />
-              {blogData.image && <img src={blogData.image} alt="Blog" className="mt-2 w-full h-64 object-cover"/>}
+              {blogData.image && (
+                <img
+                  src={blogData.image}
+                  alt="Blog"
+                  className="mt-2 w-full h-64 object-cover"
+                />
+              )}
             </div>
             <div>
               <label className="block text-gray-700">Blog Description</label>
@@ -146,11 +168,17 @@ const AddBlogsComponent = () => {
               </button>
             </div>
           </form>
-        ) : view === 'currentBlogDetails' ? (
+        ) : view === "currentBlogDetails" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {demoBlogs.map((blog, index) => (
-              <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div className="bg-cover bg-center h-48" style={{ backgroundImage: `url(${blog.image})` }}>
+              <div
+                key={index}
+                className="bg-white shadow-lg rounded-lg overflow-hidden"
+              >
+                <div
+                  className="bg-cover bg-center h-48"
+                  style={{ backgroundImage: `url(${blog.image})` }}
+                >
                   <div className="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-xl font-bold">
                     {blog.title}
                   </div>
@@ -174,8 +202,12 @@ const AddBlogsComponent = () => {
         ) : (
           <div className="text-gray-700 space-y-2">
             <p className="text-lg">Balance: {payoutData.balance}</p>
-            <p className="text-lg">Withdrawal Date: {payoutData.withdrawalDate}</p>
-            <p className="text-lg">Withdrawal Amount: {payoutData.withdrawalAmount}</p>
+            <p className="text-lg">
+              Withdrawal Date: {payoutData.withdrawalDate}
+            </p>
+            <p className="text-lg">
+              Withdrawal Amount: {payoutData.withdrawalAmount}
+            </p>
           </div>
         )}
       </div>

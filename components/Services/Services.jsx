@@ -70,7 +70,7 @@ export default function Services() {
             </Box>
             <button
               // onClick={handleSearch}
-              className="py-2 px-10 bg-yellow-500 text-gray-900 rounded-md "
+              className="py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md "
             >
               Search
             </button>

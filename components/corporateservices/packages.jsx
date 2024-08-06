@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Packages = () => {
   const [packageType, setPackageType] = useState("monthly");
@@ -9,45 +9,81 @@ const Packages = () => {
         name: "Starter",
         price: "Pkr 5",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+        ],
       },
       {
         name: "Basic",
         price: "Pkr 10",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+        ],
         popular: false,
       },
       {
         name: "Plus",
         price: "Pkr 20",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
       {
         name: "Starter",
         price: "Pkr 5",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+        ],
       },
       {
         name: "Basic",
         price: "Pkr 10",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+        ],
         popular: true,
       },
       {
         name: "Plus",
         price: "Pkr 20",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
       {
         name: "Plus",
         price: "Pkr 20",
         per: "/mo",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
     ],
     yearly: [
@@ -55,98 +91,166 @@ const Packages = () => {
         name: "Starter",
         price: "Pkr 50",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+        ],
       },
       {
         name: "Basic",
         price: "Pkr 100",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+        ],
         popular: false,
       },
       {
         name: "Plus",
         price: "Pkr 200",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
       {
         name: "Starter",
         price: "Pkr 50",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+        ],
       },
       {
         name: "Basic",
         price: "Pkr 100",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+        ],
         popular: true,
       },
       {
         name: "Plus",
         price: "Pkr 200",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
       {
         name: "Plus",
         price: "Pkr 200",
         per: "/yr",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
-
     ],
     onetime: [
       {
         name: "Starter",
         price: "Pkr 100",
         per: "one-time",
-        features: ["Automated Reporting", "Faster Processing", "Customizations"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+        ],
       },
       {
         name: "Basic",
         price: "Pkr 200",
         per: "one-time",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+        ],
         popular: true,
       },
       {
         name: "Plus",
         price: "Pkr 400",
         per: "one-time",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
       {
         name: "Plus",
         price: "Pkr 400",
         per: "one-time",
-        features: ["Automated Reporting", "Faster Processing", "Customizations", "Priority Support", "Dedicated Manager"],
+        features: [
+          "Automated Reporting",
+          "Faster Processing",
+          "Customizations",
+          "Priority Support",
+          "Dedicated Manager",
+        ],
       },
     ],
   };
 
   return (
-    <div className=''>
+    <div className="">
       <h1 className="text-4xl font-bold text-center text-yellow-500 mb-10">
         Packages
       </h1>
       <div className="flex justify-center">
         <div className="relative z-50 flex mb-10">
           <button
-            className={`py-2 px-4 rounded-l-md border border-gray-200 ${packageType === "monthly" ? "bg-yellow-500 text-white" : "bg-white text-gray-700"}`}
+            className={`py-2 px-4 rounded-l-md border border-gray-200 ${
+              packageType === "monthly"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-white text-gray-700"
+            }`}
             onClick={() => setPackageType("monthly")}
           >
             Monthly
           </button>
           <button
-            className={`py-2 px-4 border-t border-b border-gray-200 ${packageType === "yearly" ? "bg-yellow-500 text-white" : "bg-white text-gray-700"}`}
+            className={`py-2 px-4 border-t border-b border-gray-200 ${
+              packageType === "yearly"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-white text-gray-700"
+            }`}
             onClick={() => setPackageType("yearly")}
           >
             Yearly
           </button>
           <button
-            className={`py-2 px-4 rounded-r-md border border-gray-200 ${packageType === "onetime" ? "bg-yellow-500 text-white" : "bg-white text-gray-700"}`}
+            className={`py-2 px-4 rounded-r-md border border-gray-200 ${
+              packageType === "onetime"
+                ? "bg-[#FFCE58] text-white"
+                : "bg-white text-gray-700"
+            }`}
             onClick={() => setPackageType("onetime")}
           >
             One-Time
@@ -158,15 +262,19 @@ const Packages = () => {
           {packageOptions[packageType].map((packageItem, index) => (
             <div
               key={index}
-              className={`bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-all cursor-pointer hover:shadow-xl w-full p-6 ${packageItem.popular ? "border-2 border-yellow-500" : ""}`}
+              className={`bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-all cursor-pointer hover:shadow-xl w-full p-6 ${
+                packageItem.popular ? "border-2 border-yellow-500" : ""
+              }`}
               style={{ width: "380px", height: "429px" }}
             >
               {packageItem.popular && (
-                <div className="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-[#FFCE58] text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
                   Popular
                 </div>
               )}
-              <h2 className="text-lg font-normal text-gray-500">{packageItem.name}</h2>
+              <h2 className="text-lg font-normal text-gray-500">
+                {packageItem.name}
+              </h2>
               <h3 className="text-3xl font-medium text-gray-900 my-2 mb-6">
                 {packageItem.price}{" "}
                 <span className="text-gray-500 font-light text-lg">
@@ -193,7 +301,7 @@ const Packages = () => {
                   </li>
                 ))}
               </ul>
-              <button className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 w-full mt-auto">
+              <button className="bg-[#FFCE58] text-white py-2 px-4 rounded-md hover:bg-yellow-600 w-full mt-auto">
                 Select Plan
               </button>
             </div>

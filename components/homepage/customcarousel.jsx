@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../../app/globals.css';
+import "../../app/globals.css";
 
 const CustomCarousel = ({ data }) => {
   const { cementRates, steelRates, brickRates, trGardarRates } = data;
@@ -124,7 +124,7 @@ const CustomCarousel = ({ data }) => {
             <option value="filter3">Brick Rates</option>
           </select>
         </div>
-        <div className="flex-1 text-right">  
+        <div className="flex-1 text-right">
           <input
             type="text"
             value={searchTerm}

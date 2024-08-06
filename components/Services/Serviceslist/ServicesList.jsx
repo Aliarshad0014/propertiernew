@@ -112,7 +112,7 @@ export default function ServicesList() {
 
             <button
               onClick={getFilteredServices}
-              className="py-2 px-10 bg-yellow-500 text-gray-900 rounded-md"
+              className="py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md"
             >
               Search
             </button>
@@ -124,7 +124,7 @@ export default function ServicesList() {
         <div className="flex flex-col items-center w-[70%]">
           <div className="w-full flex justify-center font-semibold">
             <Link href={"/services"}>
-              <button className="py-2 px-10 bg-yellow-500 text-gray-900 rounded-md">
+              <button className="py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md">
                 Explore More Services
               </button>
             </Link>

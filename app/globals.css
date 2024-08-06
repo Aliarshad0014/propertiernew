@@ -156,7 +156,7 @@ body {
 /* Services */
 .services-carousel-container {
   width: 80vw;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   text-align: center;
   display: flex;

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import React, { useState } from "react";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const SearchBox = () => {
-  const [propertyType, setPropertyType] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
-  const [region, setRegion] = useState('');
-  const [priceRange, setPriceRange] = useState('');
+  const [propertyType, setPropertyType] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [region, setRegion] = useState("");
+  const [priceRange, setPriceRange] = useState("");
   const [showMore, setShowMore] = useState(false);
 
   const handleShowMoreClick = () => {
@@ -26,7 +26,7 @@ const SearchBox = () => {
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
                     label="Property Type"
-                    sx={{ backgroundColor: 'white', height: '40px' }}
+                    sx={{ backgroundColor: "white", height: "40px" }}
                   >
                     <MenuItem value="allProperties">All Properties</MenuItem>
                     <MenuItem value="rental">Rental</MenuItem>
@@ -35,13 +35,19 @@ const SearchBox = () => {
                 </FormControl>
               </div>
               <div className="flex flex-col items-start">
-                <FormControl fullWidth className="w-60" variant="outlined" size="small">
+                <FormControl
+                  fullWidth
+                  className="w-60"
+                  variant="outlined"
+                  size="small"
+                >
                   <InputLabel>Country</InputLabel>
                   <Select
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                     label="Country"
-                    sx={{ backgroundColor: 'white' }}
+                    sx={{ backgroundColor: "white" }}
+                    className="w-60"
                   >
                     <MenuItem value="Pakistan">Pakistan</MenuItem>
                     <MenuItem value="China">China</MenuItem>
@@ -50,13 +56,19 @@ const SearchBox = () => {
                 </FormControl>
               </div>
               <div className="flex flex-col items-start">
-                <FormControl fullWidth className="w-60" variant="outlined" size="small">
+                <FormControl
+                  fullWidth
+                  className="w-60"
+                  variant="outlined"
+                  size="small"
+                >
                   <InputLabel>City</InputLabel>
                   <Select
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     label="City"
-                    sx={{ backgroundColor: 'white' }}
+                    sx={{ backgroundColor: "white" }}
+                    className="w-60"
                   >
                     <MenuItem value="Islamabad">Islamabad</MenuItem>
                     <MenuItem value="Karachi">Karachi</MenuItem>
@@ -65,11 +77,11 @@ const SearchBox = () => {
                 </FormControl>
               </div>
               <button
-              // onClick={handleSearch}
-              className="hidden lg:flex py-2 px-10 bg-yellow-500 text-gray-900 rounded-md "
-            >
-              Search
-            </button>
+                // onClick={handleSearch}
+                className="hidden lg:flex py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md "
+              >
+                Search
+              </button>
               {/* <button className="lg:flex hidden items-center justify-center w-24 h-24 bg-custom-color text-white shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-none">
                 Search
               </button> */}
@@ -84,7 +96,8 @@ const SearchBox = () => {
                       value={region}
                       onChange={(e) => setRegion(e.target.value)}
                       label="Region"
-                      sx={{ backgroundColor: 'white' }}
+                      sx={{ backgroundColor: "white" }}
+                      className="w-60"
                     >
                       <MenuItem value="North">North</MenuItem>
                       <MenuItem value="South">South</MenuItem>
@@ -100,11 +113,16 @@ const SearchBox = () => {
                       value={priceRange}
                       onChange={(e) => setPriceRange(e.target.value)}
                       label="Price Range"
-                      sx={{ backgroundColor: 'white' }}
+                      sx={{ backgroundColor: "white" }}
+                      className="w-60"
                     >
                       <MenuItem value="Below $50,000">Below $50,000</MenuItem>
-                      <MenuItem value="$50,000 - $100,000">$50,000 - $100,000</MenuItem>
-                      <MenuItem value="$100,000 - $200,000">$100,000 - $200,000</MenuItem>
+                      <MenuItem value="$50,000 - $100,000">
+                        $50,000 - $100,000
+                      </MenuItem>
+                      <MenuItem value="$100,000 - $200,000">
+                        $100,000 - $200,000
+                      </MenuItem>
                       <MenuItem value="Above $200,000">Above $200,000</MenuItem>
                     </Select>
                   </FormControl>
@@ -119,7 +137,7 @@ const SearchBox = () => {
             </button>
             <button
               // onClick={handleSearch}
-              className="lg:hidden flex justify-start items-start py-2 px-10  bg-yellow-500 text-gray-900 rounded-md "
+              className="lg:hidden flex justify-start items-start py-2 px-10  bg-[#FFCE58] text-gray-900 rounded-md "
             >
               Search
             </button>

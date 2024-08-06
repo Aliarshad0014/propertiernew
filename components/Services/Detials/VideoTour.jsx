@@ -58,7 +58,7 @@ export default function VideoTour({ video_url }) {
             ></textarea>
             <button
               type="submit"
-              className="w-full bg-yellow-500 text-white py-2 rounded"
+              className="w-full bg-[#FFCE58] text-white py-2 rounded"
             >
               Submit
             </button>
@@ -66,7 +66,7 @@ export default function VideoTour({ video_url }) {
         </div>
       </div>
       <div className="flex mt-6 justify-start w-full">
-        <button className="bg-yellow-500 text-white py-2 px-4 rounded mr-2">
+        <button className="bg-[#FFCE58] text-white py-2 px-4 rounded mr-2">
           GET SERVICE
         </button>
         <button className="bg-yellow-100 text-yellow-500 py-2 px-4 rounded mr-2">

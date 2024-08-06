@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React, { useState } from "react";
+import noimg from "@/image/noImg.svg";
 
 const UserReviews = ({ data }) => {
   const [currentReview, setCurrentReview] = useState(0);
@@ -17,7 +19,9 @@ const UserReviews = ({ data }) => {
       stars.push(
         <svg
           key={i}
-          className={`h-5 w-5 ${i < rating ? "text-yellow-500" : "text-gray-300"}`}
+          className={`h-5 w-5 ${
+            i < rating ? "text-yellow-500" : "text-gray-300"
+          }`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -30,19 +34,24 @@ const UserReviews = ({ data }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 p-6 mb-10">
-      <h1 className="text-3xl font-bold mb-2 text-gray-800">Client Review</h1>
-      <h2 className="text-lg font-regular mb-20 text-gray-500">What our clients say about us?</h2>
+      <h1 className="text-3xl font-bold mb-2 text-[#FFCE58]">Client Review</h1>
+      <h2 className="text-lg font-regular mb-20 text-gray-500">
+        What our clients say about us?
+      </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6 gap-16 lg:w-2/3 bg-none rounded-lg">
         {data.slice(0, 3).map((review) => (
-          <div key={review.id} className="relative bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+          <div
+            key={review.id}
+            className="relative bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
+          >
             <div className="absolute top-0 left-16 transform -translate-x-1/2 -translate-y-1/2">
-              <img
-                src={review.user_profile_picture}
+              <Image
+                src={review.user_profile_picture ?? noimg}
                 alt="Image"
-                className="rounded-full h-24 w-24 border-4 border-yellow-500 bg-black text-center justify-center items-center flex text-xs shadow-lg"
+                className="rounded-full h-24 w-24 border-4 p-4 border-yellow-500 bg-black text-center justify-center items-center flex text-xs shadow-lg"
               />
             </div>
-            <div className="mt-20 flex-grow">
+            <div className="mt-8 flex-grow">
               <p className="text-gray-500 p-3">{review.description}</p>
             </div>
             <div className="pt-4 flex justify-between items-center bg-gray-100 rounded-md p-4">
@@ -54,7 +63,10 @@ const UserReviews = ({ data }) => {
       </div>
 
       <div className="mt-8 text-center">
-        <a href="/" className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-black transition-all">
+        <a
+          href="/"
+          className="bg-[#FFCE58] text-white py-2 px-4 rounded-lg hover:bg-black transition-all"
+        >
           View All Reviews
         </a>
       </div>

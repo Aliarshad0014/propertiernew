@@ -147,7 +147,7 @@ const Header = () => {
       </div>
       <div className="flex items-center space-x-4">
         <Link href="/add-properties" className="text-white flex items-center">
-          <button className="bg-yellow-500 text-black font-medium p-1 text-xs w-32 rounded-md hover:bg-yellow-600">
+          <button className="bg-[#FFCE58] text-black font-medium p-1 text-xs w-32 rounded-md hover:bg-yellow-600">
             Add Properties
           </button>
         </Link>

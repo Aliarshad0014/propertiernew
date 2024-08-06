@@ -21,7 +21,7 @@ const CorporateServices = () => {
 
       {/* SearchBox Component */}
       <div className="flex flex-col items-center justify-center bottom-10">
-        <SearchBox/>
+        <SearchBox />
       </div>
 
       <div className="py-10">
@@ -50,7 +50,7 @@ const CorporateServices = () => {
           Looking for more Services?
         </h2>
         <Link href="/allcorporateservices">
-          <button className="bg-yellow-500 text-white py-2 px-4 transition-all rounded-md hover:bg-yellow-600">
+          <button className="bg-[#FFCE58] text-white py-2 px-4 transition-all rounded-md hover:bg-yellow-600">
             Show All Services
           </button>
         </Link>

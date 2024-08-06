@@ -1,11 +1,19 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Image from 'next/image';
-import { faFacebookF, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import { faCalendarAlt, faUser, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FooterSection from '@/components/footer';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Image from "next/image";
+import {
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faCalendarAlt,
+  faUser,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FooterSection from "@/components/footer";
 
 const Page = ({ params }) => {
   const [blogData, setBlogData] = useState(null);
@@ -26,11 +34,12 @@ const Page = ({ params }) => {
         const commentsResponse = await axios.get(
           `https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/comments/${params.id}/`
         );
-        
+
         // Normalize comments into an array
         const fetchedComments = commentsResponse.data;
-        setComments(Array.isArray(fetchedComments) ? fetchedComments : [fetchedComments]);
-
+        setComments(
+          Array.isArray(fetchedComments) ? fetchedComments : [fetchedComments]
+        );
       } catch (error) {
         setError(error);
       } finally {
@@ -56,17 +65,36 @@ const Page = ({ params }) => {
   const { title, content, image_url, author, cover_photo_url } = blogData;
 
   // Format the created_at date
-  const formattedDate = new Date(author.created_at).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
+  const formattedDate = new Date(author.created_at).toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }
+  );
 
   const latestPosts = [
-    { title: "5 Marla House for sale", time: "20 minutes ago", author: "Admin" },
-    { title: "5 Marla House for sale", time: "20 minutes ago", author: "Admin" },
-    { title: "5 Marla House for sale", time: "20 minutes ago", author: "Admin" },
-    { title: "5 Marla House for sale", time: "20 minutes ago", author: "Admin" }
+    {
+      title: "5 Marla House for sale",
+      time: "20 minutes ago",
+      author: "Admin",
+    },
+    {
+      title: "5 Marla House for sale",
+      time: "20 minutes ago",
+      author: "Admin",
+    },
+    {
+      title: "5 Marla House for sale",
+      time: "20 minutes ago",
+      author: "Admin",
+    },
+    {
+      title: "5 Marla House for sale",
+      time: "20 minutes ago",
+      author: "Admin",
+    },
   ]; // Mock data for latest posts
   const categories = [
     { name: "Houses on Rent" },
@@ -74,7 +102,7 @@ const Page = ({ params }) => {
     { name: "Lorem ipsum" },
     { name: "Lorem ipsum" },
     { name: "Lorem ipsum" },
-    { name: "Lorem ipsum" }
+    { name: "Lorem ipsum" },
   ]; // Mock data for categories
 
   return (
@@ -91,19 +119,23 @@ const Page = ({ params }) => {
           <h1 className="text-lg md:text-lg font-bold mb-2 mt-2">{title}</h1>
           <div className="flex items-center text-sm text-gray-500 mb-2 justify-between">
             <span className="flex items-center mr-2">
-              <FontAwesomeIcon icon={faCalendarAlt} className="mr-1 text-yellow-500" />
+              <FontAwesomeIcon
+                icon={faCalendarAlt}
+                className="mr-1 text-yellow-500"
+              />
               {formattedDate}
-            </span> |
+            </span>{" "}
+            |
             <span className="flex items-center ml-1">
               <FontAwesomeIcon icon={faUser} className="mr-1 text-yellow-500" />
               {author.name}
             </span>
-            <button className="ml-auto bg-yellow-500 hover:bg-red-500 transition-all text-white px-2 py-1 rounded text-xs">
+            <button className="ml-auto bg-[#FFCE58] hover:bg-red-500 transition-all text-white px-2 py-1 rounded text-xs">
               Follow
             </button>
           </div>
           <div className="blog-content text-sm md:text-sm leading-relaxed">
-            {content.split('\n').map((paragraph, index) => (
+            {content.split("\n").map((paragraph, index) => (
               <p key={index} className="mb-4">
                 {paragraph}
               </p>
@@ -131,18 +163,26 @@ const Page = ({ params }) => {
               <p>No comments available.</p>
             ) : (
               comments.map((comment) => (
-                <div key={comment.id} className="mb-4 pb-10 border-b border-gray-200">
+                <div
+                  key={comment.id}
+                  className="mb-4 pb-10 border-b border-gray-200"
+                >
                   <div className="flex items-center mb-2">
                     <Image
                       width={40}
                       height={40}
-                      src={comment.author.profile_picture_url || 'https://via.placeholder.com/40'}
+                      src={
+                        comment.author.profile_picture_url ||
+                        "https://via.placeholder.com/40"
+                      }
                       alt={comment.author.name}
                       className="rounded-full"
                     />
                     <div className="ml-4">
                       <h3 className="font-semibold">{comment.author.name}</h3>
-                      <p className="text-sm text-gray-500">{new Date(comment.created_at).toLocaleDateString()}</p>
+                      <p className="text-sm text-gray-500">
+                        {new Date(comment.created_at).toLocaleDateString()}
+                      </p>
                     </div>
                   </div>
                   <p>{comment.content}</p>
@@ -170,7 +210,10 @@ const Page = ({ params }) => {
                 placeholder="Your Comment Here"
                 className="w-full p-2 bg-gray-100 rounded lg:h-60 h-36 resize-none"
               ></textarea>
-              <button type="submit" className="bg-yellow-500 text-white px-4 py-2 rounded">
+              <button
+                type="submit"
+                className="bg-[#FFCE58] text-white px-4 py-2 rounded"
+              >
                 Post A Comment
               </button>
             </form>
@@ -179,9 +222,14 @@ const Page = ({ params }) => {
         <div className="right-content w-full lg:w-1/3 space-y-8">
           {/* Latest Posts */}
           <div className="latest-posts bg-gray-50 p-4 rounded-md">
-            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">Recent Posts</h2>
+            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">
+              Recent Posts
+            </h2>
             {latestPosts.map((post, index) => (
-              <div key={index} className="mb-4 pb-4 border-b border-gray-200 flex items-center">
+              <div
+                key={index}
+                className="mb-4 pb-4 border-b border-gray-200 flex items-center"
+              >
                 <Image
                   width={50}
                   height={50}
@@ -199,19 +247,26 @@ const Page = ({ params }) => {
           </div>
           {/* Categories */}
           <div className="categories bg-gray-50 p-4 rounded-md">
-            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">Categories</h2>
+            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">
+              Categories
+            </h2>
             <ul className="space-y-2">
               {categories.map((category, index) => (
-                <li key={index} className="text-md text-gray-700 flex items-center">
-                  <FontAwesomeIcon icon={faChevronRight} className=" text-gray-500" />
-                  <span className='ml-2'>{category.name}</span>
+                <li
+                  key={index}
+                  className="text-md text-gray-700 flex items-center"
+                >
+                  <FontAwesomeIcon
+                    icon={faChevronRight}
+                    className=" text-gray-500"
+                  />
+                  <span className="ml-2">{category.name}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

@@ -8,7 +8,7 @@ const CorporateServices = () => {
     startDate: "",
     endDate: "",
     flyer: null,
-    appliedOn: ""
+    appliedOn: "",
   });
 
   const [showBanner, setShowBanner] = useState(false);
@@ -18,7 +18,7 @@ const CorporateServices = () => {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -26,7 +26,7 @@ const CorporateServices = () => {
     const file = e.target.files[0];
     setFormValues({
       ...formValues,
-      flyer: file
+      flyer: file,
     });
   };
 
@@ -41,7 +41,7 @@ const CorporateServices = () => {
       startDate: "",
       endDate: "",
       flyer: null,
-      appliedOn: ""
+      appliedOn: "",
     });
   };
 
@@ -58,13 +58,21 @@ const CorporateServices = () => {
     <div className="mt-6">
       <div className="flex flex-wrap justify-center md:justify-start space-x-2 lg:space-y-0  space-y-2 mb-4 text-gray-600">
         <button
-          className={`px-4 py-2 ${activeTab === "addNew" ? "bg-yellow-500 text-black" : "bg-gray-200 hover:bg-gray-300"} rounded`}
+          className={`px-4 py-2 ${
+            activeTab === "addNew"
+              ? "bg-[#FFCE58] text-black"
+              : "bg-gray-200 hover:bg-gray-300"
+          } rounded`}
           onClick={() => handleTabClick("addNew")}
         >
           Add New
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === "corporateMarketing" ? "bg-yellow-500 text-black" : "bg-gray-200 hover:bg-gray-300"} rounded`}
+          className={`px-4 py-2 ${
+            activeTab === "corporateMarketing"
+              ? "bg-[#FFCE58] text-black"
+              : "bg-gray-200 hover:bg-gray-300"
+          } rounded`}
           onClick={() => handleTabClick("corporateMarketing")}
         >
           Corporate Marketing with Propertier
@@ -76,7 +84,10 @@ const CorporateServices = () => {
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label htmlFor="projectName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="projectName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Project Name
                 </label>
                 <input
@@ -89,7 +100,10 @@ const CorporateServices = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="discount" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="discount"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Discount
                 </label>
                 <input
@@ -102,7 +116,10 @@ const CorporateServices = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="startDate"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Offer Starts From
                 </label>
                 <input
@@ -115,7 +132,10 @@ const CorporateServices = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="endDate"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Offer Ends On
                 </label>
                 <input
@@ -128,7 +148,10 @@ const CorporateServices = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="flyer" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="flyer"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Upload Flyer
                 </label>
                 <input
@@ -140,7 +163,10 @@ const CorporateServices = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="appliedOn" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="appliedOn"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Applied On
                 </label>
                 <select
@@ -179,12 +205,13 @@ const CorporateServices = () => {
             />
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <button className="bg-yellow-500 text-black px-4 py-2 rounded">Feature Your Ad</button>
+              <button className="bg-[#FFCE58] text-black px-4 py-2 rounded">
+                Feature Your Ad
+              </button>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };

@@ -165,7 +165,7 @@ export default function SubCategoryDetial({ paramsID }) {
                 >
                   Cancel
                 </button>
-                <button className="bg-yellow-500 text-white py-2 px-4 rounded">
+                <button className="bg-[#FFCE58] text-white py-2 px-4 rounded">
                   Continue
                 </button>
               </div>
