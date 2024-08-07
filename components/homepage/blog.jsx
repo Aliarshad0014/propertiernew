@@ -42,14 +42,14 @@ const BlogComponent = () => {
           <div key={post.id} className="border rounded-lg flex flex-col h-full">
             <div
               className="w-full h-64 mb-4 overflow-hidden"
-              style={{ width: "414px", height: "254px" }}
+              style={{ width: "100%", height: "200px" }}
             >
               <Image
                 src={post.image_url ?? noimg}
                 alt={post.title}
-                className="w-full h-full object-contain"
-                width={414}
-                height={254}
+                className="w-full h-[200px] object-contain"
+                width={300}
+                height={200}
                 onError={(e) => {
                   e.currentTarget.src = noimg;
                 }}
@@ -57,12 +57,13 @@ const BlogComponent = () => {
             </div>
             <div className="p-6 flex flex-col justify-between flex-grow">
               <div>
-                <h2 className="text-xl font-semibold mb-2 text-gray-600">
+                <h2 className="text-xl font-semibold mb-2 text-gray-600 line-clamp-1">
                   {post.title}
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  {truncateText(post.content, 50)}
-                  {post.content.split(" ").length > 50 && (
+                  {/* {truncateText(post.content, 50)} */}
+                  <div className=" line-clamp-4">{post.content}</div>
+                  {post.content.split(" ").length > 30 && (
                     <Link href={`/blogpages/${post.id}`}>
                       <div className="text-blue-500 hover:underline">
                         {" "}

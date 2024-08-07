@@ -33,7 +33,7 @@ const UserReviews = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 p-6 mb-10">
+    <div className="flex flex-col items-center justify-center w-screen  bg-gray-100 p-6 mb-5">
       <h1 className="text-3xl font-bold mb-2 text-[#FFCE58]">Client Review</h1>
       <h2 className="text-lg font-regular mb-20 text-gray-500">
         What our clients say about us?

@@ -6,6 +6,7 @@ import Image from "next/image";
 import noimg from "@/image/noImg.svg";
 import BounceLoader from "react-spinners/BounceLoader";
 import Logo from "@/icons/Logo";
+import Link from "next/link";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -67,7 +68,6 @@ const Properties = () => {
               <div
                 key={property.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-all cursor-pointer hover:shadow-xl"
-                onClick={() => openPropertyDetails(property)}
               >
                 <Image
                   src={property.image_url || noimg}
@@ -86,13 +86,16 @@ const Properties = () => {
                     ${property.price}
                   </p>
                   <div className="flex justify-between mt-auto pt-4">
-                    <a
+                    <Link
                       href={`/properties/${property.id}`}
                       className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]"
                     >
                       Details
-                    </a>
-                    <button className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]">
+                    </Link>
+                    <button
+                      onClick={() => openPropertyDetails(property)}
+                      className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]"
+                    >
                       Talk
                     </button>
                   </div>
