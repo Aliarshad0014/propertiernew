@@ -11,6 +11,7 @@ const Page = ({ params }) => {
   const [error, setError] = useState(null);
   const [properties, setProperties] = useState([]);
   const [btnLoad, setBtnLoad] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,12 +70,25 @@ const Page = ({ params }) => {
   };
 
   const renderVideo = (url) => {
+    console.log("Video URL:", url); // Debugging
+
     const isYouTube = url.includes("youtube.com") || url.includes("youtu.be");
+
+    let embedUrl = url;
+    if (isYouTube) {
+      if (url.includes("watch?v=")) {
+        embedUrl = url.replace("watch?v=", "embed/");
+      } else if (url.includes("youtu.be")) {
+        const videoId = url.split("/").pop();
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
     return isYouTube ? (
       <iframe
         width="100%"
         height="400"
-        src={url.replace("watch?v=", "embed/")}
+        src={embedUrl}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -91,7 +105,28 @@ const Page = ({ params }) => {
       </video>
     );
   };
-  console.log(properties);
+
+  const AgentPopup = ({ agent, onClose }) => (
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h2 className="text-xl font-bold mb-4 text-black">Agent Details</h2>
+        <p className="text-gray-700 mb-4">
+          <strong>Name:</strong> {agent?.name || "N/A"}
+        </p>
+        <p className="text-gray-700 mb-4">
+          <strong>Phone:</strong>{" "}
+          {agent?.phone_number_country_code + agent?.phone_number || "N/A"}
+        </p>
+        <button
+          className="mt-4 bg-[#FFCE58] text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+          onClick={onClose}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+
   return btnLoad ? (
     <div className="flex h-screen justify-center items-center">
       <BounceLoader color="#eab308" />
@@ -151,7 +186,6 @@ const Page = ({ params }) => {
                   <div>Bedroom : {data.Property?.bedroom ?? "-"}</div>
                   <div>Floor : {data.Property?.floor ?? "-"}</div>
                 </div>
-                {/* Add appropriate details here if available */}
               </div>
             </div>
             {/* Other Features Section */}
@@ -176,7 +210,6 @@ const Page = ({ params }) => {
                 <div> City : {data.Property?.city} </div>
                 <div className="text-lg font-semibold my-3">Agent Details</div>
                 <div> Agent Name : {data.Property?.agent?.name} </div>
-                {/* <div> Agent Name : {data.Property?.agent?.name} </div> */}
               </ul>
             </div>
             {/* Video Tour Section */}
@@ -191,7 +224,10 @@ const Page = ({ params }) => {
                 <p>No video available</p>
               )}
               <div className="mt-6">
-                <button className="lg:flex hidden justify-center lg:w-1/4 w-1/2 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-[#FFCE58]">
+                <button
+                  className="lg:flex hidden justify-center lg:w-1/4 w-1/2 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-[#FFCE58]"
+                  onClick={() => setShowPopup(true)}
+                >
                   Talk to Seller
                 </button>
               </div>
@@ -215,51 +251,22 @@ const Page = ({ params }) => {
                 <p>No short video available</p>
               )}
             </div>
-            {/* Recommended Section */}
-            <div>
-              <h2 className="text-xl font-semibold text-black text-start">
-                Recommended for you
-              </h2>
-              <div className="flex flex-col gap-4 mt-4">
-                {properties?.slice(0, 5)?.map((recommendation, index) => (
-                  <Link href={`/properties/${recommendation.id}`}>
-                    <div key={index} className="bg-white p-4 rounded shadow">
-                      <Image
-                        src={
-                          recommendation.image_url ||
-                          "https://via.placeholder.com/300x200"
-                        }
-                        width={200}
-                        height={100}
-                        alt="Recommended Property"
-                        style={{ objectFit: "cover" }}
-                        className="w-full h-[100px] rounded"
-                      />
-                      <div className="mt-2">
-                        <h3 className="text-lg font-semibold">
-                          {recommendation.title || "Recommended Property"}
-                        </h3>
-                        <p>{recommendation.price || "PKR"}</p>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <button className="lg:hidden flex justify-center lg:w-1/4 w-1/2 py-2 px-4 border border-yellow-500 text-black transition-all rounded hover:bg-[#FFCE58]">
-                Talk to Seller
-              </button>
-            </div>
           </div>
         </div>
         <button
           className="fixed bottom-6 right-6 bg-[#FFCE58] text-white transition-all py-3 px-6 rounded-full shadow-lg hover:bg-black focus:outline-none"
           onClick={() => {
-            // Add your contact logic here
             alert("Contact Now");
           }}
         >
           Contact Now
         </button>
+        {showPopup && (
+          <AgentPopup
+            agent={data.Property?.agent}
+            onClose={() => setShowPopup(false)}
+          />
+        )}
       </div>
     </>
   );

@@ -49,7 +49,7 @@ const Properties = () => {
   const handleError = (e) => {
     e.target.src = noimg;
   };
-
+  console.log(selectedProperty);
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 relative">
       <TopBanner />
@@ -112,12 +112,38 @@ const Properties = () => {
             <div className="w-full flex justify-center">
               <Logo />
             </div>
-            <h2 className="text-xl font-bold mb-4">{selectedProperty.title}</h2>
-            <p className="text-gray-700 mb-4">{selectedProperty.city}</p>
-            <p className="text-yellow-500 font-semibold mb-4">
-              ${selectedProperty.price}
-            </p>
-            <p className="text-gray-700">{selectedProperty.description}</p>
+            <h2 className="text-xl font-bold mb-4 text-black mt-2">
+              {selectedProperty.title}
+            </h2>
+            <div className="flex flex-wrap mb-4">
+              <span className="font-semibold text-black w-1/3">City:</span>
+              <span className="text-gray-700 w-2/3">
+                {selectedProperty.city}
+              </span>
+            </div>
+            <div className="flex flex-wrap mb-4">
+              <span className="font-semibold text-black w-1/3">Price:</span>
+              <span className="text-yellow-500 font-semibold w-2/3">
+                Rs {selectedProperty.price}
+              </span>
+            </div>
+            <div className="flex flex-wrap mb-4">
+              <span className="font-semibold text-black w-1/3">
+                Description:
+              </span>
+              <span className="text-gray-700 w-2/3">
+                {selectedProperty.description}
+              </span>
+            </div>
+            <div className="flex flex-wrap mt-3 mb-4">
+              <span className="font-semibold text-black w-1/3">
+                Agent Phone:
+              </span>
+              <span className="text-gray-700 w-2/3">
+                {selectedProperty.agent?.phone_number_country_code +
+                  selectedProperty.agent?.phone_number}
+              </span>
+            </div>
             <div className="w-full flex justify-end">
               <button
                 className="mt-4 bg-[#FFCE58] text-white py-2 px-4 rounded-md hover:bg-yellow-600"

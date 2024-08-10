@@ -50,8 +50,8 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 py-8 bg-white text-black max-w-7xl">
+    <div className="bg-white min-h-screen w-full mt-5">
+      <div className="container mx-auto px-2 py-8 bg-white text-black max-w-[95%]">
         {/* Cover Photo and Buttons Section */}
         <div className="mb-4">
           <div className="relative">
@@ -76,9 +76,9 @@ const UserProfile = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex flex-col lg:flex-row lg:space-x-4">
+        <div className="flex flex-col lg:flex-row lg:space-x-2">
           {/* Left Div - User Info */}
-          <div className="w-full lg:w-1/3 bg-gray-50 shadow-lg flex flex-col items-center p-8 min-h-screen">
+          <div className="w-full md:w-[30%] bg-gray-50 shadow-lg flex flex-col items-center p-8 min-h-screen">
             <div className="sticky top-0 pt-8 mb-4">
               <div className="flex justify-between">
                 <img
@@ -145,7 +145,7 @@ const UserProfile = () => {
           </div>
 
           {/* Right Div - Sections based on Headings (Horizontal Layout) */}
-          <div className="w-full lg:w-2/3 p-6 bg-white shadow-xl overflow-y-auto">
+          <div className="w-full md:w-[70%] p-6 bg-white shadow-xl overflow-y-auto">
             <div className="flex mb-4 flex-wrap">
               {/* Render all sections based on headings */}
               {Object.keys(sectionContent).map((section) => (
