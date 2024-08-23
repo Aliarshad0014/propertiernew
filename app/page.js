@@ -37,11 +37,11 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
         );
         const result = await response.json();
         console.log("Fetched data:", result);
-        setData(result.Data);
+        setData(result?.Data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -106,7 +106,7 @@ export default function Home() {
       </div>
 
       <div className="pb-5 -mt-5">
-        <HotSale data={data.properties} className="relative" />
+        <HotSale data={data?.properties} className="relative" />
       </div>
       <div className="py-5">
         <CustomCarousel data={data.materialRates} />

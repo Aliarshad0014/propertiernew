@@ -14,7 +14,7 @@ const BlogPage = () => {
     const fetchBlogData = async () => {
       try {
         const response = await axios.get(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/blogposts/"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/blogposts/"
         );
         const data = response.data;
 

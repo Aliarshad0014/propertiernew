@@ -11,7 +11,7 @@ const BlogComponent = () => {
     const fetchBlogPosts = async () => {
       try {
         const response = await axios.get(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/blogposts/"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/blogposts/"
         );
         setBlogPosts(response.data.slice(0, 3)); // Get only the first 3 blog posts
       } catch (error) {

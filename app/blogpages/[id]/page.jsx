@@ -26,13 +26,13 @@ const Page = ({ params }) => {
       try {
         // Fetch blog post data
         const blogResponse = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/blogposts/${params.id}`
+          `https://propertier-p2wwcx3okq-em.a.run.app/properties/blogposts/${params.id}`
         );
         setBlogData(blogResponse.data);
 
         // Fetch comments data
         const commentsResponse = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/comments/${params.id}/`
+          `https://propertier-p2wwcx3okq-em.a.run.app/properties/comments/${params.id}/`
         );
 
         // Normalize comments into an array

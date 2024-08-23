@@ -66,7 +66,7 @@ const SmallScreenVideoShorts = ({
 
       if (isLiked) {
         const response = await axios.post(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/",
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
           {
             agent_id: agent.id,
             property_id: id,
@@ -79,7 +79,7 @@ const SmallScreenVideoShorts = ({
         );
       } else {
         const response = await axios.post(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/",
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
           {
             agent_id: agent.id,
             property_id: id,

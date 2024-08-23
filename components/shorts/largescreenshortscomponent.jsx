@@ -16,7 +16,13 @@ import axios from "axios";
  * @param {number[]} props.likedVideos - Array of indices of liked videos.
  * @param {function(number): void} props.setLikedVideos - Function to set liked videos.
  */
-const VerticalVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos, setLikedVideos }) => {
+const VerticalVideoShorts = ({
+  data,
+  playingIndex,
+  setPlayingIndex,
+  likedVideos,
+  setLikedVideos,
+}) => {
   const videoRefs = useRef(Array(data.length).fill(null));
 
   useEffect(() => {
@@ -51,17 +57,25 @@ const VerticalVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos,
       const isLiked = likedVideos.includes(index);
 
       if (isLiked) {
-        await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-        });
-        setLikedVideos((prevLikedVideos) => prevLikedVideos.filter((item) => item !== index));
+        await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+          }
+        );
+        setLikedVideos((prevLikedVideos) =>
+          prevLikedVideos.filter((item) => item !== index)
+        );
       } else {
-        await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-          action: "like",
-        });
+        await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+            action: "like",
+          }
+        );
         setLikedVideos((prevLikedVideos) => [...prevLikedVideos, index]);
       }
     } catch (error) {

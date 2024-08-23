@@ -16,7 +16,7 @@ const UserProfile = () => {
   // Example user data (replace with actual data)
   const userData = {
     name: "John Doe",
-    profileImage: "https://randomuser.me/api/portraits/men/1.jpg",
+    profileImage: "https://randomuser.me/portraits/men/1.jpg",
     email: "john.doe@example.com",
     phoneNumber: "+1234567890",
     following: 500,

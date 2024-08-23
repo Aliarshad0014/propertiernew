@@ -17,7 +17,7 @@ const Page = ({ params }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/GetPropertiesDetail?property_id=${params.id}`
+          `https://propertier-p2wwcx3okq-em.a.run.app/properties/GetPropertiesDetail?property_id=${params.id}`
         );
         setData(response.data.DetailDataModel);
         console.log(response.data.DetailDataModel);
@@ -37,7 +37,7 @@ const Page = ({ params }) => {
     const fetchProperties = async () => {
       try {
         const response = await fetch(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
         );
         const result = await response.json();
         setProperties(result.Data.properties);

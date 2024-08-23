@@ -20,7 +20,7 @@ const Properties = () => {
     const fetchProperties = async () => {
       try {
         const response = await fetch(
-          "https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/ComputerHomePage"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
         );
         const result = await response.json();
         setProperties(result.Data.properties);

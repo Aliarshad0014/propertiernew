@@ -16,7 +16,13 @@ import axios from "axios";
  * @param {number[]} props.likedVideos - Array of indices of liked videos.
  * @param {function(number): void} props.setLikedVideos - Function to set liked videos.
  */
-const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVideos, setLikedVideos }) => {
+const SmallScreenVideoShorts = ({
+  data,
+  playingIndex,
+  setPlayingIndex,
+  likedVideos,
+  setLikedVideos,
+}) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -59,19 +65,27 @@ const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
       const isLiked = likedVideos.includes(playingIndex);
 
       if (isLiked) {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-        });
+        const response = await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+          }
+        );
         console.log("Unlike action response:", response.data);
 
-        setLikedVideos((prevLikedVideos) => prevLikedVideos.filter((item) => item !== playingIndex));
+        setLikedVideos((prevLikedVideos) =>
+          prevLikedVideos.filter((item) => item !== playingIndex)
+        );
       } else {
-        const response = await axios.post("https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/LikeOrUnlike/", {
-          agent_id: agent.id,
-          property_id: id,
-          action: "like",
-        });
+        const response = await axios.post(
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/LikeOrUnlike/",
+          {
+            agent_id: agent.id,
+            property_id: id,
+            action: "like",
+          }
+        );
         console.log("Like action response:", response.data);
 
         setLikedVideos((prevLikedVideos) => [...prevLikedVideos, playingIndex]);
@@ -83,7 +97,9 @@ const SmallScreenVideoShorts = ({ data, playingIndex, setPlayingIndex, likedVide
 
   return (
     <div className="relative flex flex-col w-full min-h-screen items-center justify-center p-4 bg-white">
-      <h1 className="text-3xl font-bold mt-10 mb-4 text-yellow-500">Short Videos</h1>
+      <h1 className="text-3xl font-bold mt-10 mb-4 text-yellow-500">
+        Short Videos
+      </h1>
       <div className="relative flex flex-col items-center w-full">
         <div className="relative flex-none w-full mx-1">
           <video
