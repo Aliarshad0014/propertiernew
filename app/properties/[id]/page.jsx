@@ -17,10 +17,10 @@ const Page = ({ params }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/properties/GetPropertiesDetail?property_id=${params.id}`
+          `https://propertier-p2wwcx3okq-em.a.run.app/properties/properties/${params.id}`
         );
-        setData(response.data.DetailDataModel);
-        console.log(response.data.DetailDataModel);
+        setData(response.data);
+        console.log(response.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -31,6 +31,7 @@ const Page = ({ params }) => {
     fetchData();
   }, [params.id]);
 
+  console.log(data);
   useEffect(() => {
     setBtnLoad(true);
 
@@ -51,7 +52,7 @@ const Page = ({ params }) => {
     fetchProperties();
   }, []);
 
-  if (loading) {
+  if (btnLoad) {
     return <div>Loading...</div>;
   }
 
@@ -64,8 +65,8 @@ const Page = ({ params }) => {
   }
 
   const renderFeatures = (features) => {
-    return features.map((feature, index) => (
-      <li key={index}>{feature.feature_id.name}</li>
+    return features?.map((feature, index) => (
+      <li key={index}>{feature?.feature_id?.name}</li>
     ));
   };
 
@@ -138,15 +139,12 @@ const Page = ({ params }) => {
           {/* Left Column */}
           <div className="w-[70%] flex flex-col">
             <div className="text-3xl font-bold mb-6 ">
-              {data.Property?.title || "Property Title"}
+              {data?.title || "Property Title"}
             </div>
             {/* Property Pictures Section */}
             <div className="mb-6">
               <Image
-                src={
-                  data.Property?.image_url ||
-                  "https://via.placeholder.com/600x400"
-                }
+                src={data?.image_url || "https://via.placeholder.com/600x400"}
                 width={600}
                 height={400}
                 alt="Property"
@@ -170,7 +168,7 @@ const Page = ({ params }) => {
             <div className="mb-6">
               <h2 className="text-xl font-semibold">Description</h2>
               <p className="mt-2">
-                {data.Property?.description || "No description available"}
+                {data?.description || "No description available"}
               </p>
             </div>
             {/* Property Details Section */}
@@ -179,12 +177,12 @@ const Page = ({ params }) => {
               <h2 className="text-xl font-semibold">Details</h2>
               <div className="flex justify-between mt-4">
                 <div>
-                  <div>Type : {data.Property?.type ?? "-"}</div>
-                  <div>Area : {data.Property?.area ?? "-"}</div>
-                  <div>Area Unit : {data.Property?.area_unit ?? "-"}</div>
-                  <div>Bathroom : {data.Property?.bathroom ?? "-"}</div>
-                  <div>Bedroom : {data.Property?.bedroom ?? "-"}</div>
-                  <div>Floor : {data.Property?.floor ?? "-"}</div>
+                  <div>Type : {data?.type ?? "-"}</div>
+                  <div>Area : {data?.area ?? "-"}</div>
+                  <div>Area Unit : {data?.area_unit ?? "-"}</div>
+                  <div>Bathroom : {data?.bathroom ?? "-"}</div>
+                  <div>Bedroom : {data?.bedroom ?? "-"}</div>
+                  <div>Floor : {data?.floor ?? "-"}</div>
                 </div>
               </div>
             </div>
@@ -207,9 +205,9 @@ const Page = ({ params }) => {
               </h3>
               <hr className="my-4" />
               <ul className="list-disc list-inside mt-2">
-                <div> City : {data.Property?.city} </div>
+                <div> City : {data?.city} </div>
                 <div className="text-lg font-semibold my-3">Agent Details</div>
-                <div> Agent Name : {data.Property?.agent?.name} </div>
+                <div> Agent Name : {data?.agent?.name} </div>
               </ul>
             </div>
             {/* Video Tour Section */}
@@ -218,8 +216,8 @@ const Page = ({ params }) => {
                 Video Tour
               </h3>
               <hr className="my-4" />
-              {data.Property?.video ? (
-                renderVideo(data.Property.video)
+              {data?.video ? (
+                renderVideo(data.video)
               ) : (
                 <p>No video available</p>
               )}
@@ -238,15 +236,15 @@ const Page = ({ params }) => {
             {/* Short Video Section */}
             <div className="flex mb-5 justify-between">
               <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit">
-                For {data.Property?.purpose}
+                For {data?.purpose}
               </div>
               <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit font-semibold">
-                Rs {data.Property?.price}
+                Rs {data?.price}
               </div>
             </div>
             <div className="mb-6">
-              {data.Property?.short_video ? (
-                renderVideo(data.Property.short_video)
+              {data?.short_video ? (
+                renderVideo(data.short_video)
               ) : (
                 <p>No short video available</p>
               )}
