@@ -238,3 +238,7 @@ body {
 .right-arrow {
   right: -50px;
 }
+
+.swal2-container {
+  z-index: 20000 !important;
+}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import noImg from "@/image/noImg.svg";
 const HotSale = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <div className=" flex items-center justify-center relative z-10">
       <div className="flex flex-col items-center">
