@@ -24,28 +24,28 @@ const CorporateServices = () => {
         <SearchBox />
       </div>
 
-      <div className="py-10">
+      <div className="py-4">
         <Packages />
       </div>
-      <div className="py-10">
+      <div className="py-4">
         <ERPFeatures />
       </div>
-      <div className="py-10">
+      <div className="py-4">
         <HRMFeatures />
       </div>
-      <div className="py-10">
+      <div className="py-4">
         <CRMFeatures />
       </div>
-      <div className="py-10">
+      <div className="py-4">
         <CMSFeatures />
       </div>
-      <div className="bg-gray-50 py-10">
+      <div className="bg-gray-50 py-4">
         <ContactUs />
       </div>
-      <div className="py-10">
+      <div className="py-4">
         <LogoCarousel />
       </div>
-      <div className="text-center bg-white py-10">
+      <div className="text-center bg-white py-4">
         <h2 className="text-2xl text-gray-700 font-semibold mb-6">
           Looking for more Services?
         </h2>
