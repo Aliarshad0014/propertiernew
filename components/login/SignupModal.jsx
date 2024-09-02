@@ -28,16 +28,26 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function SignupModal({ open, setOpen, setIsUser }) {
-  const [email, setEmail] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [rememberMe, setRememberMe] = React.useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [about, setAbout] = useState("");
+  const [gender, setGender] = useState("");
+  const [dob, setDob] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
   const [btnLoad, setBtnLoad] = useState(false);
   const history = useRouter();
   const path = usePathname();
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleImageChange = (e) => {
+    setProfilePicture(e.target.files[0]);
   };
 
   const signupWithEmailAndPasswordFirebase = async () => {
@@ -63,36 +73,44 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
       } else {
         toast.error("Failed to sign up. Please try again later.");
       }
-      // Handle error, display appropriate message to the user
     }
   };
 
   const saveUserData = async (token) => {
-    const body = {
-      firebase_id: firebase.auth().currentUser.uid,
-      name: name,
-      email: email,
-      type: "customer",
-    };
+    const formData = new FormData();
+    formData.append("firebase_id", firebase.auth().currentUser.uid);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone_number", phoneNumber);
+    formData.append("address", address);
+    formData.append("about", about);
+    formData.append("gender", gender);
+    formData.append("dob", dob);
+    formData.append("type", "customer");
 
-    url
-      .post("/accounts/customers/", body, {
+    if (profilePicture) {
+      formData.append("profile_picture", profilePicture);
+    }
+
+    try {
+      const res = await url.post("/accounts/customers/", formData, {
         headers: {
           Authorization: "Bearer " + token,
+          "Content-Type": "multipart/form-data",
         },
-      })
-      .then(async (res) => {
-        // return console.log(res.data);
-        setBtnLoad(false);
-        await history.push("/profile");
-        toast.success("Profile Successfully Added");
-        handleClose();
-      })
-      .catch((e) => {
-        console.log(e);
-        setBtnLoad(false);
-        toast.success(e.response.data.data.message);
       });
+
+      setBtnLoad(false);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      console.log("Signup user data: " + res.data);
+      await history.push("/profile");
+      toast.success("Profile Successfully Added");
+      handleClose();
+    } catch (e) {
+      console.log(e);
+      setBtnLoad(false);
+      toast.error(e.response?.data?.message || "Failed to save user data.");
+    }
   };
 
   return (
@@ -103,7 +121,7 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
         open={open}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Welcome Back! Please Log In to Continue
+          Create Your Account
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -146,17 +164,94 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                color="primary"
-              />
-            }
-            label="Remember me"
-            sx={{ mt: 2 }}
+          <TextField
+            margin="dense"
+            label="Phone Number"
+            placeholder="Enter your phone number"
+            fullWidth
+            variant="outlined"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
+          <TextField
+            margin="dense"
+            label="Address"
+            placeholder="Enter your address"
+            fullWidth
+            variant="outlined"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="About"
+            placeholder="Tell us about yourself"
+            fullWidth
+            multiline
+            rows={3}
+            variant="outlined"
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Date of Birth"
+            type="date"
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Gender"
+            select
+            fullWidth
+            variant="outlined"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            SelectProps={{
+              native: true,
+            }}
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </TextField>
+          <div className="flex flex-col mt-3 gap-2">
+            <input
+              accept="image/jpeg"
+              style={{ display: "none" }}
+              id="profile-picture-upload"
+              type="file"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="profile-picture-upload">
+              <Button variant="contained" component="span">
+                Upload Profile Picture
+              </Button>
+            </label>
+            {profilePicture && (
+              <img
+                src={URL.createObjectURL(profilePicture)}
+                alt="Profile Picture"
+                style={{ width: "150px" }}
+              />
+            )}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  color="primary"
+                />
+              }
+              label="Remember me"
+              sx={{ mt: 2 }}
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button
@@ -167,7 +262,7 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
             color="primary"
             fullWidth
           >
-            {btnLoad ? <ScaleLoader color="#eab308" /> : "  Signup"}
+            {btnLoad ? <ScaleLoader color="#eab308" /> : "Signup"}
           </Button>
         </DialogActions>
       </BootstrapDialog>

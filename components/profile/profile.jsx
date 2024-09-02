@@ -9,6 +9,8 @@ import AddBlogsComponent from "@/components/profile/addblog";
 import CorporateServices from "@/components/profile/corporate";
 import Franchise from "@/components/profile/franchise";
 import "../../app/globals.css";
+import propertyImg from "@/image/corporate.png";
+import Image from "next/image";
 
 const UserProfile = () => {
   const [activeSection, setActiveSection] = useState("Awards"); // State for active section
@@ -55,10 +57,10 @@ const UserProfile = () => {
         {/* Cover Photo and Buttons Section */}
         <div className="mb-4">
           <div className="relative">
-            <img
-              src="https://propertier.com.pk/storage/user/2024-06-26-667c071dabb45.jpg"
+            <Image
+              src={propertyImg}
               alt="Cover"
-              className="w-full h-64 object-fill rounded-lg shadow-md"
+              className="w-full h-64 object-cover rounded-lg shadow-md"
             />
             <div className="absolute top-0 right-0 flex justify-end mt-2 mr-4 space-x-2">
               <button className="bg-[#FFCE58] hover:bg-yellow-600 transition-all text-white px-4 py-2 rounded">

@@ -12,6 +12,7 @@ import ServicesCarousel from "@/components/homepage/services";
 import BlogComponent from "@/components/homepage/blog";
 import FooterSection from "@/components/footer";
 import SearchBox from "@/components/searchbox/searchbox";
+import url from "@/config/axios";
 
 const images = [
   "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -32,6 +33,24 @@ export default function Home() {
     shortVideos: [],
     appFeedbacks: [],
   });
+  const [btnLoad, setBtnLoad] = useState(false);
+  const [silders, setSliders] = useState([]);
+
+  useEffect(() => {
+    getSliders();
+  }, []);
+
+  const getSliders = async () => {
+    setBtnLoad(true);
+    try {
+      const res = await url.get(`/properties/sliders/`);
+      setSliders(res.data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setBtnLoad(false);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +59,6 @@ export default function Home() {
           "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
         );
         const result = await response.json();
-        console.log("Fetched data:", result);
         setData(result?.Data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -51,27 +69,29 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    if (silders.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % silders.length);
+      }, 5000);
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }
+  }, [silders]);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % silders.length);
   };
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      (prevIndex) => (prevIndex - 1 + silders.length) % silders.length
     );
   };
 
   return (
-    <div className="min-h-screen relative w-full bg-white">
+    <div className="min-h-screen relative w-full bg-white pt-10">
       <div className="relative z-0 h-[80vh] w-full overflow-hidden">
-        {images.map((image, index) => (
+        {silders.map((image, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -79,7 +99,7 @@ export default function Home() {
             }`}
           >
             <Image
-              src={image}
+              src={image?.image_url}
               alt={`Background Image ${index + 1}`}
               fill
               style={{ objectFit: "cover" }}

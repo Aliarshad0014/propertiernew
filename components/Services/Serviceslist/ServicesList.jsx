@@ -10,6 +10,7 @@ import axios from "@/config/axios"; // Assuming you're using axios for API calls
 import BounceLoader from "react-spinners/BounceLoader";
 import FeaturedCard from "./FeaturedCard";
 import Link from "next/link";
+import propertyImg from "@/image/services.png";
 
 export default function ServicesList() {
   const [selectedService, setSelectedService] = useState("");
@@ -78,6 +79,7 @@ export default function ServicesList() {
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
+        coverImg={propertyImg}
       />
       <div className="w-full flex justify-center -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[50%] rounded-md">

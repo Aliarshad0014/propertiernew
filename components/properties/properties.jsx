@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import TopBanner from "../TopBanner/TopBannerProperties";
+import TopBanner from "../TopBanner/TopBanner";
 import SearchBox from "../searchbox/searchboxpages";
 import Image from "next/image";
 import noimg from "@/image/noImg.svg";
 import BounceLoader from "react-spinners/BounceLoader";
 import Logo from "@/icons/Logo";
 import Link from "next/link";
+import propertyImg from "@/image/properties.png";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -52,7 +53,13 @@ const Properties = () => {
   console.log(selectedProperty);
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 relative">
-      <TopBanner />
+      {/* <TopBanner /> */}
+      <TopBanner
+        title={"Propertier"}
+        firstCrumb={"Propertier"}
+        firstCrumbLink={"/propertier"}
+        coverImg={propertyImg}
+      />
       <SearchBox />
 
       <h1 className="text-3xl font-bold text-center text-yellow-500 mb-10">

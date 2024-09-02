@@ -9,6 +9,7 @@ import TopBanner from "../TopBanner/TopBanner";
 import ServicesCard from "./Sub-Services/ServicesCard";
 import url from "@/config/axios";
 import BounceLoader from "react-spinners/BounceLoader";
+import propertyImg from "@/image/services.png";
 
 export default function Services() {
   const [allService, setAllService] = useState("Electricity");
@@ -43,6 +44,7 @@ export default function Services() {
         title={"Services"}
         firstCrumb={"Services"}
         firstCrumbLink={"/services"}
+        coverImg={propertyImg}
       />
       <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">

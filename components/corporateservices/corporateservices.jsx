@@ -10,14 +10,21 @@ import CMSFeatures from "@/components/corporateservices/cmsfeatures";
 import LogoCarousel from "@/components/logocarousel";
 
 import Link from "next/link";
-import TopBanner from "../TopBanner/TopBannerCorporateServices";
+import TopBanner from "../TopBanner/TopBanner";
 import SearchBox from "../searchbox/searchboxpages";
+import propertyImg from "@/image/corporate.png";
 
 const CorporateServices = () => {
   return (
     <div className="min-h-screen overflow-hidden relative bg-white">
       {/* TopBanner Component */}
-      <TopBanner />
+      {/* <TopBanner /> */}
+      <TopBanner
+        title={"Corporate Services"}
+        firstCrumb={"Corporate Services"}
+        firstCrumbLink={"/corporateservices"}
+        coverImg={propertyImg}
+      />
 
       {/* SearchBox Component */}
       <div className="flex flex-col items-center justify-center bottom-10">

@@ -19,6 +19,15 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
 
   const onNavClick = () => {
     setNavBar((prevState) => !prevState);
@@ -95,29 +104,33 @@ const Header = () => {
             {text}
           </Link>
         ))}
-        <div className="relative text-left flex items-center">
-          <div className="group">
-            <button
-              type="button"
-              className="justify-center w-full rounded-md h-9 ease-in-out duration-500 font-regular text-white hover:text-white flex items-center"
+        <div
+          className="relative text-left flex items-center"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <button
+            type="button"
+            className="justify-center w-full rounded-md h-9 ease-in-out duration-500 font-regular text-white hover:text-white flex items-center"
+          >
+            OTHERS
+            <svg
+              className="-mr-1 ml-2 h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
             >
-              OTHERS
-              <svg
-                className="-mr-1 ml-2 h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+              <path
+                fillRule="evenodd"
+                d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          {isOpen && (
             <div
-              className="hidden group-hover:block origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 opacity-70 focus:outline-none"
+              className="origin-top-right top-8 absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-black ring-1 ring-black ring-opacity-5 "
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -125,26 +138,23 @@ const Header = () => {
             >
               <div className="py-1" role="none">
                 {[
-                  { href: "/option1", text: "Short Videos" },
-                  { href: "/option2", text: "Corporate Services" },
-                  { href: "/option3", text: "Profile" },
+                  { href: "/shorts", text: "Short Videos" },
+                  { href: "/corporateservices", text: "Corporate Services" },
+                  // { href: "/option3", text: "Profile" },
                 ].map(({ href, text }) => (
                   <Link
                     key={href}
                     href={href}
-                    className={`text-white block px-4 py-2 text-sm hover:text-yellow-500 ${
-                      activeLink === href ? "text-yellow-500 font-bold" : ""
-                    }`}
+                    className={`text-white block px-4 py-2 text-sm hover:text-yellow-500`}
                     role="menuitem"
                     tabIndex={-1}
-                    onClick={() => handleLinkClick(href)}
                   >
                     {text}
                   </Link>
                 ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="flex items-center space-x-4">
