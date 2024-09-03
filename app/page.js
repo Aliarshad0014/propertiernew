@@ -101,14 +101,14 @@ export default function Home() {
             <Image
               src={image?.image_url}
               alt={`Background Image ${index + 1}`}
-              style={{ objectFit: "cover" }}
-              quality={100}
-              width={100}
-              height={100}
-              className="w-full h-full object-fill"
-              // priority
-              layout="responsive"
-              loading="lazy"
+              // quality={100}
+              className="w-full h-full "
+              loading="eager"
+              objectFit="cover"
+              // layout="responsive"
+              fill
+              // width={100}
+              // height={100}
             />
           </div>
         ))}
