@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../../app/globals.css";
 import { Input } from "@material-tailwind/react";
+import Image from "next/image";
 
 const responsive = {
   desktop: {
@@ -42,7 +43,9 @@ const CustomCarousel = () => {
           renderButtonGroupOutside
         >
           <div className="relative carousel-item h-screen text-white rounded-lg">
-            <img
+            <Image
+              width={100}
+              height={100}
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
@@ -82,7 +85,9 @@ const CustomCarousel = () => {
             </div>
           </div>
           <div className="relative carousel-item h-screen text-white">
-            <img
+            <Image
+              width={100}
+              height={100}
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
@@ -122,7 +127,9 @@ const CustomCarousel = () => {
             </div>
           </div>
           <div className="relative carousel-item h-screen text-white">
-            <img
+            <Image
+              width={100}
+              height={100}
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""

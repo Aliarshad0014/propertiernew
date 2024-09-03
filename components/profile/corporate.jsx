@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FooterSection from "../footer";
+import Image from "next/image";
 
 const CorporateServices = () => {
   const [formValues, setFormValues] = useState({
@@ -198,7 +199,9 @@ const CorporateServices = () => {
       {showBanner && (
         <div className="rounded-md p-4 mt-4">
           <div className="bg-cover bg-center h-72 relative">
-            <img
+            <Image
+              width={100}
+              height={100}
               className="absolute inset-0 w-full h-full object-cover"
               src="https://via.placeholder.com/150"
               alt="Banner Image"

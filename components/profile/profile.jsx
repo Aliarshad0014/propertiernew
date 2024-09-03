@@ -11,10 +11,20 @@ import Franchise from "@/components/profile/franchise";
 import "../../app/globals.css";
 import propertyImg from "@/image/corporate.png";
 import Image from "next/image";
+import noImg from "@/image/noImg.svg";
 
 const UserProfile = () => {
   const [activeSection, setActiveSection] = useState("Awards"); // State for active section
 
+  const hasWindow = typeof window !== "undefined";
+
+  let user;
+
+  if (hasWindow) {
+    user = JSON.parse(localStorage.getItem("user"));
+  }
+
+  console.log(user);
   // Example user data (replace with actual data)
   const userData = {
     name: "John Doe",
@@ -83,8 +93,14 @@ const UserProfile = () => {
           <div className="w-full md:w-[30%] bg-gray-50 shadow-lg flex flex-col items-center p-8 min-h-screen">
             <div className="sticky top-0 pt-8 mb-4">
               <div className="flex justify-between">
-                <img
-                  src={userData.profileImage}
+                <Image
+                  src={
+                    user?.profile_picture_url
+                      ? user?.profile_picture_url
+                      : noImg
+                  }
+                  width={100}
+                  height={100}
                   alt="Profile"
                   className="w-32 h-32 object-cover rounded-md shadow-md"
                 />
@@ -96,7 +112,7 @@ const UserProfile = () => {
                 </button>
               </div>
               <h2 className="text-xl font-bold mt-2 text-start">
-                {userData.name}
+                {user?.name}
               </h2>
               <div className="mt-2">
                 <button className="bg-[#FFCE58] hover:bg-black transition-all text-white px-4 py-2 rounded w-full lg:w-auto">
@@ -105,28 +121,29 @@ const UserProfile = () => {
               </div>
               <div className="mt-4 text-left bg-gray-100 font-light shadow-lg rounded-md space-y-2 p-4 lg:p-2">
                 <p>
-                  <strong>Email:</strong> {userData.email}
+                  <strong>Email:</strong> {user?.email}
                 </p>
                 <p>
-                  <strong>Phone Number:</strong> {userData.phoneNumber}
+                  <strong>Phone Number:</strong> {user?.phone_number ?? "-"}
                 </p>
+                {/* <p className="hover:underline cursor-pointer text-green-500">
+                  <strong>Following:</strong> {user?.following}
+                </p> */}
                 <p className="hover:underline cursor-pointer text-green-500">
-                  <strong>Following:</strong> {userData.following}
-                </p>
-                <p className="hover:underline cursor-pointer text-green-500">
-                  <strong>Followers:</strong> {userData.followers}
+                  <strong>Followers:</strong>{" "}
+                  {user?.followers?.length === 0 ? 0 : user?.followers?.length}
                 </p>
                 <p>
-                  <strong>Total Ads:</strong> {userData.totalAds}
+                  <strong>Total Ads:</strong> {user?.totalAds}
                 </p>
                 <p>
-                  <strong>Appreciations:</strong> {userData.appreciations}
+                  <strong>Appreciations:</strong> {user?.appreciations}
                 </p>
                 <p>
-                  <strong>Address:</strong> {userData.address}
+                  <strong>Address:</strong> {user?.address}
                 </p>
                 <p>
-                  <strong>Since:</strong> {userData.since}
+                  <strong>Since:</strong> {user?.since}
                 </p>
               </div>
               <div className="mt-4 flex flex-wrap justify-center lg:justify-start">

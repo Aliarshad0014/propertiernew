@@ -109,13 +109,13 @@ export default function Home() {
           </div>
         ))}
         <button
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
+          className="absolute top-1/2 bg-slate-600 p-5 rounded-full left-4 transform -translate-y-1/2 bg-opacity-50 text-white  z-50"
           onClick={handlePrev}
         >
           <GrPrevious size={30} color="#eaab0c" />
         </button>
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-opacity-50 text-white p-2 rounded-full z-50"
+          className="absolute top-1/2 right-4  bg-slate-600 p-5 rounded-full  transform -translate-y-1/2 bg-opacity-50 text-white z-50"
           onClick={handleNext}
         >
           <GrNext size={30} color="#eaab0c" />

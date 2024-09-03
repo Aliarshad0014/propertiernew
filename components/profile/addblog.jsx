@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 const AddBlogsComponent = () => {
@@ -122,7 +123,9 @@ const AddBlogsComponent = () => {
                 className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
               />
               {blogData.image && (
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   src={blogData.image}
                   alt="Blog"
                   className="mt-2 w-full h-64 object-cover"

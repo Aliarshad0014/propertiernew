@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../../app/globals.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const responsive = {
   desktop: {
@@ -70,7 +71,13 @@ const ServicesCarousel = () => {
             },
           ].map((member, index) => (
             <div key={index} className="service-card text-black mb-12">
-              <img src={member.img} alt={member.name} />
+              <Image
+                width={100}
+                height={100}
+                src={member.img}
+                alt={member.name}
+                className="w-full "
+              />
               <div className="service-info">
                 <h3 className="text-white">{member.name}</h3>
                 <p>{member.title}</p>

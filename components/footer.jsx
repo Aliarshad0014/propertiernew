@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import logo from "@/image/logo.png";
 
 const FooterSection = () => {
   return (
@@ -10,7 +11,7 @@ const FooterSection = () => {
             <Image
               width={100}
               height={100}
-              src="https://propertier.com.pk/assets/img/footer-logo-n.png"
+              src={logo}
               alt="Logo"
               className="w-1/3 cursor-pointer mb-5"
             />
@@ -92,7 +93,7 @@ const FooterSection = () => {
           </a>
         </div>
         <p className="text-xs text-center mt-4">
-          © Copyrights 2024. Propertier.pk. All Rights Reserved. 
+          © Copyrights 2024. Propertier.pk. All Rights Reserved.
         </p>
       </div>
     </footer>

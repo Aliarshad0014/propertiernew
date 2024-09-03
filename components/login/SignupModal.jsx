@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
 import url from "@/config/axios";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import Image from "next/image";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -35,7 +36,7 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [about, setAbout] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [dob, setDob] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const [btnLoad, setBtnLoad] = useState(false);
@@ -215,7 +216,7 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
               native: true,
             }}
           >
-            <option value="">Select Gender</option>
+            {/* <option value="">Select Gender</option> */}
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -234,7 +235,9 @@ export default function SignupModal({ open, setOpen, setIsUser }) {
               </Button>
             </label>
             {profilePicture && (
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={URL.createObjectURL(profilePicture)}
                 alt="Profile Picture"
                 style={{ width: "150px" }}

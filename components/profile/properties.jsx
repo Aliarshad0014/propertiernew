@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const demoPropertiesData = [
@@ -59,7 +60,9 @@ const PropertiesComponent = () => {
             key={property.id}
             className="bg-white p-4 rounded-lg shadow-md relative"
           >
-            <img
+            <Image
+              width={100}
+              height={100}
               src={property.image}
               alt={property.title}
               className="w-full h-40 object-cover rounded-md mb-2"

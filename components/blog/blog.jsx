@@ -64,7 +64,7 @@ const BlogPage = () => {
                   />
                   <div className="absolute bottom-0 w-full bg-gray-700 bg-opacity-30 p-4">
                     <h2 className="text-xl font-semibold text-white">
-                      {mainBlog.title}
+                      {/* {mainBlog.title} */}
                     </h2>
                     <p className="text-sm text-gray-300">
                       {formatDate(mainBlog.published_date)}

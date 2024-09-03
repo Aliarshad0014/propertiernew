@@ -1,4 +1,5 @@
 // VerticalImagePage.jsx
+import Image from "next/image";
 import React from "react";
 
 const VerticalImagePage = () => {
@@ -16,7 +17,9 @@ const VerticalImagePage = () => {
       <div className="w-full max-w-6xl space-y-10">
         {images.map((img, index) => (
           <div key={index} className="relative w-full h-[500px]">
-            <img
+            <Image
+              width={100}
+              height={100}
               src={img}
               alt={`Image ${index}`}
               className="w-full h-full object-cover opacity-70"
