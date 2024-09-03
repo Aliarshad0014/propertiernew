@@ -106,8 +106,7 @@ export default function Home() {
               width={100}
               height={100}
               className="w-full h-full object-fill"
-              priority
-              layout="responsive"
+              loading="lazy"
             />
           </div>
         ))}
