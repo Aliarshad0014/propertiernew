@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { FaBell } from "react-icons/fa"; // Import the bell icon
+import React, { useRef, useState, useEffect } from "react";
+import { FaBell } from "react-icons/fa";
 import AwardsComponent from "@/components/profile/awards";
 import Properties from "@/components/profile/properties";
 import NewListingComponent from "@/components/profile/newlisting";
@@ -12,65 +12,124 @@ import "../../app/globals.css";
 import propertyImg from "@/image/corporate.png";
 import Image from "next/image";
 import noImg from "@/image/noImg.svg";
+import moment from "moment";
+import url from "@/config/axios";
 
 const UserProfile = () => {
-  const [activeSection, setActiveSection] = useState("Awards"); // State for active section
+  const [activeSection, setActiveSection] = useState("Awards");
+  const [coverPhoto, setCoverPhoto] = useState();
+  const fileInputRef = useRef(null);
+  const [isUploading, setIsUploading] = useState(false); // State for upload status
 
   const hasWindow = typeof window !== "undefined";
-
   let user;
 
   if (hasWindow) {
     user = JSON.parse(localStorage.getItem("user"));
   }
 
-  console.log(user);
-  // Example user data (replace with actual data)
-  const userData = {
-    name: "John Doe",
-    profileImage: "https://randomuser.me/portraits/men/1.jpg",
-    email: "john.doe@example.com",
-    phoneNumber: "+1234567890",
-    following: 500,
-    followers: 178,
-    totalAds: 20,
-    appreciations: 100,
-    address: "123 Main St, Cityville",
-    since: "January 2020",
-  };
-
-  // Content for each section (replace with actual content)
   const sectionContent = {
     Awards: <AwardsComponent />,
     Properties: <Properties />,
     "New Listing": <NewListingComponent />,
     "Short Videos": <ShortVideosGridComponent />,
-    Franchise: <Franchise />,
-    "Corporate Services": <CorporateServices />,
     "Add Blogs": <AddBlogsComponent />,
   };
 
-  // Function to handle section change
+  useEffect(() => {
+    setCoverPhoto(user?.cover_photo_url ? user.cover_photo_url : propertyImg);
+  }, [user]);
+
   const handleSectionChange = (section) => {
     setActiveSection(section);
   };
 
-  // Placeholder function for handling notifications
-  const handleNotifications = () => {
-    // Add logic for displaying notifications
-    alert("Notifications feature is under development.");
+  const handleEditCoverPhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
+  const handleCoverPhotoChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setIsUploading(true); // Start uploading state
+      const formData = new FormData();
+      formData.append("cover_photo", file);
+      formData.append("firebase_id", user?.firebase_id);
+      formData.append("email", user?.email);
+      formData.append("type", user?.type);
+
+      try {
+        const response = await url.put(
+          `accounts/customers/${user.id}/`,
+          formData,
+          {
+            headers: {
+              // Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data", // Ensure content type is set
+            },
+          }
+        );
+
+        // Ensure response is successful
+        if (response.status === 200) {
+          const data = response.data;
+          localStorage.setItem("user", JSON.stringify(data));
+
+          console.log("Upload successful:", data);
+          setCoverPhoto(data.cover_photo_url); // Update cover photo with the new URL
+        } else {
+          console.error("Unexpected response status:", response.status);
+          alert("Failed to upload cover photo. Please try again.");
+        }
+      } catch (error) {
+        // Enhanced error logging
+        console.error("Error uploading cover photo:", error);
+        if (error.response) {
+          // Server responded with a status other than 200
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+          alert(
+            `Failed to upload cover photo: ${
+              error.response.data.message || "Please try again."
+            }`
+          );
+        } else if (error.request) {
+          // No response was received
+          console.error(
+            "Request made but no response received:",
+            error.request
+          );
+          alert("No response from server. Please try again later.");
+        } else {
+          // Something else happened
+          console.error("Error:", error.message);
+          alert(`Error: ${error.message}`);
+        }
+      } finally {
+        setIsUploading(false); // End uploading state
+      }
+    }
+  };
+
+  const handleNotifications = () => {
+    alert("Notifications feature is under development.");
+  };
+  // const file = event.target.files[0];
   return (
     <div className="bg-white min-h-screen w-full mt-5">
       <div className="container mx-auto px-2 py-8 bg-white text-black max-w-[95%]">
-        {/* Cover Photo and Buttons Section */}
         <div className="mb-4">
           <div className="relative">
             <Image
-              src={propertyImg}
+              src={coverPhoto}
               alt="Cover"
-              className="w-full h-64 object-cover rounded-lg shadow-md"
+              layout="responsive" // Maintain aspect ratio and ensure clarity
+              width={1000} // Set a larger width in pixels to improve resolution
+              height={250}
+              className="w-full !h-[250px] object-cover rounded-lg shadow-md"
             />
             <div className="absolute top-0 right-0 flex justify-end mt-2 mr-4 space-x-2">
               <button className="bg-[#FFCE58] hover:bg-yellow-600 transition-all text-white px-4 py-2 rounded">
@@ -79,10 +138,20 @@ const UserProfile = () => {
               <button className="bg-red-500 hover:bg-red-600 transition-all text-white px-4 py-2 rounded">
                 Logout
               </button>
-              <button className="bg-gray-500 hover:bg-gray-600 transition-all text-white px-4 py-2 rounded">
+              <button
+                className="bg-gray-500 hover:bg-gray-600 transition-all text-white px-4 py-2 rounded"
+                onClick={handleEditCoverPhoto}
+              >
                 Edit Cover Photo
               </button>
-              {/* Bell icon for notifications */}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleCoverPhotoChange}
+                disabled={isUploading}
+              />
             </div>
           </div>
         </div>
@@ -126,24 +195,16 @@ const UserProfile = () => {
                 <p>
                   <strong>Phone Number:</strong> {user?.phone_number ?? "-"}
                 </p>
-                {/* <p className="hover:underline cursor-pointer text-green-500">
-                  <strong>Following:</strong> {user?.following}
-                </p> */}
                 <p className="hover:underline cursor-pointer text-green-500">
                   <strong>Followers:</strong>{" "}
                   {user?.followers?.length === 0 ? 0 : user?.followers?.length}
                 </p>
                 <p>
-                  <strong>Total Ads:</strong> {user?.totalAds}
-                </p>
-                <p>
-                  <strong>Appreciations:</strong> {user?.appreciations}
-                </p>
-                <p>
                   <strong>Address:</strong> {user?.address}
                 </p>
                 <p>
-                  <strong>Since:</strong> {user?.since}
+                  <strong>Since:</strong>{" "}
+                  {moment(user?.createdAt).format("DD MMM YYYY")}
                 </p>
               </div>
               <div className="mt-4 flex flex-wrap justify-center lg:justify-start">

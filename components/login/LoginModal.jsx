@@ -88,8 +88,8 @@ export default function LoginModal({ open, setOpen, setIsUser }) {
       .then(async (res) => {
         // return console.log(res.data);
         setBtnLoad(false);
-        setIsUser(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
+        setIsUser(res.data?.users[0]);
+        localStorage.setItem("user", JSON.stringify(res.data?.users[0]));
         await history.push("/profile");
         toast.success("Account successfully Login.");
         handleClose();
