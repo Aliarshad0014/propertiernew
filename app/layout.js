@@ -49,6 +49,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="stylesheet" href="/globals.css" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
+          crossorigin="anonymous"></script>
       </head>
       <body className={poppins.className}>
         <div className="">
@@ -56,8 +60,7 @@ export default function RootLayout({ children }) {
             value={{
               isUser,
               setIsUser,
-            }}
-          >
+            }}>
             <Toaster />
             <Header />
 
