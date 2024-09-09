@@ -8,6 +8,7 @@ import { ChatContext } from "@/Contexts/ChatContext";
 import { Toaster } from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
 import Head from "next/head";
+import AdSense from "@/components/AdSense";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -46,48 +47,11 @@ export default function RootLayout({ children }) {
     }
   }, [isUser, loggedIn]);
 
-  useEffect(() => {
-    // Load AdSense script
-    const script = document.createElement("script");
-    script.src =
-      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-
-  function MyApp({ Component, pageProps }) {
-    useEffect(() => {
-      // Load AdSense script
-      const script = document.createElement("script");
-      script.src =
-        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871";
-      script.async = true;
-      script.crossOrigin = "anonymous";
-      document.head.appendChild(script);
-
-      return () => {
-        document.head.removeChild(script);
-      };
-    }, []);
-  }
   return (
     <html lang="en">
-      <Head>
-        <link rel="stylesheet" href="/globals.css" />
-        <script
-          async
-          custom-element="amp-ad"
-          src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
-          crossorigin="anonymous"></script>
-      </Head>
+      <head>
+        <AdSense pId="ca-pub-9403488694655871" />
+      </head>
       <body className={poppins.className}>
         <div className="">
           <ChatContext.Provider
