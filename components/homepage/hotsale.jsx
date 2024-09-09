@@ -43,7 +43,7 @@ const HotSale = ({ data }) => {
                   <div className="p-4">
                     <div className="flex justify-between mb-5">
                       <span className="text-yellow-500 font-bold text-xl">
-                        ${property?.price}
+                        {property?.price} PKR
                       </span>
                     </div>
                     {/* <hr className="border-gray-500 bottom-1" /> */}

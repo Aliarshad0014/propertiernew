@@ -74,8 +74,7 @@ const Properties = () => {
             {properties.map((property) => (
               <div
                 key={property.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-all cursor-pointer hover:shadow-xl"
-              >
+                className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-all cursor-pointer hover:shadow-xl">
                 <Image
                   src={property.image_url || noimg}
                   alt={property.title}
@@ -85,24 +84,23 @@ const Properties = () => {
                   height={254}
                 />
                 <div className="p-4 flex flex-col flex-grow">
+                  <p className="text-yellow-500 font-semibold">
+                    {property.price} PKR
+                  </p>
                   <h2 className="text-md text-start mb-4 font-bold text-black">
                     {property.title}
                   </h2>
                   <p className="text-gray-700">{property.city}</p>
-                  <p className="text-yellow-500 font-semibold">
-                    ${property.price}
-                  </p>
+
                   <div className="flex justify-between mt-auto pt-4">
                     <Link
                       href={`/properties/${property.id}`}
-                      className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]"
-                    >
+                      className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]">
                       Details
                     </Link>
                     <button
                       onClick={() => openPropertyDetails(property)}
-                      className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]"
-                    >
+                      className="bg-white border border-yellow-500 text-black font-medium py-1 px-4 rounded-md hover:bg-[#FFCE58]">
                       Talk
                     </button>
                   </div>
@@ -154,8 +152,7 @@ const Properties = () => {
             <div className="w-full flex justify-end">
               <button
                 className="mt-4 bg-[#FFCE58] text-white py-2 px-4 rounded-md hover:bg-yellow-600"
-                onClick={closePropertyDetails}
-              >
+                onClick={closePropertyDetails}>
                 Close
               </button>
             </div>

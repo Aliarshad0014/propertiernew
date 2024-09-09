@@ -71,7 +71,6 @@ const LargeScreenVideoShorts = ({
     e.stopPropagation();
     try {
       const { id, agent } = data[index];
-
       const isLiked = likedVideos.includes(index);
 
       if (isLiked) {
@@ -106,15 +105,14 @@ const LargeScreenVideoShorts = ({
   };
 
   return (
-    <div className="relative flex flex-col w-full items-center justify-center p-4  bg-white">
+    <div className="relative flex flex-col w-full items-center justify-center p-4 bg-white">
       <h1 className="text-3xl md:text-4xl font-bold mt-5 mb-10 text-yellow-500">
         Short Videos
       </h1>
       <div className="relative flex items-center w-full md:w-4/5">
         <button
           className="absolute left-4 md:-left-24 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
-          onClick={handlePrev}
-        >
+          onClick={handlePrev}>
           <GrPrevious size={24} />
         </button>
         <div className="flex items-center w-full overflow-x-hidden md:overflow-hidden space-x-2 md:space-x-4">
@@ -128,12 +126,12 @@ const LargeScreenVideoShorts = ({
               }`}
               style={{
                 display:
-                  index >= playingIndex - 1 && index <= playingIndex + 1
+                  index >= Math.max(0, playingIndex - 1) &&
+                  index <= Math.min(data.length - 1, playingIndex + 2)
                     ? "block"
                     : "none",
               }}
-              onClick={() => handleVideoClick(index)}
-            >
+              onClick={() => handleVideoClick(index)}>
               <video
                 ref={(el) => {
                   if (el) {
@@ -141,15 +139,14 @@ const LargeScreenVideoShorts = ({
                   }
                 }}
                 src={item.short_video}
-                className={`w-full  cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${
+                className={`w-full cursor-pointer object-cover rounded-lg transition-opacity duration-300 ${
                   index === playingIndex ? "opacity-100" : "opacity-70"
                 }`}
               />
               <div className="absolute bottom-24 right-4 flex flex-col space-y-2 md:space-y-4">
                 <button
                   className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110"
-                  onClick={(e) => handleLikeClick(e, index)}
-                >
+                  onClick={(e) => handleLikeClick(e, index)}>
                   {likedVideos.includes(index) ? (
                     <AiFillHeart size={24} className="text-red-500" />
                   ) : (
@@ -165,15 +162,13 @@ const LargeScreenVideoShorts = ({
         </div>
         <button
           className="absolute right-4 md:-right-10 top-1/2 transform -translate-y-1/2 rounded-full border-none p-4 md:p-2 cursor-pointer text-lg md:text-2xl transition-transform duration-300 z-10 bg-custom-color text-white"
-          onClick={handleNext}
-        >
+          onClick={handleNext}>
           <GrNext size={24} />
         </button>
       </div>
       <Link
         href="/shorts"
-        className=" px-4 mt-10 py-2 bg-[#FFCE58] hover:bg-black transition-all text-white rounded-md block text-center"
-      >
+        className="px-4 mt-10 py-2 bg-[#FFCE58] hover:bg-black transition-all text-white rounded-md block text-center">
         Show More
       </Link>
     </div>
