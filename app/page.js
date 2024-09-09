@@ -126,11 +126,11 @@ export default function Home() {
       <div className="pb-5 -mt-5">
         <HotSale data={data?.properties} className="relative" />
       </div>
-      <AdBanner
+      {/* <AdBanner
         dataAdFormat="auto"
         dataFullWidthResponsive={true}
         dataAdSlot="1415523676"
-      />
+      /> */}
       {/* <AdComponent /> */}
       <div className="py-5">
         <CustomCarousel data={data.materialRates} />
