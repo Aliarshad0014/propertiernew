@@ -49,10 +49,8 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
-        <AdSense pId="ca-pub-9403488694655871" />
-      </head>
       <body className={poppins.className}>
+        <AdSense pId="ca-pub-9403488694655871" />
         <div className="">
           <ChatContext.Provider
             value={{
