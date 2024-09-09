@@ -13,6 +13,8 @@ import BlogComponent from "@/components/homepage/blog";
 import FooterSection from "@/components/footer";
 import SearchBox from "@/components/searchbox/searchbox";
 import url from "@/config/axios";
+import AdComponent from "@/components/AdComponent";
+import AdComponent2 from "@/components/AdComponent2";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -123,6 +125,7 @@ export default function Home() {
       <div className="pb-5 -mt-5">
         <HotSale data={data?.properties} className="relative" />
       </div>
+      <AdComponent />
       <div className="py-5">
         <CustomCarousel data={data.materialRates} />
       </div>
@@ -138,6 +141,7 @@ export default function Home() {
       <div className="py-5">
         <UserReviews data={data.appFeedbacks} />
       </div>
+      <AdComponent2 />
       <div className="py-5">
         <BlogComponent />
       </div>
