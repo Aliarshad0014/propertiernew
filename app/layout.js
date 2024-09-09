@@ -7,6 +7,7 @@ import { Poppins } from "next/font/google";
 import { ChatContext } from "@/Contexts/ChatContext";
 import { Toaster } from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
+import Head from "next/head";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -76,13 +77,17 @@ export default function RootLayout({ children }) {
   }
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link rel="stylesheet" href="/globals.css" />
+        <script
+          async
+          custom-element="amp-ad"
+          src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
           crossorigin="anonymous"></script>
-      </head>
+      </Head>
       <body className={poppins.className}>
         <div className="">
           <ChatContext.Provider
