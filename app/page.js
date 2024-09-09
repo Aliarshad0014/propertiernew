@@ -14,12 +14,6 @@ import FooterSection from "@/components/footer";
 import SearchBox from "@/components/searchbox/searchbox";
 import url from "@/config/axios";
 
-const images = [
-  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-];
-
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [data, setData] = useState({
@@ -96,8 +90,7 @@ export default function Home() {
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
               index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
+            }`}>
             <Image
               src={image?.image_url}
               alt={`Background Image ${index + 1}`}
@@ -114,14 +107,12 @@ export default function Home() {
         ))}
         <button
           className="absolute top-1/2 bg-slate-600 p-5 hover:bg-slate-800 rounded-full left-4 transform -translate-y-1/2 bg-opacity-50 text-white  z-50"
-          onClick={handlePrev}
-        >
+          onClick={handlePrev}>
           <GrPrevious size={30} color="#eaab0c" />
         </button>
         <button
           className="absolute top-1/2 right-4 hover:bg-slate-800 bg-slate-600 p-5 rounded-full  transform -translate-y-1/2 bg-opacity-50 text-white z-50"
-          onClick={handleNext}
-        >
+          onClick={handleNext}>
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
