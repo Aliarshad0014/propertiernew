@@ -11,7 +11,7 @@ const FeaturedCard = ({ allService }) => {
         <Image
           src={allService?.image_urls[0] ?? noimg}
           alt={allService?.image_urls}
-          className="w-full"
+          className="w-full h-[200px]"
           width={200}
           height={200}
         />
@@ -43,14 +43,12 @@ const FeaturedCard = ({ allService }) => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              ></path>
+                d="M9 5l7 7-7 7"></path>
             </svg>
           </button>
         </Link>

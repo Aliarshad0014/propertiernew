@@ -11,24 +11,24 @@ const HotSale = ({ data }) => {
           <h2 className="text-3xl font-bold mb-10 text-start text-[#FFCE58]">
             Blazing Deals!
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
             {data?.slice(0, 4).map((property, index) => (
               <Link key={index} href={`/properties/${property?.id}`} passHref>
-                <div className="relative cursor-pointer h-[370px] bg-white rounded-md shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                <div className="relative cursor-pointer w-[300px] h-[370px] bg-white rounded-md shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
                   <div className="relative h-48 w-full">
                     {property?.image_url ? (
                       <Image
                         src={property?.image_url}
                         alt={property?.image_url}
                         layout="fill"
-                        className="object-cover"
+                        // className="object-cover"
                       />
                     ) : (
                       <Image
                         src={noImg}
                         alt={noImg}
                         layout="fill"
-                        className="object-cover"
+                        // className="object-cover"
                       />
                     )}
 
@@ -63,8 +63,7 @@ const HotSale = ({ data }) => {
         <div className="flex justify-center mt-5 z-10">
           <a
             href="/properties"
-            className="bg-yellow-400 hover:bg-black transition-all text-black hover:text-white py-2 px-4 rounded-md shadow-lg"
-          >
+            className="bg-yellow-400 hover:bg-black transition-all text-black hover:text-white py-2 px-4 rounded-md shadow-lg">
             View More
           </a>
         </div>

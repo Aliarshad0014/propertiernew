@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { FaBell } from "react-icons/fa";
 import AwardsComponent from "@/components/profile/awards";
 import Properties from "@/components/profile/properties";
@@ -14,8 +14,11 @@ import Image from "next/image";
 import noImg from "@/image/noImg.svg";
 import moment from "moment";
 import url from "@/config/axios";
+import { ChatContext } from "@/Contexts/ChatContext";
 
 const UserProfile = () => {
+  const { setIsUser } = useContext(ChatContext);
+
   const [activeSection, setActiveSection] = useState("Awards");
   const [coverPhoto, setCoverPhoto] = useState();
   const fileInputRef = useRef(null);
@@ -28,10 +31,16 @@ const UserProfile = () => {
     user = JSON.parse(localStorage.getItem("user"));
   }
 
+  const handleSectionChange = (section) => {
+    setActiveSection(section);
+  };
+
   const sectionContent = {
     Awards: <AwardsComponent />,
     Properties: <Properties />,
-    "New Listing": <NewListingComponent />,
+    "New Listing": (
+      <NewListingComponent handleSectionChange={handleSectionChange} />
+    ),
     "Short Videos": <ShortVideosGridComponent />,
     "Add Blogs": <AddBlogsComponent />,
   };
@@ -39,10 +48,6 @@ const UserProfile = () => {
   useEffect(() => {
     setCoverPhoto(user?.cover_photo_url ? user.cover_photo_url : propertyImg);
   }, [user]);
-
-  const handleSectionChange = (section) => {
-    setActiveSection(section);
-  };
 
   const handleEditCoverPhoto = () => {
     if (fileInputRef.current) {
@@ -135,13 +140,17 @@ const UserProfile = () => {
               <button className="bg-[#FFCE58] hover:bg-yellow-600 transition-all text-white px-4 py-2 rounded">
                 Support
               </button>
-              <button className="bg-red-500 hover:bg-red-600 transition-all text-white px-4 py-2 rounded">
+              <button
+                className="bg-red-500 hover:bg-red-600 cursor-pointer transition-all text-white px-4 py-2 rounded"
+                onClick={() => {
+                  setIsUser(false);
+                  localStorage.removeItem("user");
+                }}>
                 Logout
               </button>
               <button
                 className="bg-gray-500 hover:bg-gray-600 transition-all text-white px-4 py-2 rounded"
-                onClick={handleEditCoverPhoto}
-              >
+                onClick={handleEditCoverPhoto}>
                 Edit Cover Photo
               </button>
               <input
@@ -175,8 +184,7 @@ const UserProfile = () => {
                 />
                 <button
                   className="text-red-500 flex top-0 hover:text-black focus:outline-none"
-                  onClick={handleNotifications}
-                >
+                  onClick={handleNotifications}>
                   <FaBell size={24} />
                 </button>
               </div>
@@ -236,8 +244,7 @@ const UserProfile = () => {
                       ? "font-bold text-yellow-500"
                       : "text-black"
                   }`}
-                  onClick={() => handleSectionChange(section)}
-                >
+                  onClick={() => handleSectionChange(section)}>
                   {section}
                 </button>
               ))}
