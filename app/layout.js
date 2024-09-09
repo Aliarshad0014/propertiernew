@@ -39,7 +39,6 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     setIsUser(loggedIn);
     if (isUser && path === "/") {
-      // history.push("/");
     } else if (!loggedIn) {
       history.push("/");
     }
@@ -56,8 +55,7 @@ export default function RootLayout({ children }) {
             value={{
               isUser,
               setIsUser,
-            }}
-          >
+            }}>
             <Toaster />
             <Header />
 
