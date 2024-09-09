@@ -45,6 +45,35 @@ export default function RootLayout({ children }) {
     }
   }, [isUser, loggedIn]);
 
+  useEffect(() => {
+    // Load AdSense script
+    const script = document.createElement("script");
+    script.src =
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  function MyApp({ Component, pageProps }) {
+    useEffect(() => {
+      // Load AdSense script
+      const script = document.createElement('script');
+      script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      document.head.appendChild(script);
+      
+      return () => {
+        document.head.removeChild(script);
+      };
+    }, []);
+
+    
   return (
     <html lang="en">
       <head>
