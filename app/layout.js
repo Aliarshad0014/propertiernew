@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <AdSense pId="ca-pub-9403488694655871" />
+        {/* <AdSense pId="ca-pub-9403488694655871" /> */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
