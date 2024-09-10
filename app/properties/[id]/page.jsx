@@ -12,15 +12,18 @@ const Page = ({ params }) => {
   const [properties, setProperties] = useState([]);
   const [btnLoad, setBtnLoad] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [propertyImg, setPropertyImg] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/properties/properties/${params.id}`
+          // `https://propertier-p2wwcx3okq-em.a.run.app/properties/properties/${params.id}`
+          `https://propertier-p2wwcx3okq-em.a.run.app/api/mob/v1/GetPropertiesDetail?property_id=${params.id}`
         );
-        setData(response.data);
-        console.log(response.data);
+        setData(response?.data?.DetailDataModel);
+        console.log(response?.data?.DetailDataModel);
+        setPropertyImg(response?.data?.DetailDataModel?.Property?.image_url);
       } catch (error) {
         setError(error);
       } finally {
@@ -147,24 +150,29 @@ const Page = ({ params }) => {
                 {/* Property Pictures Section */}
                 <div className="mb-6">
                   <Image
-                    src={
-                      data?.image_url || "https://via.placeholder.com/600x400"
-                    }
+                    src={propertyImg || "https://via.placeholder.com/600x400"}
                     width={600}
                     height={400}
                     alt="Property"
-                    className="w-full h-72  rounded"
+                    className="w-full h-72 object-contain rounded"
                   />
                   <div className="flex gap-2 mt-4">
-                    {data.Gallery_images?.map((image, index) => (
+                    {data?.Gallery_images?.map((image, index) => (
                       <Image
                         key={index}
                         width={100}
                         height={100}
-                        src={image.image_url}
+                        src={image?.image_url}
                         alt={`Thumbnail ${index + 1}`}
                         style={{ objectFit: "cover" }}
-                        className="w-24 h-24 rounded "
+                        onClick={() => {
+                          setPropertyImg(image?.image_url);
+                        }}
+                        className={`w-24 h-24 rounded cursor-pointer ${
+                          propertyImg === image?.image_url
+                            ? "border-2 border-orange-500"
+                            : ""
+                        }`}
                       />
                     ))}
                   </div>
@@ -173,7 +181,7 @@ const Page = ({ params }) => {
                 <div className="mb-6">
                   <h2 className="text-xl font-semibold">Description</h2>
                   <p className="mt-2">
-                    {data?.description || "No description available"}
+                    {data?.Property?.description || "No description available"}
                   </p>
                 </div>
                 {/* Property Details Section */}
@@ -182,12 +190,12 @@ const Page = ({ params }) => {
                   <h2 className="text-xl font-semibold">Details</h2>
                   <div className="flex justify-between mt-4">
                     <div>
-                      <div>Type : {data?.type ?? "-"}</div>
-                      <div>Area : {data?.area ?? "-"}</div>
-                      <div>Area Unit : {data?.area_unit ?? "-"}</div>
-                      <div>Bathroom : {data?.bathroom ?? "-"}</div>
-                      <div>Bedroom : {data?.bedroom ?? "-"}</div>
-                      <div>Floor : {data?.floor ?? "-"}</div>
+                      <div>Type : {data?.Property?.type ?? "-"}</div>
+                      <div>Area : {data?.Property?.area ?? "-"}</div>
+                      <div>Area Unit : {data?.Property?.area_unit ?? "-"}</div>
+                      <div>Bathroom : {data?.Property?.bathroom ?? "-"}</div>
+                      <div>Bedroom : {data?.Property?.bedroom ?? "-"}</div>
+                      <div>Floor : {data?.Property?.floor ?? "-"}</div>
                     </div>
                   </div>
                 </div>
@@ -198,7 +206,7 @@ const Page = ({ params }) => {
                   </h3>
                   <hr className="my-4" />
                   <ul className="list-disc list-inside mt-2">
-                    {data.Features?.length !== 0
+                    {data?.Features?.length !== 0
                       ? renderFeatures(data.Features)
                       : "No Features Available"}
                   </ul>
@@ -210,11 +218,11 @@ const Page = ({ params }) => {
                   </h3>
                   <hr className="my-4" />
                   <ul className="list-disc list-inside mt-2">
-                    <div> City : {data?.city} </div>
+                    <div> City : {data?.Property?.city} </div>
                     <div className="text-lg font-semibold my-3">
                       Agent Details
                     </div>
-                    <div> Agent Name : {data?.agent?.name} </div>
+                    <div> Agent Name : {data?.Property?.agent?.name} </div>
                   </ul>
                 </div>
                 {/* Video Tour Section */}
@@ -223,8 +231,8 @@ const Page = ({ params }) => {
                     Video Tour
                   </h3>
                   <hr className="my-4" />
-                  {data?.video ? (
-                    renderVideo(data.video)
+                  {data?.Property?.video ? (
+                    renderVideo(data?.Property.video)
                   ) : (
                     <p>No video available</p>
                   )}
@@ -242,15 +250,15 @@ const Page = ({ params }) => {
                 {/* Short Video Section */}
                 <div className="flex mb-5 justify-between">
                   <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit">
-                    For {data?.purpose}
+                    For {data?.Property?.purpose}
                   </div>
                   <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit font-semibold">
-                    Rs {data?.price}
+                    Rs {data?.Property?.price}
                   </div>
                 </div>
                 <div className="mb-6">
-                  {data?.short_video ? (
-                    renderVideo(data.short_video)
+                  {data?.Property?.short_video ? (
+                    renderVideo(data?.Property.short_video)
                   ) : (
                     <p>No short video available</p>
                   )}
@@ -266,7 +274,7 @@ const Page = ({ params }) => {
             </button>
             {showPopup && (
               <AgentPopup
-                agent={data.Property?.agent}
+                agent={data?.Property?.agent}
                 onClose={() => setShowPopup(false)}
               />
             )}

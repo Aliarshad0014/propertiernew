@@ -11,9 +11,11 @@ import propertyImg from "@/image/properties.png";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [showMore, setShowMore] = useState(false);
   const [btnLoad, setBtnLoad] = useState(false);
+  const [activeTab, setActiveTab] = useState("All");
 
   useEffect(() => {
     setBtnLoad(true);
@@ -21,10 +23,11 @@ const Properties = () => {
     const fetchProperties = async () => {
       try {
         const response = await fetch(
-          "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
+          "https://propertier-p2wwcx3okq-em.a.run.app/properties/properties/"
         );
         const result = await response.json();
-        setProperties(result.Data.properties);
+        setProperties(result);
+        setFilteredProperties(result); // Initially show all properties
         setBtnLoad(false);
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -35,6 +38,19 @@ const Properties = () => {
     fetchProperties();
   }, []);
 
+  useEffect(() => {
+    // Filter properties based on the selected tab
+    if (activeTab === "All") {
+      setFilteredProperties(properties);
+    } else {
+      setFilteredProperties(
+        properties.filter(
+          (property) => property.area_type === activeTab.toLowerCase()
+        )
+      );
+    }
+  }, [activeTab, properties]);
+
   const openPropertyDetails = (property) => {
     setSelectedProperty(property);
   };
@@ -43,17 +59,16 @@ const Properties = () => {
     setSelectedProperty(null);
   };
 
-  const handleShowMoreClick = () => {
-    setShowMore(!showMore);
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
   };
 
   const handleError = (e) => {
     e.target.src = noimg;
   };
-  console.log(selectedProperty);
+
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 relative">
-      {/* <TopBanner /> */}
       <TopBanner
         title={"Propertier"}
         firstCrumb={"Propertier"}
@@ -66,12 +81,28 @@ const Properties = () => {
         Properties
       </h1>
 
+      {/* Tabs for filtering properties */}
+      <div className="flex justify-center mb-6">
+        {["All", "Commercial", "Residential"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => handleTabChange(tab)}
+            className={`px-4 py-2 mx-2 font-medium border-b-2 ${
+              activeTab === tab
+                ? "border-yellow-500 text-yellow-500"
+                : "border-transparent text-black"
+            } hover:border-yellow-500 hover:text-yellow-500 transition-colors duration-300`}>
+            {tab}
+          </button>
+        ))}
+      </div>
+
       <div className="flex justify-center">
         {btnLoad ? (
           <BounceLoader color="#eab308" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl lg:grid-cols-4 gap-6 mb-20 p-4 lg:p-0">
-            {properties.map((property) => (
+            {filteredProperties.map((property) => (
               <div
                 key={property.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-all cursor-pointer hover:shadow-xl">
@@ -159,8 +190,6 @@ const Properties = () => {
           </div>
         </div>
       )}
-
-      {/* <FooterSection /> */}
     </div>
   );
 };
