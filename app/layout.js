@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
 import Head from "next/head";
 import AdSense from "@/components/AdSense";
+import Script from "next/script";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -51,6 +52,18 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <AdSense pId="ca-pub-9403488694655871" />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
+          crossOrigin="anonymous"></Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
+          crossOrigin="anonymous"></Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403488694655871"
+          crossOrigin="anonymous"></Script>
         <div className="">
           <ChatContext.Provider
             value={{
