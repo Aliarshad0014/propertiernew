@@ -81,7 +81,7 @@ export default function ServicesList() {
         firstCrumbLink={"/services"}
         coverImg={propertyImg}
       />
-      <div className="w-full flex justify-center -mt-10 absolute">
+      {/* <div className="w-full flex justify-center -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[50%] rounded-md">
           <div className="flex items-center bg-gray-900 px-4 gap-3 w-full rounded-lg">
             <Box sx={{ minWidth: 120, width: "100%" }}>
@@ -120,7 +120,7 @@ export default function ServicesList() {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="bg-[#ffffff] mt-20 flex flex-col items-center text-black">
         <div className="flex flex-col items-center w-[70%]">

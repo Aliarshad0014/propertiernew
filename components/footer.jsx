@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import logo from "@/image/logo.png";
+import Link from "next/link";
 
 const FooterSection = () => {
   return (
@@ -51,46 +52,50 @@ const FooterSection = () => {
         </div>
         <div className="border-t border-gray-700 mt-8 pt-4 flex flex-col md:flex-row justify-center items-center">
           <nav className="flex flex-wrap justify-center md:justify-center space-x-4">
-            <a href="#" className="text-sm">
+            <Link href="/" className="text-sm">
               Home
-            </a>
-            <a href="#" className="text-sm">
+            </Link>
+            <Link href="/disclaimer" className="text-sm">
+              Disclaimer
+            </Link>
+
+            <Link href="terms&conditions" className="text-sm">
               Terms And Conditions
-            </a>
-            <a href="#" className="text-sm">
+            </Link>
+            <Link href="/our-services" className="text-sm">
               Our Services
-            </a>
-            <a href="#" className="text-sm">
+            </Link>
+            <Link href="/privacy-policy" className="text-sm">
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm">
+            </Link>
+            <Link href="/refund-policy" className="text-sm">
               Refund Policy
-            </a>
-            <a href="#" className="text-sm">
+            </Link>
+            <Link href="/faqs" className="text-sm">
               FAQs
-            </a>
-            <a href="#" className="text-sm">
-              Contact Us
-            </a>
+            </Link>
+            <Link href="about-us" className="text-sm">
+              About Us
+            </Link>
           </nav>
         </div>
         <div className="border-t border-gray-700 mt-4 pt-4 flex flex-col md:flex-row justify-center items-center"></div>
         <div className="flex justify-center space-x-4 mt-4">
-          <a href="#">
+          <Link href="#">
             <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <i className="fab fa-youtube"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <i className="fab fa-tiktok"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <i className="fab fa-instagram"></i>
-          </a>
+          </Link>
         </div>
         <p className="text-xs text-center mt-4">
           © Copyrights 2024. Propertier.pk. All Rights Reserved.

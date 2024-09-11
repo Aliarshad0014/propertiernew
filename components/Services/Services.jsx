@@ -46,12 +46,11 @@ export default function Services() {
         firstCrumbLink={"/services"}
         coverImg={propertyImg}
       />
-      <div className="w-full flex justify-center  -mt-10 absolute">
+      {/* <div className="w-full flex justify-center  -mt-10 absolute">
         <div className="bg-[#131A22] h-[90px] flex w-[70%] rounded-md">
           <div className="flex items-center bg-gray-900 px-4 gap-3 w-full rounded-lg">
             <Box sx={{ minWidth: 120, width: "100%" }}>
               <FormControl fullWidth>
-                {/* <InputLabel id="demo-simple-select-label">AllService</InputLabel> */}
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -62,8 +61,7 @@ export default function Services() {
                     color: "black",
                     width: "100%",
                     height: "40px",
-                  }}
-                >
+                  }}>
                   <MenuItem value={"Electricity"}>Electricity</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
@@ -72,15 +70,14 @@ export default function Services() {
             </Box>
             <button
               // onClick={handleSearch}
-              className="py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md "
-            >
+              className="py-2 px-10 bg-[#FFCE58] text-gray-900 rounded-md ">
               Search
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="bg-[#DDDDDD] mt-20 flex flex-col items-center text-black">
+      <div className="bg-[#DDDDDD]  flex flex-col items-center text-black">
         <div className="flex flex-col items-center w-[70%]">
           <div className="text-3xl font-bold text-black mb-5 mt-10">
             Services

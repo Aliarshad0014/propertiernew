@@ -94,9 +94,8 @@ const VerticalVideoShorts = ({
               index === playingIndex ? "block" : "hidden"
             }`}
             style={{
-              height: "100vh",
-            }}
-          >
+              height: "80vh",
+            }}>
             <video
               ref={(el) => {
                 if (el) {
@@ -111,8 +110,7 @@ const VerticalVideoShorts = ({
             <div className="absolute bottom-8 right-4 flex flex-col space-y-2">
               <button
                 className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110"
-                onClick={(e) => handleLikeClick(e, index)}
-              >
+                onClick={(e) => handleLikeClick(e, index)}>
                 {likedVideos.includes(index) ? (
                   <AiFillHeart size={24} className="text-red-500" />
                 ) : (
@@ -129,14 +127,12 @@ const VerticalVideoShorts = ({
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 space-y-4">
         <button
           className="bg-white text-black rounded-full p-2"
-          onClick={handlePrev}
-        >
+          onClick={handlePrev}>
           <FaArrowUp size={24} />
         </button>
         <button
           className="bg-white text-black rounded-full p-2"
-          onClick={handleNext}
-        >
+          onClick={handleNext}>
           <FaArrowDown size={24} />
         </button>
       </div>

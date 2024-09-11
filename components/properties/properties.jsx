@@ -66,6 +66,7 @@ const Properties = () => {
   const handleError = (e) => {
     e.target.src = noimg;
   };
+  console.log(filteredProperties);
 
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 relative">
@@ -75,9 +76,9 @@ const Properties = () => {
         firstCrumbLink={"/propertier"}
         coverImg={propertyImg}
       />
-      <SearchBox />
+      {/* <SearchBox /> */}
 
-      <h1 className="text-3xl font-bold text-center text-yellow-500 mb-10">
+      <h1 className="text-3xl font-bold text-center text-yellow-500 my-10">
         Properties
       </h1>
 

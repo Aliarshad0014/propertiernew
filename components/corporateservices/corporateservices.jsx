@@ -27,11 +27,11 @@ const CorporateServices = () => {
       />
 
       {/* SearchBox Component */}
-      <div className="flex flex-col items-center justify-center bottom-10">
+      {/* <div className="flex flex-col items-center justify-center bottom-10">
         <SearchBox />
-      </div>
+      </div> */}
 
-      <div className="py-4">
+      <div className="py-4 mt-10">
         <Packages />
       </div>
       <div className="py-4">

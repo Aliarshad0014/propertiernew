@@ -119,11 +119,12 @@ export default function Home() {
           <GrNext size={30} color="#eaab0c" />
         </button>
       </div>
-      <div className="relative z-40 flex flex-col items-center justify-center">
+      {/* <div className="relative z-40 flex flex-col items-center justify-center">
         <SearchBox />
-      </div>
+      </div> */}
 
-      <div className="pb-5 -mt-5">
+      {/* <div className="pb-5 -mt-5"> */}
+      <div className="pb-5 mt-10">
         <HotSale data={data?.properties} className="relative" />
       </div>
       {/* <AdBanner

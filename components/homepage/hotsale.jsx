@@ -61,11 +61,11 @@ const HotSale = ({ data }) => {
           </div>
         </div>
         <div className="flex justify-center mt-5 z-10">
-          <a
+          <Link
             href="/properties"
             className="bg-yellow-400 hover:bg-black transition-all text-black hover:text-white py-2 px-4 rounded-md shadow-lg">
             View More
-          </a>
+          </Link>
         </div>
       </div>
     </div>
