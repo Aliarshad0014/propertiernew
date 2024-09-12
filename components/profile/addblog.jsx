@@ -1,16 +1,27 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "@/config/axios"; // Import Axios
+import Swal from "sweetalert2";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const AddBlogsComponent = () => {
-  const [blogData, setBlogData] = useState({
-    title: "",
-    image: "",
-    description: "",
-    tags: "",
-    category: "",
-  });
-
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [category, setCategory] = useState("");
   const [view, setView] = useState("addBlog");
+  const [tagsOptions, setTagsOptions] = useState([]);
+  const [categoriesOptions, setCategoriesOptions] = useState([]);
+  const [userBlog, setUserBlog] = useState([]);
+  const [btnLoad, setBtnLoad] = useState(false);
+
+  const hasWindow = typeof window !== "undefined";
+  let user;
+
+  if (hasWindow) {
+    user = JSON.parse(localStorage.getItem("user"));
+  }
 
   const demoBlogs = [
     {
@@ -39,25 +50,160 @@ const AddBlogsComponent = () => {
     withdrawalAmount: "$1000",
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBlogData({
-      ...blogData,
-      [name]: value,
-    });
-  };
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleDescriptionChange = (e) => setDescription(e.target.value);
+  const handleTagsChange = (e) => setTags(e.target.value);
+  const handleCategoryChange = (e) => setCategory(e.target.value);
+
+  useEffect(() => {
+    // Fetch Blog Tags
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get("/properties/blog-tags/");
+        setTagsOptions(response.data);
+      } catch (error) {
+        console.error("Error fetching tags: ", error);
+      }
+    };
+
+    // Fetch Blog Categories
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/mob/v1/blog-categories/");
+        setCategoriesOptions(response.data);
+      } catch (error) {
+        console.error("Error fetching categories: ", error);
+      }
+    };
+
+    const fetchUserBlogs = async () => {
+      try {
+        const response = await axios.get(
+          `properties/user-blogposts/${user?.id}/`
+        );
+        setUserBlog(response.data);
+      } catch (error) {
+        console.error("Error fetching categories: ", error);
+      }
+    };
+
+    fetchTags();
+    fetchCategories();
+    fetchUserBlogs();
+  }, []);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setBlogData({
-      ...blogData,
-      image: file ? URL.createObjectURL(file) : "",
-    });
+    setImage(file); // Store the actual file object
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Blog Data Submitted: ", blogData);
+    setBtnLoad(true);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("slug", title.toLowerCase().replace(/ /g, "-")); // Generate slug from title
+    formData.append("category_id", category);
+    formData.append("author_id", user?.id); // Example static author_id
+    formData.append("content", description);
+    formData.append("image", image);
+    formData.append("tag_ids", tags); // Assuming tags are a single string for simplicity
+
+    try {
+      const response = await axios.post("/properties/blogposts/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setBtnLoad(false);
+      setTitle("");
+      setImage(null);
+      setDescription("");
+      setTags("");
+      setCategory("");
+      setView("currentBlogDetails");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Blog Added Successfully",
+      });
+      // console.log("Blog posted successfully: ", response.data);
+    } catch (error) {
+      setBtnLoad(false);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+
+      if (error.response) {
+        if (error.response.status === 413) {
+          // Handle 413 Payload Too Large error
+          Toast.fire({
+            icon: "error",
+            title:
+              "Payload too large. Please reduce the size of the files you are uploading.",
+          });
+        } else if (error.response.data) {
+          const errorData = error.response.data;
+
+          // If errorData is an object with multiple errors, show them one by one
+          if (typeof errorData === "object") {
+            Object.entries(errorData).forEach(([key, message]) => {
+              Toast.fire({
+                icon: "error",
+                title: `${key}: ${message}`,
+              });
+            });
+          } else {
+            // If the errorData is a string or a single message, show it directly
+            Toast.fire({
+              icon: "error",
+              title: errorData,
+            });
+          }
+        } else {
+          if (error.response.status === 413) {
+            // Handle 413 Payload Too Large error
+            Toast.fire({
+              icon: "error",
+              title:
+                "Payload too large. Please reduce the size of the files you are uploading.",
+            });
+          }
+          // Fallback in case the error response doesn't contain data
+          else {
+            Toast.fire({
+              icon: "error",
+              title: "An unexpected error occurred.",
+            });
+          }
+        }
+      } else {
+        // Handle other types of errors
+        Toast.fire({
+          icon: "error",
+          title: "An unexpected error occurred.",
+        });
+      }
+    }
   };
 
   return (
@@ -70,8 +216,7 @@ const AddBlogsComponent = () => {
               view === "addBlog"
                 ? "bg-[#FFCE58] text-white"
                 : "bg-gray-200 text-black"
-            }`}
-          >
+            }`}>
             Add Blog
           </button>
           <button
@@ -80,19 +225,8 @@ const AddBlogsComponent = () => {
               view === "currentBlogDetails"
                 ? "bg-[#FFCE58] text-white"
                 : "bg-gray-200 text-black"
-            }`}
-          >
+            }`}>
             Current Blog Details
-          </button>
-          <button
-            onClick={() => setView("payoutDetails")}
-            className={`px-4 py-2 rounded-md shadow-sm transition-all ${
-              view === "payoutDetails"
-                ? "bg-[#FFCE58] text-white"
-                : "bg-gray-200 text-black"
-            }`}
-          >
-            Payout
           </button>
         </div>
         <h2 className="text-2xl font-bold mb-8">
@@ -108,25 +242,24 @@ const AddBlogsComponent = () => {
               <label className="block text-gray-700">Blog Title</label>
               <input
                 type="text"
-                name="title"
-                value={blogData.title}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
+                value={title}
+                onChange={handleTitleChange}
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
               />
             </div>
             <div>
               <label className="block text-gray-700">Blog Image</label>
               <input
                 type="file"
-                name="image"
                 onChange={handleFileChange}
-                className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
+                accept="image/jpeg"
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
               />
-              {blogData.image && (
+              {image && (
                 <Image
                   width={100}
                   height={100}
-                  src={blogData.image}
+                  src={URL.createObjectURL(image)} // Use URL.createObjectURL to display the image preview
                   alt="Blog"
                   className="mt-2 w-full h-64 object-cover"
                 />
@@ -135,83 +268,87 @@ const AddBlogsComponent = () => {
             <div>
               <label className="block text-gray-700">Blog Description</label>
               <textarea
-                name="description"
-                value={blogData.description}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
+                value={description}
+                onChange={handleDescriptionChange}
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
                 rows="5"
               />
             </div>
             <div>
               <label className="block text-gray-700">Blog Tags</label>
-              <input
-                type="text"
+              <select
                 name="tags"
-                value={blogData.tags}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
-              />
+                value={tags}
+                onChange={handleTagsChange}
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm">
+                <option value="">Select a tag</option>
+                {tagsOptions.map((tag) => (
+                  <option key={tag.id} value={tag.id}>
+                    {tag.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="block text-gray-700">Blog Category</label>
-              <input
-                type="text"
+              <select
                 name="category"
-                value={blogData.category}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-none border-b border-gray-300 shadow-sm"
-              />
+                value={category}
+                onChange={handleCategoryChange}
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm">
+                <option value="">Select a category</option>
+                {categoriesOptions.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 transition-all"
-              >
-                Add Blog
-              </button>
+              {btnLoad ? (
+                <div className="flex justify-center items-center">
+                  <ScaleLoader color="#eab308" />
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 transition-all">
+                  Add Blog
+                </button>
+              )}
             </div>
           </form>
-        ) : view === "currentBlogDetails" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {demoBlogs.map((blog, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden"
-              >
-                <div
-                  className="bg-cover bg-center h-48"
-                  style={{ backgroundImage: `url(${blog.image})` }}
-                >
-                  <div className="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-xl font-bold">
-                    {blog.title}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-700">{blog.description}</p>
-                  <div className="mt-4 grid grid-cols-2 gap-4 text-gray-700">
-                    <div>
-                      <p>Views: {blog.views}</p>
-                      <p>Earnings: {blog.earnings}</p>
-                    </div>
-                    <div>
-                      <p>Comments: {blog.comments}</p>
-                      <p>Likes: {blog.likes}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         ) : (
-          <div className="text-gray-700 space-y-2">
-            <p className="text-lg">Balance: {payoutData.balance}</p>
-            <p className="text-lg">
-              Withdrawal Date: {payoutData.withdrawalDate}
-            </p>
-            <p className="text-lg">
-              Withdrawal Amount: {payoutData.withdrawalAmount}
-            </p>
-          </div>
+          view === "currentBlogDetails" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {demoBlogs.map((blog, index) => (
+                <div
+                  key={index}
+                  className="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <div
+                    className="bg-cover bg-center h-48"
+                    style={{ backgroundImage: `url(${blog.image})` }}>
+                    <div className="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-xl font-bold">
+                      {blog.title}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-gray-700">{blog.description}</p>
+                    <div className="mt-4 grid grid-cols-2 gap-4 text-gray-700">
+                      <div>
+                        <p>Views: {blog.views}</p>
+                        <p>Earnings: {blog.earnings}</p>
+                      </div>
+                      <div>
+                        <p>Comments: {blog.comments}</p>
+                        <p>Likes: {blog.likes}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )
         )}
       </div>
     </div>
