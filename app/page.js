@@ -16,6 +16,7 @@ import url from "@/config/axios";
 import AdComponent from "@/components/AdComponent";
 import AdComponent2 from "@/components/AdComponent2";
 import AdBanner from "@/components/AdBanner";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,26 +39,33 @@ export default function Home() {
   }, []);
 
   const getSliders = async () => {
-    setBtnLoad(true);
+    // setBtnLoad(true);
     try {
       const res = await url.get(`/properties/sliders/`);
       setSliders(res.data);
+      // setBtnLoad(false);
     } catch (e) {
       console.error(e);
     } finally {
-      setBtnLoad(false);
+      // setBtnLoad(false);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
+      setBtnLoad(true);
+
       try {
         const response = await fetch(
           "https://propertier-p2wwcx3okq-em.a.run.app/properties/ComputerHomePage"
         );
         const result = await response.json();
+        setBtnLoad(false);
+
         setData(result?.Data);
       } catch (error) {
+        setBtnLoad(false);
+
         console.error("Error fetching data:", error);
       }
     };
@@ -125,7 +133,13 @@ export default function Home() {
 
       {/* <div className="pb-5 -mt-5"> */}
       <div className="pb-5 mt-10">
-        <HotSale data={data?.properties} className="relative" />
+        {btnLoad ? (
+          <div className="flex justify-center items-center">
+            <ScaleLoader color="#eab308" />
+          </div>
+        ) : (
+          <HotSale data={data?.properties} className="relative" />
+        )}
       </div>
       {/* <AdBanner
         dataAdFormat="auto"
@@ -134,10 +148,22 @@ export default function Home() {
       /> */}
       {/* <AdComponent /> */}
       <div className="py-5">
-        <CustomCarousel data={data.materialRates} />
+        {btnLoad ? (
+          <div className="flex justify-center items-center">
+            <ScaleLoader color="#eab308" />
+          </div>
+        ) : (
+          <CustomCarousel data={data.materialRates} />
+        )}
       </div>
       <div className="py-5">
-        <VideoShorts data={data.shortVideos} />
+        {btnLoad ? (
+          <div className="flex justify-center items-center">
+            <ScaleLoader color="#eab308" />
+          </div>
+        ) : (
+          <VideoShorts data={data.shortVideos} />
+        )}
       </div>
       <div className="py-5">
         <ServicesCarousel />
