@@ -6,6 +6,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const AddBlogsComponent = () => {
   const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
@@ -51,6 +52,7 @@ const AddBlogsComponent = () => {
   };
 
   const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleSlugChange = (e) => setSlug(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handleTagsChange = (e) => setTags(e.target.value);
   const handleCategoryChange = (e) => setCategory(e.target.value);
@@ -102,7 +104,7 @@ const AddBlogsComponent = () => {
     setBtnLoad(true);
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("slug", title.toLowerCase().replace(/ /g, "-")); // Generate slug from title
+    formData.append("slug", slug); // Generate slug from title
     formData.append("category_id", category);
     formData.append("author_id", user?.id); // Example static author_id
     formData.append("content", description);
@@ -207,8 +209,8 @@ const AddBlogsComponent = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen py-8">
-      <div className="container mx-auto px-4 py-8 bg-white text-black max-w-4xl">
+    <div className="bg-white min-h-screen">
+      <div className="container mx-autopy-8 bg-white text-black max-w-4xl">
         <div className="flex space-x-4 mb-8">
           <button
             onClick={() => setView("addBlog")}
@@ -244,6 +246,15 @@ const AddBlogsComponent = () => {
                 type="text"
                 value={title}
                 onChange={handleTitleChange}
+                className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700">Blog Slug</label>
+              <input
+                type="text"
+                value={slug}
+                onChange={handleSlugChange}
                 className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
               />
             </div>
