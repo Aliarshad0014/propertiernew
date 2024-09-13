@@ -249,9 +249,15 @@ const Page = ({ params }) => {
               <div className="w-[30%] ">
                 {/* Short Video Section */}
                 <div className="flex mb-5 justify-between">
-                  <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit">
+                  <div
+                    className={`p-2 text-sm rounded-md w-fit uppercase ${
+                      data?.Property?.purpose === "rent"
+                        ? "bg-green-500 text-white"
+                        : "bg-blue-500 text-white"
+                    }`}>
                     For {data?.Property?.purpose}
                   </div>
+
                   <div className="bg-[#FFCE58] p-2 text-sm rounded-md w-fit font-semibold">
                     Rs {data?.Property?.price}
                   </div>

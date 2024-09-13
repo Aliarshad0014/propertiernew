@@ -32,9 +32,15 @@ const HotSale = ({ data }) => {
                       />
                     )}
 
-                    <div className="absolute top-2 right-2 bg-[#FFCE58] text-black text-xs font-regular p-1">
+                    <div
+                      className={`absolute top-2 right-2 text-xs font-regular px-3 py-1 text-lg uppercase ${
+                        property?.purpose === "rent"
+                          ? "bg-green-500 text-white"
+                          : "bg-blue-500 text-white"
+                      }`}>
                       {property?.purpose}
                     </div>
+
                     <div className="absolute bottom-2 bg-black text-white text-xs font-bold p-1 rounded-sm">
                       {property?.type}
                     </div>
