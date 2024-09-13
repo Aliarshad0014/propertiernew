@@ -99,12 +99,22 @@ const AddBlogsComponent = () => {
     setImage(file); // Store the actual file object
   };
 
+  const generateSlug = (title) => {
+    return title
+      .trim() // Trim leading and trailing spaces
+      .toLowerCase() // Convert to lowercase
+      .replace(/[^a-z0-9_-]+/g, "-") // Replace invalid characters with hyphen
+      .replace(/--+/g, "-") // Replace multiple hyphens with a single hyphen
+      .replace(/^-+|-+$/g, ""); // Remove leading or trailing hyphens
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setBtnLoad(true);
+    const slugGenerted = generateSlug(title);
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("slug", slug); // Generate slug from title
+    formData.append("slug", slugGenerted); // Generate slug from title
     formData.append("category_id", category);
     formData.append("author_id", user?.id); // Example static author_id
     formData.append("content", description);
@@ -249,7 +259,7 @@ const AddBlogsComponent = () => {
                 className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
               />
             </div>
-            <div>
+            {/* <div>
               <label className="block text-gray-700">Blog Slug</label>
               <input
                 type="text"
@@ -257,7 +267,7 @@ const AddBlogsComponent = () => {
                 onChange={handleSlugChange}
                 className="mt-1 block w-full rounded-none border p-2 border-gray-300 shadow-sm"
               />
-            </div>
+            </div> */}
             <div>
               <label className="block text-gray-700">Blog Image</label>
               <input

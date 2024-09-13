@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FooterSection from "../footer";
 import Link from "next/link";
+import noImg from "../../image/noImg.svg";
 
 const BlogPage = () => {
   const [mainBlog, setMainBlog] = useState(null);
@@ -18,9 +19,9 @@ const BlogPage = () => {
         );
         const data = response.data;
 
-        setMainBlog(data[0]);
-        setStaffPicks(data.slice(1, 5));
-        setBlogs(data.slice(5));
+        setMainBlog(data?.[0]);
+        setStaffPicks(data?.slice(1, 5));
+        setBlogs(data?.slice(5));
       } catch (error) {
         console.error("Error fetching blog posts:", error);
       }
@@ -76,22 +77,24 @@ const BlogPage = () => {
           </div>
 
           <div className="w-full md:w-1/2 grid grid-cols-2 sm:grid-cols-2 gap-1 h-80">
-            {staffPicks.map((pick, index) => (
-              <Link key={index} href={`/blogpages/${pick.id}`}>
+            {staffPicks?.map((pick, index) => (
+              <Link
+                key={index}
+                href={pick?.id ? `/blogpages/${pick?.id}` : "/"}>
                 <div className="relative cursor-pointer h-full hover:shadow-lg transition-all">
                   <Image
-                    src={pick.image_url}
-                    alt={pick.title}
+                    src={pick?.image_url ? pick?.image_url : noImg}
+                    alt={pick?.title}
                     layout="fill"
-                    objectFit="cover"
                     className="w-full h-full"
                   />
+
                   <div className="absolute bottom-0 w-full bg-gray-700 bg-opacity-30 p-2 group-hover:bg-opacity-50 transition-all">
                     <h3 className="lg:text-sm text-xs font-semibold text-white truncate">
-                      {pick.title}
+                      {pick?.title}
                     </h3>
                     <p className="lg:text-sm text-xs text-gray-300">
-                      {formatDate(pick.published_date)}
+                      {formatDate(pick?.published_date)}
                     </p>
                   </div>
                 </div>
@@ -105,13 +108,13 @@ const BlogPage = () => {
 
         <div className=" flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {blogs.map((post) => (
-              <Link key={post.id} href={`/blogpages/${post.id}`}>
+            {blogs?.map((post) => (
+              <Link key={post.id} href={`/blogpages/${post?.id}`}>
                 <div className="relative cursor-pointer ">
                   <div className="relative h-60 w-full overflow-hidden hover:shadow-lg">
                     <Image
-                      src={post.image_url}
-                      alt={post.title}
+                      src={post?.image_url}
+                      alt={post?.title}
                       layout="fill"
                       objectFit="cover"
                       quality={100}
@@ -120,10 +123,10 @@ const BlogPage = () => {
                   </div>
                   <div className="pt-4">
                     <p className="text-xs font-medium text-yellow-500">
-                      {formatDate(post.published_date)}
+                      {formatDate(post?.published_date)}
                     </p>
                     <h3 className="text-base font-semibold mt-2 text-gray-700">
-                      {post.title}
+                      {post?.title}
                     </h3>
                   </div>
                 </div>

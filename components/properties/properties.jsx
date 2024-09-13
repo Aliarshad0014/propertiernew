@@ -116,9 +116,19 @@ const Properties = () => {
                   height={254}
                 />
                 <div className="p-4 flex flex-col flex-grow">
-                  <p className="text-yellow-500 font-semibold">
-                    {property.price} PKR
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="text-yellow-500 font-semibold">
+                      {property?.price} PKR
+                    </div>
+                    <div
+                      className={`px-3 py-1 uppercase font-semibold rounded ${
+                        property?.purpose === "rent"
+                          ? "border border-green-500 text-green-500"
+                          : "border border-blue-500 text-blue-500"
+                      }`}>
+                      {property?.purpose}
+                    </div>
+                  </div>
                   <h2 className="text-md text-start mb-4 font-bold text-black">
                     {property.title}
                   </h2>

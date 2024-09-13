@@ -727,8 +727,9 @@ const NewListingComponent = ({ handleSectionChange }) => {
           ) : (
             <button
               type="submit"
+              disabled={!user}
               className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md poppins">
-              Submit
+              {user ? "Submit" : "Please Login to Continue"}
             </button>
           )}
         </form>
