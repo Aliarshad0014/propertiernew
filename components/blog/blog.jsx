@@ -57,8 +57,8 @@ const BlogPage = () => {
               <Link href={`/blogpages/${mainBlog.id}`}>
                 <div className="h-80 w-full relative cursor-pointer hover:shadow-lg">
                   <Image
-                    src={mainBlog.image_url}
-                    alt={mainBlog.title}
+                    src={mainBlog?.image_url ? mainBlog?.image_url : noImg}
+                    alt={mainBlog?.title}
                     layout="fill"
                     objectFit="cover"
                     className="w-full h-full"
@@ -113,10 +113,9 @@ const BlogPage = () => {
                 <div className="relative cursor-pointer ">
                   <div className="relative h-60 w-full overflow-hidden hover:shadow-lg">
                     <Image
-                      src={post?.image_url}
+                      src={post?.image_url ? post?.image_url : noImg}
                       alt={post?.title}
                       layout="fill"
-                      objectFit="cover"
                       quality={100}
                       className="w-full h-full"
                     />

@@ -42,12 +42,11 @@ const BlogComponent = () => {
           <div key={post.id} className="border rounded-lg flex flex-col h-full">
             <div
               className="w-full h-64 mb-4 overflow-hidden"
-              style={{ width: "100%", height: "200px" }}
-            >
+              style={{ width: "100%", height: "200px" }}>
               <Image
                 src={post.image_url ?? noimg}
                 alt={post.title}
-                className="w-full h-[200px] object-contain"
+                className="w-full h-[200px] object-cover"
                 width={300}
                 height={200}
                 onError={(e) => {
@@ -64,7 +63,7 @@ const BlogComponent = () => {
                   {/* {truncateText(post.content, 50)} */}
                   <div className=" line-clamp-4">{post.content}</div>
                   {post.content.split(" ").length > 30 && (
-                    <Link href={`/blogpages/${post.id}`}>
+                    <Link href={`/blogpages/${post?.id}`}>
                       <div className="text-blue-500 hover:underline">
                         {" "}
                         ...see more
@@ -77,7 +76,7 @@ const BlogComponent = () => {
                 <p className="text-gray-700 font-semibold">
                   By {post.author.name}
                 </p>
-                <Link href={`/blogpages/${post.id}`}>
+                <Link href={`/blogpages/${post?.id}`}>
                   <div className="mt-2 bg-[#FFCE58] hover:bg-black transition-all text-white font-semibold py-2 px-4 rounded">
                     Read More
                   </div>

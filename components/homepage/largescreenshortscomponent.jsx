@@ -27,21 +27,17 @@ const LargeScreenVideoShorts = ({
   const videoRefs = useRef(Array(data.length).fill(null));
 
   useEffect(() => {
-    const handleVideoChange = () => {
+    const handleVideoPause = () => {
       videoRefs.current.forEach((video, index) => {
         if (video) {
-          if (index === playingIndex) {
-            video.play();
-          } else {
-            video.pause();
-            video.currentTime = 0;
-          }
+          video.pause(); // Ensure all videos are paused by default.
+          video.currentTime = 0; // Reset the current time to 0.
         }
       });
     };
 
-    handleVideoChange();
-  }, [playingIndex]);
+    handleVideoPause();
+  }, [playingIndex]); // Only pauses the videos on playingIndex change
 
   const handlePrev = (e) => {
     e.stopPropagation();
@@ -54,10 +50,10 @@ const LargeScreenVideoShorts = ({
   };
 
   const handleVideoClick = (index) => {
+    const video = videoRefs.current[index];
     if (index !== playingIndex) {
-      setPlayingIndex(index);
+      setPlayingIndex(index); // Change the playing index
     } else {
-      const video = videoRefs.current[index];
       if (video.paused) {
         video.play();
       } else {

@@ -14,40 +14,48 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FooterSection from "@/components/footer";
+import noImg from "@/image/noImg.svg";
 
 const Page = ({ params }) => {
   const [blogData, setBlogData] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [latestPosts, setLatestPosts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchBlogData = async () => {
       try {
         // Fetch blog post data
         const blogResponse = await axios.get(
           `https://propertier-p2wwcx3okq-em.a.run.app/properties/blogposts/${params.id}`
         );
         setBlogData(blogResponse.data);
-
-        // Fetch comments data
-        const commentsResponse = await axios.get(
-          `https://propertier-p2wwcx3okq-em.a.run.app/properties/comments/${params.id}/`
-        );
-
-        // Normalize comments into an array
-        const fetchedComments = commentsResponse.data;
-        setComments(
-          Array.isArray(fetchedComments) ? fetchedComments : [fetchedComments]
-        );
       } catch (error) {
-        setError(error);
+        console.error("Error fetching blog data:", error);
+        setError((prevError) => ({
+          ...prevError,
+          blogError: "Failed to load blog data.",
+        }));
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    const fetchLatestPosts = async () => {
+      try {
+        // Fetch latest posts data
+        const latestPostsResponse = await axios.get(
+          `https://propertier-p2wwcx3okq-em.a.run.app/properties/blogposts`
+        );
+        setLatestPosts(latestPostsResponse.data.slice(0, 5)); // Get the latest 5 posts
+      } catch (error) {
+        console.error("Error fetching latest posts:", error);
+      }
+    };
+
+    fetchBlogData();
+    fetchLatestPosts();
   }, [params.id]);
 
   if (loading) {
@@ -59,10 +67,14 @@ const Page = ({ params }) => {
   }
 
   if (!blogData) {
-    return <div>No blog data available</div>;
+    return (
+      <div className="h-screen flex items-center justify-center text-black">
+        No blog data available
+      </div>
+    );
   }
 
-  const { title, content, image_url, author, cover_photo_url } = blogData;
+  const { title, content, image_url, author, tags, category } = blogData;
 
   // Format the created_at date
   const formattedDate = new Date(author.created_at).toLocaleDateString(
@@ -74,37 +86,6 @@ const Page = ({ params }) => {
     }
   );
 
-  const latestPosts = [
-    {
-      title: "5 Marla House for sale",
-      time: "20 minutes ago",
-      author: "Admin",
-    },
-    {
-      title: "5 Marla House for sale",
-      time: "20 minutes ago",
-      author: "Admin",
-    },
-    {
-      title: "5 Marla House for sale",
-      time: "20 minutes ago",
-      author: "Admin",
-    },
-    {
-      title: "5 Marla House for sale",
-      time: "20 minutes ago",
-      author: "Admin",
-    },
-  ]; // Mock data for latest posts
-  const categories = [
-    { name: "Houses on Rent" },
-    { name: "Lorem ipsum" },
-    { name: "Lorem ipsum" },
-    { name: "Lorem ipsum" },
-    { name: "Lorem ipsum" },
-    { name: "Lorem ipsum" },
-  ]; // Mock data for categories
-
   return (
     <div className="bg-white min-h-screen flex flex-col justify-between">
       <div className="flex-grow max-w-6xl mx-auto p-4 mt-10 md:p-6 bg-white flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-12 text-black">
@@ -112,7 +93,7 @@ const Page = ({ params }) => {
           <Image
             width={100}
             height={100}
-            src="https://dummyimage.com/200x200"
+            src={image_url || "https://dummyimage.com/200x200"}
             alt={title}
             className="w-full h-1/2 lg:h-1/5 object-cover rounded-lg mb-6"
           />
@@ -165,8 +146,7 @@ const Page = ({ params }) => {
               comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="mb-4 pb-10 border-b border-gray-200"
-                >
+                  className="mb-4 pb-10 border-b border-gray-200">
                   <div className="flex items-center mb-2">
                     <Image
                       width={40}
@@ -190,83 +170,87 @@ const Page = ({ params }) => {
               ))
             )}
           </div>
-          {/* Post a Comment Form */}
-          <div className="post-comment-form mt-8 ">
-            <h2 className="text-xl font-bold mb-4">Post a Comment</h2>
-            <form className="space-y-4">
-              <div className="flex space-x-4">
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  className="w-1/2 p-2 bg-gray-100 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  className="w-1/2 p-2 bg-gray-100 rounded"
-                />
-              </div>
-              <textarea
-                placeholder="Your Comment Here"
-                className="w-full p-2 bg-gray-100 rounded lg:h-60 h-36 resize-none"
-              ></textarea>
-              <button
-                type="submit"
-                className="bg-[#FFCE58] text-white px-4 py-2 rounded"
-              >
-                Post A Comment
-              </button>
-            </form>
-          </div>
         </div>
+        {/* Right Sidebar */}
         <div className="right-content w-full lg:w-1/3 space-y-8">
-          {/* Latest Posts */}
-          <div className="latest-posts bg-gray-50 p-4 rounded-md">
-            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">
-              Recent Posts
-            </h2>
-            {latestPosts.map((post, index) => (
-              <div
-                key={index}
-                className="mb-4 pb-4 border-b border-gray-200 flex items-center"
-              >
-                <Image
-                  width={50}
-                  height={50}
-                  src="https://dummyimage.com/50x50"
-                  alt={post.title}
-                  className="object-cover rounded-lg"
-                />
-                <div className="ml-4">
-                  <h3 className="text-md font-semibold">{post.title}</h3>
-                  <p className="text-sm text-gray-500">{post.time}</p>
-                  <p className="text-sm text-gray-500">By {post.author}</p>
-                </div>
-              </div>
-            ))}
+          {/* Author Section */}
+          <div className="author-section bg-gray-50 p-4 rounded-md text-center">
+            <Image
+              width={100}
+              height={100}
+              src={
+                author?.profile_picture_url
+                  ? author?.profile_picture_url
+                  : noImg
+              }
+              alt={author.name}
+              className="rounded-full mx-auto mb-4"
+            />
+            <h2 className="text-lg font-bold">{author.name}</h2>
+            <p className="text-sm text-gray-500">{author.about}</p>
+            <p className="text-sm text-gray-500 mt-2">{author.address}</p>
+            <p className="text-sm text-gray-500 mt-2">{author.phone_number}</p>
           </div>
-          {/* Categories */}
-          <div className="categories bg-gray-50 p-4 rounded-md">
-            <h2 className="text-xl font-bold mb-4 border-b-2 border-yellow-500">
-              Categories
-            </h2>
-            <ul className="space-y-2">
-              {categories.map((category, index) => (
-                <li
-                  key={index}
-                  className="text-md text-gray-700 flex items-center"
-                >
+          {/* Tags Section */}
+          <div className="tags-section bg-gray-50 p-4 rounded-md">
+            <h2 className="text-lg font-bold mb-4">Tags</h2>
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span
+                  key={tag.id}
+                  className="bg-yellow-200 text-yellow-700 px-2 py-1 rounded-full text-xs">
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+          {/* Category Section */}
+          <div className="category-section bg-gray-50 p-4 rounded-md">
+            <h2 className="text-lg font-bold mb-4">Category</h2>
+            <div className="flex items-center space-x-4">
+              <Image
+                width={50}
+                height={50}
+                src={category?.image_url ? category?.image_url : noImg}
+                alt={category.name}
+                className="rounded-full"
+              />
+              <div>
+                <h3 className="text-sm font-bold">{category.name}</h3>
+                <p className="text-sm text-gray-500">{category.description}</p>
+              </div>
+            </div>
+          </div>
+          {/* Latest Posts Section */}
+          <div className="latest-posts-section bg-gray-50 p-4 rounded-md">
+            <h2 className="text-lg font-bold mb-4">Latest Posts</h2>
+            <ul className="space-y-7">
+              {latestPosts.map((post) => (
+                <li key={post.id} className="flex items-center space-x-4">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={post?.image_url ? post?.image_url : noImg}
+                    alt={post.title}
+                    className="rounded-md"
+                  />
+                  <div>
+                    <h3 className="text-sm font-bold">{post.title}</h3>
+                    <p className="text-sm text-gray-500">
+                      {new Date(post.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className=" text-gray-500"
+                    className="ml-auto text-gray-400"
                   />
-                  <span className="ml-2">{category.name}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
+      <FooterSection />
     </div>
   );
 };
