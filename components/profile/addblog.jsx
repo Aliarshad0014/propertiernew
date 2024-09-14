@@ -24,27 +24,6 @@ const AddBlogsComponent = () => {
     user = JSON.parse(localStorage.getItem("user"));
   }
 
-  const demoBlogs = [
-    {
-      title: "Sample Blog 1",
-      image: "https://via.placeholder.com/300",
-      description: "This is a description for sample blog 1.",
-      views: 1234,
-      earnings: "$500",
-      comments: 56,
-      likes: 78,
-    },
-    {
-      title: "Sample Blog 2",
-      image: "https://via.placeholder.com/300",
-      description: "This is a description for sample blog 2.",
-      views: 2345,
-      earnings: "$600",
-      comments: 67,
-      likes: 89,
-    },
-  ];
-
   const payoutData = {
     balance: "$2000",
     withdrawalDate: "2024-07-15",
@@ -78,22 +57,21 @@ const AddBlogsComponent = () => {
       }
     };
 
-    const fetchUserBlogs = async () => {
-      try {
-        const response = await axios.get(
-          `properties/user-blogposts/${user?.id}/`
-        );
-        setUserBlog(response.data);
-      } catch (error) {
-        console.error("Error fetching categories: ", error);
-      }
-    };
-
     fetchTags();
     fetchCategories();
     fetchUserBlogs();
   }, []);
 
+  const fetchUserBlogs = async () => {
+    try {
+      const response = await axios.get(
+        `properties/${user?.id}/user-profile-blogs/`
+      );
+      setUserBlog(response.data);
+    } catch (error) {
+      console.error("Error fetching categories: ", error);
+    }
+  };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setImage(file); // Store the actual file object
@@ -215,6 +193,45 @@ const AddBlogsComponent = () => {
           title: "An unexpected error occurred.",
         });
       }
+    }
+  };
+
+  const handleDelete = async (postId) => {
+    try {
+      await axios.delete(`/properties/blogposts/${postId}/`);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Blog post deleted successfully",
+      });
+      fetchUserBlogs();
+    } catch (error) {
+      console.error("Error deleting the blog post:", error);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Failed to delete the blog post",
+      });
     }
   };
 
@@ -342,28 +359,67 @@ const AddBlogsComponent = () => {
         ) : (
           view === "currentBlogDetails" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {demoBlogs.map((blog, index) => (
+              {userBlog?.map((blog, index) => (
                 <div
                   key={index}
                   className="bg-white shadow-lg rounded-lg overflow-hidden">
                   <div
                     className="bg-cover bg-center h-48"
-                    style={{ backgroundImage: `url(${blog.image})` }}>
-                    <div className="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-xl font-bold">
+                    style={{ backgroundImage: `url(${blog.image_url})` }}>
+                    <div className="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-xl font-semibold">
                       {blog.title}
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="text-gray-700">{blog.description}</p>
-                    <div className="mt-4 grid grid-cols-2 gap-4 text-gray-700">
+                    <p className="text-gray-700">{blog.content}</p>
+                    <div className="mt-4 grid grid-cols-2 gap-5 text-gray-700">
                       <div>
-                        <p>Views: {blog.views}</p>
-                        <p>Earnings: {blog.earnings}</p>
+                        <p className="font-semibold">
+                          Author:{" "}
+                          <span className="font-normal">
+                            {blog.author.name}
+                          </span>
+                        </p>
+                        <p className="font-semibold mt-2">
+                          Category:{" "}
+                          <span className="bg-green-400 text-white text-sm px-2 py-1 rounded-md">
+                            {blog.category.name}
+                          </span>
+                        </p>
                       </div>
                       <div>
-                        <p>Comments: {blog.comments}</p>
-                        <p>Likes: {blog.likes}</p>
+                        <p className="font-semibold">
+                          Status:{" "}
+                          <span className="font-normal">{blog.status}</span>
+                        </p>
+                        <p className="font-semibold mt-2">
+                          Created At:{" "}
+                          <span className="font-normal">
+                            {new Date(blog.created_at).toLocaleDateString()}
+                          </span>
+                        </p>
                       </div>
+                    </div>
+                    <div className="mt-4 text-gray-700 flex items-center gap-3">
+                      <div className="font-semibold flex items-center">
+                        Tags:
+                      </div>
+                      <div className="flex flex-wrap gap-2 ">
+                        {blog.tags.map((tag) => (
+                          <span
+                            key={tag.id}
+                            className="bg-blue-400 text-white text-sm px-2 py-1 rounded-md">
+                            {tag.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        onClick={() => handleDelete(blog.id)}
+                        className="bg-red-500  text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>
