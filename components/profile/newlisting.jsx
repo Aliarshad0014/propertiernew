@@ -27,6 +27,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
   const [slug, setSlug] = useState(""); // New field
   const [btnLoad, setBtnLoad] = useState(false);
   const [allFeatures, setAllFeatures] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   const history = useRouter();
   const path = usePathname();
@@ -37,6 +38,8 @@ const NewListingComponent = ({ handleSectionChange }) => {
   if (hasWindow) {
     user = JSON.parse(localStorage.getItem("user"));
   }
+
+  // console.log(galleryImages);
 
   useEffect(() => {
     getFeatures();
@@ -61,6 +64,10 @@ const NewListingComponent = ({ handleSectionChange }) => {
     );
   };
 
+  const handleGalleryImagesChange = (e) => {
+    setGalleryImages(Array.from(e.target.files)); // Store selected images in state
+  };
+
   const addFeatures = async (id) => {
     let body = {
       property_id: id,
@@ -72,6 +79,15 @@ const NewListingComponent = ({ handleSectionChange }) => {
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  const generateSlug = (title) => {
+    return title
+      .trim() // Trim leading and trailing spaces
+      .toLowerCase() // Convert to lowercase
+      .replace(/[^a-z0-9_-]+/g, "-") // Replace invalid characters with hyphen
+      .replace(/--+/g, "-") // Replace multiple hyphens with a single hyphen
+      .replace(/^-+|-+$/g, ""); // Remove leading or trailing hyphens
   };
 
   const handleSubmit = (e) => {
@@ -87,14 +103,17 @@ const NewListingComponent = ({ handleSectionChange }) => {
     formData.append("bedroom", bedroom);
     formData.append("bathroom", bathroom);
     formData.append("city", city);
-    formData.append("city_slug", citySlug);
+    formData.append("city_slug", generateSlug(city));
     formData.append("address", address);
     formData.append("area", area);
     formData.append("description", description);
-    formData.append("slug", slug);
+    formData.append("slug", generateSlug(title));
     formData.append("area_unit", areaUnit);
     formData.append("area_type", areaType);
-    formData.append("status", 1); // Assuming status is always set to 1
+    formData.append("status", 1);
+    galleryImages?.forEach((image, index) => {
+      formData.append(`GalleryImages[${index}]`, image);
+    });
     features.forEach((featureId) => formData.append("features[]", featureId));
     if (videoLink) formData.append("video", videoLink); // Assuming video field for the video link
     if (shortVideo) formData.append("short_video", shortVideo); // Using "short_video" to match your data
@@ -126,6 +145,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
         setShortVideo(null);
         setFeaturedImage(null);
         setSlug("");
+        setGalleryImages([]);
 
         if (path.includes("profile")) handleSectionChange("Properties");
 
@@ -281,7 +301,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
                   className="w-full px-4 py-2 border rounded-md poppins"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="slug" className="block text-gray-700">
                   Property Slug
                 </label>
@@ -292,7 +312,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
                   onChange={(e) => setSlug(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md poppins"
                 />
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="price" className="block text-gray-700">
                   Price
@@ -594,7 +614,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
                   <option value="Ziarat">Ziarat</option>
                 </select>
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="citySlug" className="block text-gray-700">
                   City Slug
                 </label>
@@ -605,7 +625,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
                   onChange={(e) => setCitySlug(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md poppins"
                 />
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="address" className="block text-gray-700">
                   Address
@@ -716,6 +736,19 @@ const NewListingComponent = ({ handleSectionChange }) => {
                   accept="image/*"
                   onChange={(e) => setFeaturedImage(e.target.files[0])}
                   className="w-full px-4 py-2 border rounded-md poppins"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="galleryImages" className="block text-gray-700">
+                  Upload Gallery Images
+                </label>
+                <input
+                  id="galleryImages"
+                  type="file"
+                  multiple
+                  onChange={handleGalleryImagesChange}
+                  className="w-full px-4 py-2 border rounded-md"
                 />
               </div>
             </div>
