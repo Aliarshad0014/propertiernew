@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-        <script
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -55,6 +55,23 @@ export default function RootLayout({ children }) {
           }}
         />
         {/* End Google Tag Manager */}
+
+        {/* <!-- Google tag (gtag.js) --> */}
+        {/* Load the gtag.js script */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-VZTFGJZRS9`}
+          strategy="afterInteractive"
+        />
+
+        {/* Initialize Google Analytics */}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-VZTFGJZRS9');
+        `}
+        </Script>
       </Head>
       <body className={poppins.className}>
         {/* Google Tag Manager (noscript) */}
