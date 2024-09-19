@@ -15,6 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FooterSection from "@/components/footer";
 import noImg from "@/image/noImg.svg";
+import moment from "moment";
 
 const Page = ({ params }) => {
   const [blogData, setBlogData] = useState(null);
@@ -237,7 +238,8 @@ const Page = ({ params }) => {
                   <div>
                     <h3 className="text-sm font-bold">{post.title}</h3>
                     <p className="text-sm text-gray-500">
-                      {new Date(post.created_at).toLocaleDateString()}
+                      {/* {new Date(post.created_at).toLocaleDateString()} */}
+                      {moment(post.created_at).format("DD MMM YYYY")}
                     </p>
                   </div>
                   <FontAwesomeIcon
@@ -250,7 +252,7 @@ const Page = ({ params }) => {
           </div>
         </div>
       </div>
-      <FooterSection />
+      {/* <FooterSection /> */}
     </div>
   );
 };
