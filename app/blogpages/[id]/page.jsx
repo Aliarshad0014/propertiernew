@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FooterSection from "@/components/footer";
 import noImg from "@/image/noImg.svg";
 import moment from "moment";
+import Link from "next/link";
 
 const Page = ({ params }) => {
   const [blogData, setBlogData] = useState(null);
@@ -96,19 +97,20 @@ const Page = ({ params }) => {
             height={100}
             src={image_url || "https://dummyimage.com/200x200"}
             alt={title}
-            className="w-full h-1/2 lg:h-1/5 object-cover rounded-lg mb-6"
+            layout="responsive"
+            className="w-full rounded-lg mb-6"
           />
           <h1 className="text-lg md:text-lg font-bold mb-2 mt-2">{title}</h1>
           <div className="flex items-center text-sm text-gray-500 mb-2 justify-between">
-            <span className="flex items-center mr-2">
+            <span className="flex items-center mr-2 gap-1">
               <FontAwesomeIcon
                 icon={faCalendarAlt}
-                className="mr-1 text-yellow-500"
+                className="mr-1 text-yellow-500 "
               />
-              {formattedDate}
+              {moment(blogData.created_at).format("DD MMM YYYY")}
             </span>{" "}
             |
-            <span className="flex items-center ml-1">
+            <span className="flex items-center ml-1 gap-1">
               <FontAwesomeIcon icon={faUser} className="mr-1 text-yellow-500" />
               {author.name}
             </span>
@@ -236,7 +238,9 @@ const Page = ({ params }) => {
                     className="rounded-md"
                   />
                   <div>
-                    <h3 className="text-sm font-bold">{post.title}</h3>
+                    <Link href={`/blogpages/${post.id}`}>
+                      <h3 className="text-sm font-bold">{post.title}</h3>
+                    </Link>
                     <p className="text-sm text-gray-500">
                       {/* {new Date(post.created_at).toLocaleDateString()} */}
                       {moment(post.created_at).format("DD MMM YYYY")}

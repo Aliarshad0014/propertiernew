@@ -112,7 +112,7 @@ const NewListingComponent = ({ handleSectionChange }) => {
     formData.append("area_type", areaType);
     formData.append("status", 1);
     galleryImages?.forEach((image, index) => {
-      formData.append(`GalleryImages[${index}]`, image);
+      formData.append(`GalleryImages`, image);
     });
     features.forEach((featureId) => formData.append("features[]", featureId));
     if (videoLink) formData.append("video", videoLink); // Assuming video field for the video link
