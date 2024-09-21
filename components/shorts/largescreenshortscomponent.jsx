@@ -83,6 +83,41 @@ const VerticalVideoShorts = ({
     }
   };
 
+  const renderVideo = (url) => {
+    console.log("Video URL:", url); // Debugging
+
+    const isYouTube = url?.includes("youtube.com") || url?.includes("youtu.be");
+
+    let embedUrl = url;
+    if (isYouTube) {
+      if (url.includes("watch?v=")) {
+        embedUrl = url.replace("watch?v=", "embed/");
+      } else if (url.includes("youtu.be")) {
+        const videoId = url.split("/").pop();
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    return isYouTube ? (
+      <iframe
+        width="100%"
+        height="400"
+        src={embedUrl}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen></iframe>
+    ) : (
+      <video
+        width="100%"
+        height="400"
+        controls
+        className="w-full h-full object-cover rounded-lg">
+        <source src={url} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    );
+  };
+
   return (
     <div className="relative flex flex-col items-center w-full min-h-screen p-10 bg-white text-white">
       <h1 className="text-3xl font-bold mt-10 text-black">Short Videos</h1>
@@ -96,7 +131,8 @@ const VerticalVideoShorts = ({
             style={{
               height: "80vh",
             }}>
-            <video
+            {renderVideo(item?.short_video)}
+            {/* <video
               ref={(el) => {
                 if (el) {
                   videoRefs.current[index] = el;
@@ -106,10 +142,10 @@ const VerticalVideoShorts = ({
               className="w-full h-full object-cover rounded-lg"
               loop
               playsInline
-            />
+            /> */}
             <div className="absolute bottom-8 right-4 flex flex-col space-y-2">
               <button
-                className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110"
+                className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110 mb-10"
                 onClick={(e) => handleLikeClick(e, index)}>
                 {likedVideos.includes(index) ? (
                   <AiFillHeart size={24} className="text-red-500" />
@@ -118,7 +154,8 @@ const VerticalVideoShorts = ({
                 )}
               </button>
               <button className="bg-none border-none cursor-pointer transform transition-transform hover:scale-110">
-                <AiOutlineShareAlt size={24} />
+                {/* <AiOutlineShareAlt size={24} /> */}
+                <></>
               </button>
             </div>
           </div>
