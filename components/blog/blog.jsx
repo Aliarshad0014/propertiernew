@@ -44,6 +44,7 @@ const BlogPage = () => {
     });
     return `${formattedTime} | ${formattedDate}`;
   };
+  console.log(mainBlog);
 
   return (
     <div className="min-h-screen bg-white">
@@ -68,7 +69,7 @@ const BlogPage = () => {
                       {/* {mainBlog.title} */}
                     </h2>
                     <p className="text-sm text-gray-300">
-                      {formatDate(mainBlog.published_date)}
+                      {formatDate(mainBlog.created_at)}
                     </p>
                   </div>
                 </div>
@@ -94,7 +95,7 @@ const BlogPage = () => {
                       {pick?.title}
                     </h3>
                     <p className="lg:text-sm text-xs text-gray-300">
-                      {formatDate(pick?.published_date)}
+                      {formatDate(pick?.created_at)}
                     </p>
                   </div>
                 </div>
@@ -122,7 +123,7 @@ const BlogPage = () => {
                   </div>
                   <div className="pt-4">
                     <p className="text-xs font-medium text-yellow-500">
-                      {formatDate(post?.published_date)}
+                      {formatDate(post?.created_at)}
                     </p>
                     <h3 className="text-base font-semibold mt-2 text-gray-700">
                       {post?.title}
