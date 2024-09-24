@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import FooterSection from "../footer";
+// import FooterSection from "../footer";
 import Link from "next/link";
 import noImg from "../../image/noImg.svg";
 
