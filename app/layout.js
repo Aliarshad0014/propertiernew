@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     setIsUser(loggedIn);
     if (isUser && path === "/") {
-    } else if (!loggedIn) {
+    } else if (!loggedIn && path.includes("profile")) {
       history.push("/");
     }
   }, [isUser, loggedIn]);
