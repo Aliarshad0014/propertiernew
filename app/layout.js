@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
     setIsUser(loggedIn);
     if (isUser && path === "/") {
       // history.push("/");
-    } else if (!loggedIn) {
+    } else if (!loggedIn && path.includes("profile")) {
       history.push("/");
     }
   }, [isUser, loggedIn]);
